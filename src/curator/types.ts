@@ -3,10 +3,11 @@ export interface FeedItem {
   id: string;                    // UUID
   url: string;
   title: string;
-  summary: string;               // AI 생성 3줄 요약
+  summary: string;               // 한 줄 요약 (카드 접힌 상태에서 표시)
+  analysis?: string;             // 상세 팩트 설명 (3-5문장, 구체적 수치·기술 맥락 포함)
   source_origin: string;         // "anthropic.com", "arxiv.org" 등
   found_by: 'ai' | 'curator' | 'dossier';  // 누가 발견했는가
-  why_picked?: string;           // AI가 가져왔으면: 왜 가져왔는지
+  why_picked?: string;           // 이 신호를 선택한 이유 (큐레이터 맥락 기준)
   memo_ids: string[];            // 연결된 메모
   status: 'unread' | 'read' | 'bookmarked' | 'dismissed';
   created_at: string;

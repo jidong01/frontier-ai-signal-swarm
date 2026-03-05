@@ -360,7 +360,43 @@ npx tsx src/local.ts memory
 
 이 파일이 Step 1.5 중복 필터링의 기반이 된다. **업데이트를 빠뜨리면 다음 분석에서 같은 주제를 반복하게 된다.**
 
-**3. Source Auto-Registration** — 이번 분석에서 사용한 소스 자동 등록:
+**3. Feed Ingest** — 도시에 시그널을 큐레이터 피드에 등록:
+
+도시에 등록 직후 각 시그널과 심층 탐구를 피드 아이템으로 인제스트한다.
+
+```bash
+curl -s -X POST http://localhost:3847/api/dossiers/{DOSSIER_ID}/ingest \
+  -H "Content-Type: application/json" \
+  -d '{
+    "signals": [
+      {
+        "name": "시그널명",
+        "summary": "한 문장 요약 — 무슨 일이 일어났는가 (카드 접힌 상태에서 표시)",
+        "analysis": "3-5문장 상세 팩트 설명 — 구체적 수치, 기술 메커니즘, 배경 맥락 포함. 키워드 나열 금지, 완전한 문장으로 작성.",
+        "why_picked": "이 시그널을 선택한 이유 — 왜 이것이 중요한가, 큐레이터 관심 도메인과의 연결",
+        "strength": "strong",
+        "type": "architecture / research"
+      }
+    ],
+    "deep_dives": [
+      {
+        "title": "심층 탐구 제목",
+        "summary": "한 문장 요약 — 심층 탐구의 핵심 주장",
+        "analysis": "3-5문장 상세 설명 — 탐구에서 다룬 핵심 팩트, 메커니즘, 비유, 함의를 완전한 문장으로.",
+        "why_picked": "이 주제를 심층 탐구로 선택한 이유"
+      }
+    ]
+  }'
+```
+
+**`analysis` 작성 원칙:**
+- `summary`는 한 줄 (제목 옆에 표시됨)
+- `analysis`는 3-5문장의 완전한 문장. 키워드 나열("A, B, C 효과") 금지
+- 구체적 수치(실험 결과, 파라미터 수, 비율 등)를 포함한다
+- "왜 이것이 어려운가", "실제로 어떻게 작동하는가"를 담는다
+- 큐레이터가 이것만 읽고도 북마크/무시 판단을 내릴 수 있어야 한다
+
+**4. Source Auto-Registration** — 이번 분석에서 사용한 소스 자동 등록:
 
 도시에 `sources_used`에 포함된 URL 중 아직 소스 목록에 없는 것을 자동 등록한다.
 

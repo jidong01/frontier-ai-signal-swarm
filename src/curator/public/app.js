@@ -305,6 +305,12 @@ function renderFeedItem(item) {
   const sourceDisplay  = escapeHtml(item.source_origin || '');
   const titleDisplay   = escapeHtml(item.title || item.url || '(제목 없음)');
   const summaryDisplay = escapeHtml(item.summary || '');
+  const analysisHtml   = item.analysis
+    ? `<div class="card-section">
+        <div class="card-section-label">분석</div>
+        <div class="card-analysis">${escapeHtml(item.analysis)}</div>
+       </div>`
+    : '';
   const whyHtml        = item.why_picked
     ? `<div class="why-picked">${escapeHtml(item.why_picked)}</div>`
     : '';
@@ -331,7 +337,7 @@ function renderFeedItem(item) {
 
   return `
     <div class="feed-card status-${escapeHtml(statusClass)}" data-id="${escapeHtml(item.id)}" data-found-by="${escapeHtml(item.found_by || '')}" role="listitem">
-      <div class="card-header">
+      <div class="card-header" onclick="toggleCard(this)" style="cursor:pointer">
         <div class="card-header-left">
           <div class="status-dot ${escapeHtml(statusClass)}" title="${statusLabel(statusClass)}"></div>
           <div style="flex:1;min-width:0">
@@ -343,53 +349,62 @@ function renderFeedItem(item) {
               ${itemTypeBadgeHtml}
             </div>
             <div class="card-title">
-              <a href="${escapeHtml(item.url || '#')}" target="_blank" rel="noopener" onclick="markRead('${escapeHtml(item.id)}', event)">
+              <a href="${escapeHtml(item.url || '#')}" target="_blank" rel="noopener" onclick="markRead('${escapeHtml(item.id)}', event); event.stopPropagation();">
                 ${titleDisplay}
               </a>
             </div>
           </div>
         </div>
-        <span class="card-time" title="${formatDatetime(item.created_at)}">${timeLabel}</span>
+        <div class="card-header-right">
+          <span class="card-time" title="${formatDatetime(item.created_at)}">${timeLabel}</span>
+          <span class="card-chevron">▾</span>
+        </div>
       </div>
 
-      ${summaryDisplay ? `<div class="card-summary content-text">${summaryDisplay}</div>` : ''}
-      ${whyHtml}
-      ${memoChips}
-      ${dossierChips}
+      ${summaryDisplay ? `<div class="card-summary">${summaryDisplay}</div>` : ''}
 
-      <div class="card-actions">
-        <button
-          class="card-action action-read${isRead ? ' active' : ''}"
-          onclick="updateStatus('${escapeHtml(item.id)}', 'read')"
-          title="읽음으로 표시"
-        >읽음</button>
-        <button
-          class="card-action action-bookmark${isBookmarked ? ' active' : ''}"
-          onclick="updateStatus('${escapeHtml(item.id)}', 'bookmarked')"
-          title="북마크"
-        >★ 북마크</button>
-        <button
-          class="card-action action-dismiss${isDismissed ? ' active' : ''}"
-          onclick="updateStatus('${escapeHtml(item.id)}', 'dismissed')"
-          title="무시"
-        >무시</button>
-        <button
-          class="card-action action-memo"
-          onclick="toggleInlineMemo('${escapeHtml(item.id)}')"
-          title="메모 달기"
-        >메모</button>
-      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          ${analysisHtml}
+          ${whyHtml}
+          ${memoChips}
+          ${dossierChips}
 
-      <!-- Inline memo area (hidden by default) -->
-      <div class="inline-memo" id="inline-memo-${escapeHtml(item.id)}">
-        <textarea
-          id="memo-text-${escapeHtml(item.id)}"
-          placeholder="이 아이템에 대한 생각을 적어보세요... 마크다운 지원"
-          rows="3"
-        ></textarea>
-        <div class="inline-memo-actions">
-          <button class="btn-secondary" onclick="toggleInlineMemo('${escapeHtml(item.id)}')">취소</button>
-          <button class="btn-primary" onclick="addMemoToItem('${escapeHtml(item.id)}')">저장</button>
+          <div class="card-actions">
+            <button
+              class="card-action action-read${isRead ? ' active' : ''}"
+              onclick="updateStatus('${escapeHtml(item.id)}', 'read')"
+              title="읽음으로 표시"
+            >읽음</button>
+            <button
+              class="card-action action-bookmark${isBookmarked ? ' active' : ''}"
+              onclick="updateStatus('${escapeHtml(item.id)}', 'bookmarked')"
+              title="북마크"
+            >★ 북마크</button>
+            <button
+              class="card-action action-dismiss${isDismissed ? ' active' : ''}"
+              onclick="updateStatus('${escapeHtml(item.id)}', 'dismissed')"
+              title="무시"
+            >무시</button>
+            <button
+              class="card-action action-memo"
+              onclick="toggleInlineMemo('${escapeHtml(item.id)}')"
+              title="메모 달기"
+            >메모</button>
+          </div>
+
+          <!-- Inline memo area (hidden by default) -->
+          <div class="inline-memo" id="inline-memo-${escapeHtml(item.id)}">
+            <textarea
+              id="memo-text-${escapeHtml(item.id)}"
+              placeholder="이 아이템에 대한 생각을 적어보세요... 마크다운 지원"
+              rows="3"
+            ></textarea>
+            <div class="inline-memo-actions">
+              <button class="btn-secondary" onclick="toggleInlineMemo('${escapeHtml(item.id)}')">취소</button>
+              <button class="btn-primary" onclick="addMemoToItem('${escapeHtml(item.id)}')">저장</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -454,6 +469,12 @@ async function updateStatus(id, newStatus, reload = true) {
   } catch (err) {
     showToast(`상태 변경 실패: ${err.message}`, 'error');
   }
+}
+
+function toggleCard(header) {
+  const card = header.closest('.feed-card');
+  if (!card) return;
+  card.classList.toggle('expanded');
 }
 
 function toggleInlineMemo(feedItemId) {

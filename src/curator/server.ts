@@ -33,14 +33,14 @@ async function startServer() {
     const limit = parseInt(req.query.limit as string) || 50;
     const offset = parseInt(req.query.offset as string) || 0;
 
-    const items = feed.getItems({
+    const filterOpts = {
       status: status as any,
       found_by: found_by as any,
       item_type: item_type as any,
-      limit,
-      offset,
-    });
+    };
 
+    const items = feed.getItems({ ...filterOpts, limit, offset });
+    const filteredTotal = feed.countItems(filterOpts);
     const stats = feed.getStats();
 
     // Enrich items with dossier linkage
@@ -59,7 +59,8 @@ async function startServer() {
         unread: stats.unread,
         bookmarked: stats.bookmarked,
       },
-      total: stats.total,
+      total: filteredTotal,
+      totalPages: Math.max(1, Math.ceil(filteredTotal / limit)),
     });
   });
 
@@ -284,6 +285,17 @@ async function startServer() {
     });
   });
 
+  // POST /api/reload — 디스크에서 데이터 재로드 (서버 재시작 없이)
+  app.post('/api/reload', async (req, res) => {
+    try {
+      await memory.load();
+      await feed.load();
+      res.json({ ok: true, message: '데이터 재로드 완료' });
+    } catch (err: any) {
+      res.status(500).json({ ok: false, error: err.message });
+    }
+  });
+
   // =========================================================================
   // API: Dossiers — list, link, and serve generated dossiers
   // =========================================================================
@@ -414,6 +426,8 @@ async function startServer() {
           url: dossier.url + '#signal-' + encodeURIComponent(signal.name || ''),
           title: signal.name || 'Signal',
           summary: signal.summary || '',
+          analysis: signal.analysis || '',
+          why_picked: signal.why_picked || '',
           source_origin: dossierId,
           found_by: 'dossier',
           item_type: 'signal',
@@ -433,6 +447,8 @@ async function startServer() {
           url: dossier.url + '#deep-dive-' + (idx + 1),
           title: '심층 탐구: ' + (dd.title || `#${idx + 1}`),
           summary: dd.summary || '',
+          analysis: dd.analysis || '',
+          why_picked: dd.why_picked || '',
           source_origin: dossierId,
           found_by: 'dossier',
           item_type: 'deep_dive',

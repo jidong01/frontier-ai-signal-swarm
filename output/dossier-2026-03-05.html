@@ -1087,21 +1087,44 @@
 
   // === Highlight Renderer ===
   function wrapHighlight(range, annId, hasMemo) {
-    try {
-      var mark = document.createElement('mark');
-      mark.className = 'ann-highlight' + (hasMemo ? ' has-memo' : '');
-      mark.dataset.annId = annId;
-      range.surroundContents(mark);
-    } catch(ex) {
-      // surroundContents fails if range spans multiple elements - use extractContents
-      try {
-        var mark2 = document.createElement('mark');
-        mark2.className = 'ann-highlight' + (hasMemo ? ' has-memo' : '');
-        mark2.dataset.annId = annId;
-        mark2.appendChild(range.extractContents());
-        range.insertNode(mark2);
-      } catch(ex2) { /* give up gracefully */ }
+    function makeHighlight() {
+      var m = document.createElement('mark');
+      m.className = 'ann-highlight' + (hasMemo ? ' has-memo' : '');
+      m.dataset.annId = annId;
+      return m;
     }
+
+    // Fast path: selection within a single element
+    try {
+      range.surroundContents(makeHighlight());
+      return;
+    } catch(ex) { /* range spans multiple elements — fall through */ }
+
+    // Fallback: wrap each text node individually to avoid inserting block
+    // elements inside <mark>, which causes unwanted line breaks.
+    try {
+      var ancestor = range.commonAncestorContainer;
+      var walker = document.createTreeWalker(ancestor, NodeFilter.SHOW_TEXT);
+      var textNodes = [];
+      var node;
+      while ((node = walker.nextNode())) {
+        var nr = document.createRange();
+        nr.selectNode(node);
+        if (nr.compareBoundaryPoints(Range.START_TO_END, range) > 0 &&
+            nr.compareBoundaryPoints(Range.END_TO_START, range) < 0) {
+          textNodes.push(node);
+        }
+      }
+      for (var i = 0; i < textNodes.length; i++) {
+        var tn = textNodes[i];
+        var tr = document.createRange();
+        tr.setStart(tn, tn === range.startContainer ? range.startOffset : 0);
+        tr.setEnd(tn, tn === range.endContainer ? range.endOffset : tn.length);
+        if (tr.toString().trim()) {
+          tr.surroundContents(makeHighlight());
+        }
+      }
+    } catch(ex2) { /* give up gracefully */ }
   }
 
   function restoreHighlights() {

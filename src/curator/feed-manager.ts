@@ -85,6 +85,18 @@ export class FeedManager {
     return items.slice(offset, offset + limit);
   }
 
+  countItems(options: {
+    status?: FeedItem['status'];
+    found_by?: FeedItem['found_by'];
+    item_type?: FeedItem['item_type'];
+  } = {}): number {
+    let items = this.store.items;
+    if (options.status) items = items.filter(i => i.status === options.status);
+    if (options.found_by) items = items.filter(i => i.found_by === options.found_by);
+    if (options.item_type) items = items.filter(i => i.item_type === options.item_type);
+    return items.length;
+  }
+
   getItem(id: string): FeedItem | null {
     return this.store.items.find(i => i.id === id) ?? null;
   }

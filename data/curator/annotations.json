@@ -76,7 +76,33 @@
       "created_at": "2026-03-05T03:03:09.519Z",
       "updated_at": "2026-03-05T03:03:09.519Z",
       "memo_id": "cf2b160f-6bca-4600-b004-4c845b595423"
+    },
+    {
+      "dossier_id": "dossier-2026-03-05",
+      "type": "highlight",
+      "selected_text": "위협이 인간 언어로 쓰인 지시문이라면, 그것을 탐지하는 것은 결국 언어를 이해하는 다른 AI여야 한다.\nRankClaw가 AI 심층 감사로 표면 스캔보다 2.5배 많은 악성 스킬을 찾은 것이 그 증거다. AI가 공격하고, AI가 방어해야 한다.",
+      "section_id": null,
+      "position": {
+        "start_path": "body > div:nth-of-type(1) > article > p:nth-of-type(17)",
+        "start_offset": 74,
+        "end_path": "body > div:nth-of-type(1) > article > p:nth-of-type(18) > strong",
+        "end_offset": 22,
+        "context_before": ". 이 모든 도구가 자연어 페이로드 앞에서 무력하다. ",
+        "context_after": ""
+      },
+      "signal_type": null,
+      "id": "530b99d0-f90a-4ec3-b27c-aa743b764dfd",
+      "feed_item_ids": [
+        "0779b782-e542-4a21-89ca-680d6cc148fe",
+        "05905dbc-d4d5-48b0-80de-05262e6f4cf1",
+        "e6f99f8a-4bb4-4a21-a16a-aa59e811d6e8",
+        "b8880059-e9ff-4b19-af28-6f28603a8289",
+        "83f91644-b365-4890-83f6-af6973724b78",
+        "5e2784dd-8c9b-49fc-921f-ce407b65b679"
+      ],
+      "created_at": "2026-03-05T14:58:02.678Z",
+      "updated_at": "2026-03-05T14:58:02.678Z"
     }
   ],
-  "last_updated": "2026-03-05T03:03:09.520Z"
+  "last_updated": "2026-03-05T14:58:02.679Z"
 }

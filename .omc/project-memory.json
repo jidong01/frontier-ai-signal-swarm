@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1772621791819,
-  "projectRoot": "/Users/jidonghwan/frontier-ai-signal-swarm",
+  "lastScanned": 1772723236292,
+  "projectRoot": "/Users/jidonghwan/harness-factory/harnesses/frontier-ai-signal-swarm",
   "techStack": {
     "languages": [
       {
@@ -38,6 +38,7 @@
     "devCommand": "npm run start",
     "scripts": {
       "build": "tsc",
+      "curator": "tsx src/curator/server.ts",
       "start": "tsx src/index.ts",
       "collect": "tsx src/index.ts collect",
       "analyze": "tsx src/index.ts analyze",
@@ -61,18 +62,42 @@
   },
   "customNotes": [],
   "directoryMap": {
+    "agents": {
+      "path": "agents",
+      "purpose": null,
+      "fileCount": 3,
+      "lastAccessed": 1772723236279,
+      "keyFiles": [
+        "implications-analyst.md",
+        "skeptical-verifier.md",
+        "technical-analyst.md"
+      ]
+    },
     "data": {
       "path": "data",
       "purpose": "Data files",
       "fileCount": 0,
-      "lastAccessed": 1772621791795,
+      "lastAccessed": 1772723236279,
       "keyFiles": []
+    },
+    "dist": {
+      "path": "dist",
+      "purpose": "Distribution/build output",
+      "fileCount": 12,
+      "lastAccessed": 1772723236279,
+      "keyFiles": [
+        "index.d.ts",
+        "index.d.ts.map",
+        "index.js",
+        "index.js.map",
+        "local.d.ts"
+      ]
     },
     "output": {
       "path": "output",
       "purpose": null,
-      "fileCount": 18,
-      "lastAccessed": 1772621791797,
+      "fileCount": 24,
+      "lastAccessed": 1772723236280,
       "keyFiles": [
         "dossier-1634cf81.json",
         "dossier-1634cf81.md",
@@ -85,18 +110,29 @@
       "path": "src",
       "purpose": "Source code",
       "fileCount": 3,
-      "lastAccessed": 1772621791803,
+      "lastAccessed": 1772723236280,
       "keyFiles": [
         "index.ts",
         "local.ts",
         "run-demo.ts"
       ]
     },
+    "dist/config": {
+      "path": "dist/config",
+      "purpose": "Configuration files",
+      "fileCount": 4,
+      "lastAccessed": 1772723236281,
+      "keyFiles": [
+        "sources.d.ts",
+        "sources.d.ts.map",
+        "sources.js"
+      ]
+    },
     "src/config": {
       "path": "src/config",
       "purpose": "Configuration files",
       "fileCount": 1,
-      "lastAccessed": 1772621791805,
+      "lastAccessed": 1772723236281,
       "keyFiles": [
         "sources.ts"
       ]
@@ -104,148 +140,70 @@
   },
   "hotPaths": [
     {
-      "path": "data/memory/analyzed-topics.json",
-      "accessCount": 16,
-      "lastAccessed": 1772678464142,
-      "type": "file"
-    },
-    {
-      "path": "CLAUDE.md",
-      "accessCount": 15,
-      "lastAccessed": 1772678103385,
-      "type": "directory"
-    },
-    {
-      "path": "src/curator/curator-memory.ts",
-      "accessCount": 5,
-      "lastAccessed": 1772640504276,
-      "type": "file"
-    },
-    {
       "path": "src/curator/server.ts",
-      "accessCount": 5,
-      "lastAccessed": 1772640522479,
-      "type": "file"
-    },
-    {
-      "path": "data/curator/profile.json",
-      "accessCount": 4,
-      "lastAccessed": 1772677938894,
-      "type": "file"
-    },
-    {
-      "path": "",
-      "accessCount": 4,
-      "lastAccessed": 1772678013363,
+      "accessCount": 19,
+      "lastAccessed": 1772726524231,
       "type": "directory"
     },
     {
-      "path": "AGENTS.md",
-      "accessCount": 3,
-      "lastAccessed": 1772678113305,
-      "type": "directory"
-    },
-    {
-      "path": "output/dossier-2026-03-05.md",
-      "accessCount": 3,
-      "lastAccessed": 1772678416118,
+      "path": "src/curator/public/style.css",
+      "accessCount": 19,
+      "lastAccessed": 1772726663292,
       "type": "file"
     },
     {
-      "path": "data/curator/dossier-index.json",
-      "accessCount": 3,
-      "lastAccessed": 1772678443206,
+      "path": "src/curator/public/app.js",
+      "accessCount": 17,
+      "lastAccessed": 1772726654734,
       "type": "file"
     },
     {
       "path": "data/curator/feed.json",
-      "accessCount": 2,
-      "lastAccessed": 1772639084991,
+      "accessCount": 14,
+      "lastAccessed": 1772726447980,
       "type": "file"
     },
     {
-      "path": "src/dossier/html-template.ts",
-      "accessCount": 2,
-      "lastAccessed": 1772677936060,
-      "type": "file"
-    },
-    {
-      "path": "output/dossier-2026-03-04-harness-engineering.md",
-      "accessCount": 1,
-      "lastAccessed": 1772622465619,
-      "type": "file"
-    },
-    {
-      "path": "output/dossier-2026-03-04-harness-engineering-deep.md",
-      "accessCount": 1,
-      "lastAccessed": 1772624183045,
-      "type": "file"
-    },
-    {
-      "path": "package.json",
-      "accessCount": 1,
-      "lastAccessed": 1772637410761,
-      "type": "file"
-    },
-    {
-      "path": "data/curator/memos.json",
-      "accessCount": 1,
-      "lastAccessed": 1772639085023,
-      "type": "file"
-    },
-    {
-      "path": "src/curator",
-      "accessCount": 1,
-      "lastAccessed": 1772640489171,
+      "path": "CLAUDE.md",
+      "accessCount": 5,
+      "lastAccessed": 1772724071897,
       "type": "directory"
     },
     {
-      "path": "src/local.ts",
-      "accessCount": 1,
-      "lastAccessed": 1772677932380,
+      "path": "src/curator/feed-manager.ts",
+      "accessCount": 5,
+      "lastAccessed": 1772726029772,
       "type": "file"
     },
     {
-      "path": "src/dossier/dossier-generator.ts",
-      "accessCount": 1,
-      "lastAccessed": 1772677932739,
+      "path": "data/curator/profile.json",
+      "accessCount": 3,
+      "lastAccessed": 1772727521445,
       "type": "file"
     },
     {
-      "path": "src/memory/signal-memory.ts",
-      "accessCount": 1,
-      "lastAccessed": 1772677932843,
+      "path": "data/memory/analyzed-topics.json",
+      "accessCount": 3,
+      "lastAccessed": 1772727522220,
       "type": "file"
     },
     {
-      "path": "src/pipeline/local-pipeline.ts",
-      "accessCount": 1,
-      "lastAccessed": 1772677935479,
-      "type": "file"
-    },
-    {
-      "path": "src/types/signal.ts",
-      "accessCount": 1,
-      "lastAccessed": 1772677936007,
-      "type": "file"
-    },
-    {
-      "path": "data/memory/signal-memory.json",
-      "accessCount": 1,
-      "lastAccessed": 1772677938544,
-      "type": "file"
-    },
-    {
-      "path": "src/pipeline/pipeline.ts",
-      "accessCount": 1,
-      "lastAccessed": 1772677941818,
-      "type": "file"
+      "path": "src",
+      "accessCount": 2,
+      "lastAccessed": 1772723442219,
+      "type": "directory"
     },
     {
       "path": "src/curator/types.ts",
-      "accessCount": 1,
-      "lastAccessed": 1772677945960,
+      "accessCount": 2,
+      "lastAccessed": 1772723872349,
       "type": "file"
+    },
+    {
+      "path": "",
+      "accessCount": 2,
+      "lastAccessed": 1772726001125,
+      "type": "directory"
     }
   ],
   "userDirectives": []

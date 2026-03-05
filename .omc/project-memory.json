@@ -176,15 +176,21 @@
       "type": "file"
     },
     {
-      "path": "data/curator/profile.json",
-      "accessCount": 3,
-      "lastAccessed": 1772727521445,
+      "path": "data/memory/analyzed-topics.json",
+      "accessCount": 5,
+      "lastAccessed": 1772727986603,
       "type": "file"
     },
     {
-      "path": "data/memory/analyzed-topics.json",
+      "path": "",
+      "accessCount": 4,
+      "lastAccessed": 1772727996780,
+      "type": "directory"
+    },
+    {
+      "path": "data/curator/profile.json",
       "accessCount": 3,
-      "lastAccessed": 1772727522220,
+      "lastAccessed": 1772727521445,
       "type": "file"
     },
     {
@@ -200,10 +206,22 @@
       "type": "file"
     },
     {
-      "path": "",
-      "accessCount": 2,
-      "lastAccessed": 1772726001125,
-      "type": "directory"
+      "path": "output/dossier-2026-03-06.md",
+      "accessCount": 1,
+      "lastAccessed": 1772727904307,
+      "type": "file"
+    },
+    {
+      "path": "output/dossier-2026-03-06.json",
+      "accessCount": 1,
+      "lastAccessed": 1772727942806,
+      "type": "file"
+    },
+    {
+      "path": "src/dossier/html-template.ts",
+      "accessCount": 1,
+      "lastAccessed": 1772727953003,
+      "type": "file"
     }
   ],
   "userDirectives": []

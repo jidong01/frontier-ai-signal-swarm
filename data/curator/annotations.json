@@ -102,7 +102,26 @@
       ],
       "created_at": "2026-03-05T14:58:02.678Z",
       "updated_at": "2026-03-05T14:58:02.678Z"
+    },
+    {
+      "dossier_id": "dossier-2026-03-06",
+      "type": "highlight",
+      "selected_text": "인간성(human-likeness)은 의도적으로 삽입된 것이 아니라 인터넷 텍스트에 담긴 수십억 인간 경험의 불가피한 부산물이다",
+      "section_id": null,
+      "position": {
+        "start_path": "body > div:nth-of-type(1) > article > p:nth-of-type(2)",
+        "start_offset": 83,
+        "end_path": "body > div:nth-of-type(1) > article > p:nth-of-type(2)",
+        "end_offset": 154,
+        "context_before": "하는 방법을 모른다, 그것을 시도하더라도\"라고 쓴다. ",
+        "context_after": "."
+      },
+      "signal_type": null,
+      "id": "266da5e3-e8ea-4b10-bb11-64001c9358de",
+      "feed_item_ids": [],
+      "created_at": "2026-03-05T16:27:41.959Z",
+      "updated_at": "2026-03-05T16:27:41.959Z"
     }
   ],
-  "last_updated": "2026-03-05T14:58:02.679Z"
+  "last_updated": "2026-03-05T16:27:41.960Z"
 }

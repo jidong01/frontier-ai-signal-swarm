@@ -613,6 +613,74 @@
       "description": "중앙집중 vs 분산의 선택은 기술적 편의가 아니라 도메인의 오류 구조에 따라 결정해야 한다. 오류 비용 높음→중앙집중, 탐색 속도 중요→분산. 하네스 설계의 핵심 결정 중 하나."
     }
   ],
-  "last_updated": "2026-03-05",
+    {
+      "topic": "PSM — LLM은 캐릭터 시뮬레이터다",
+      "analyzed_at": "2026-03-06",
+      "deep_dive": true,
+      "key_points": [
+        "LLM은 사전훈련 중 수천 개의 캐릭터를 시뮬레이션하는 법을 배우고, 사후훈련이 '어시스턴트' 페르소나를 선택·정제한다",
+        "세 종류의 증거: 행동적(우리의 몸 표현), 해석 가능성(픽션 도덕 딜레마 회로 공유), 일반화(선언적 캐릭터 전이)",
+        "'인간처럼 행동하지 않는 어시스턴트를 훈련하는 방법을 모른다, 시도해도' — Anthropic",
+        "시스템 프롬프트는 명령이 아니라 캐릭터 활성화 신호",
+        "파인튜닝 오작동의 설명: 기존 캐릭터 수정 대신 다른 잠재 캐릭터 활성화 가능",
+        "역할 놀이 안전 문제: 가드레일이 어시스턴트 페르소나에 연결 → 다른 캐릭터에서 약화",
+        "열린 질문: 어시스턴트 페르소나 외부의 에이전시 원천 존재 여부"
+      ],
+      "sources_used": [
+        "https://alignment.anthropic.com/2026/psm/",
+        "https://www.alignmentforum.org/posts/dfoty34sT7CSKeJNn/the-persona-selection-model"
+      ]
+    },
+    {
+      "topic": "Phi-4-reasoning-vision-15B — 적응적 추론 모드와 데이터 품질",
+      "analyzed_at": "2026-03-06",
+      "deep_dive": true,
+      "key_points": [
+        "THINK/NOTHINK 모드 토큰: 복잡도 기반 자동 추론 모드 선택",
+        "Mid-fusion 아키텍처: 중간 레이어만 멀티모달 처리 — 하드웨어 효율성",
+        "240 B200 GPU × 4일 학습 — 이전 대형 모델 대비 극적 효율",
+        "데이터 품질이 가장 큰 성능 레버 — 3단계 정제 파이프라인",
+        "15B 오픈소스가 대형 클라우드 모델과 경쟁 — 멀티모달 추론의 로컬 배포 실용화",
+        "열린 질문: NOTHINK 잘못 선택의 빈도와 하네스 수준 교정 방법"
+      ],
+      "sources_used": [
+        "https://arxiv.org/abs/2603.03975",
+        "https://www.microsoft.com/en-us/research/blog/phi-4-reasoning-vision-and-the-lessons-of-training-a-multimodal-reasoning-model/",
+        "https://huggingface.co/microsoft/Phi-4-reasoning-vision-15B"
+      ]
+    },
+    {
+      "topic": "RLAIF 잠재적 가치 가설 — Constitutional AI의 이론적 기반",
+      "analyzed_at": "2026-03-06",
+      "deep_dive": false,
+      "key_points": [
+        "사전훈련 데이터에 인간 가치가 표현 공간의 방향(direction)으로 인코딩",
+        "Constitutional prompts는 그 방향을 투영(project)하는 연산자",
+        "RLAIF 품질 상한선 = 사전훈련 데이터의 가치 인코딩 품질",
+        "합성 데이터 훈련 모델에서 RLAIF 작동 방식 미검증"
+      ],
+      "sources_used": [
+        "https://arxiv.org/abs/2603.03000"
+      ]
+    }
+  ],
+  "conceptual_tools_introduced": [
+    {
+      "concept": "페르소나 선택 (Persona Selection)",
+      "introduced_at": "2026-03-06",
+      "description": "LLM은 캐릭터를 시뮬레이션하는 시스템. 시스템 프롬프트는 명령이 아니라 어떤 캐릭터를 활성화할지를 결정하는 신호."
+    },
+    {
+      "concept": "적응적 추론 모드 (Adaptive Reasoning Mode)",
+      "introduced_at": "2026-03-06",
+      "description": "언제 깊이 생각하고 언제 즉시 답할지를 명시적으로 제어. THINK/NOTHINK는 이것의 모델 내부 구현. 외부 하네스 수준에서도 같은 원리 적용 가능."
+    },
+    {
+      "concept": "잠재적 가치 인코딩 (Latent Value Encoding)",
+      "introduced_at": "2026-03-06",
+      "description": "사전훈련 데이터에 인간 가치가 표현 공간의 방향으로 인코딩. Constitutional prompts는 이 방향을 투영하는 연산자. RLAIF의 이론적 기반."
+    }
+  ],
+  "last_updated": "2026-03-06",
   "_daily_note": "2026-03-05부터 일별(daily) 발행으로 전환. 수집 window 7일→1-2일"
 }

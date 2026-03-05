@@ -93,7 +93,7 @@ When the user asks you to analyze AI news/trends, you execute this pipeline:
 | **Meta AI** | `site:ai.meta.com/blog` | WebSearch | 공식 1차 발표 |
 | **HuggingFace 트렌딩** | `site:huggingface.co/papers` | WebSearch | 커뮤니티 주목 논문 |
 | **The Information AI** | `site:theinformation.com AI` | WebSearch | 고품질 기술 저널리즘 |
-| **AI Frontier 팟캐스트** | `site:aifrontier.kr` | WebSearch / WebFetch | 한국 AI 전문가 심층 분석 (기술/산업/철학, 주 1-2회) |
+| **AI Frontier 팟캐스트** | `site:aifrontier.kr` | WebSearch / Scrapling | 한국 AI 전문가 심층 분석 (기술/산업/철학, 주 1-2회) |
 
 **시간 기준:** 오늘 날짜를 기준으로 최근 1-2일 이내 (오늘 + 어제 버퍼) 항목만 수확. 검색 쿼리에 반드시 현재 날짜(연도/월/일)를 포함한다 (예: "2026-03-05", "March 5 2026"). `mcp__exa__web_search_exa`를 병렬로 사용하면 빠름. 오래된 정보는 가치가 없다 — 항상 가장 최신 소스를 우선한다. **도시에는 일별(daily) 발행이므로 2일 이상 된 소스는 제외한다.**
 
@@ -105,7 +105,7 @@ When the user asks you to analyze AI news/trends, you execute this pipeline:
 
 ```
 씨앗 시그널 발견
-  ├─→ 1차 소스 읽기 (WebFetch로 원문 확인)
+  ├─→ 1차 소스 읽기 (Scrapling으로 원문 확인: `Bash: python scripts/web_fetch.py <url> --mode auto --format text`)
   │     ├─→ 인용된 논문/출처 → 그 논문의 핵심 주장 확인
   │     ├─→ 같은 저자/팀의 다른 최근 발표 검색
   │     └─→ 원문에서 언급된 관련 기업/프로젝트 → 그 기업의 공식 발표 확인
@@ -296,7 +296,7 @@ Launch all 3 agents in PARALLEL using the Task tool (`oh-my-claudecode:architect
 - **`memos.json`에서 부정적 피드백("관심 없음" 등)이 있는 유형은 후순위로 한다**
 
 심층 탐구 방법:
-- 관련 1차 소스(논문, 공식 블로그)를 WebFetch로 직접 읽기
+- 관련 1차 소스(논문, 공식 블로그)를 Scrapling으로 직접 읽기: `Bash: python scripts/web_fetch.py <url> --mode auto --format text`
 - 핵심 개념을 **비유와 구체적 예시**로 설명
 - "왜 이것이 어려운가"를 기술적으로 구체화
 - 관련 역사적 사례와 비교·대조
@@ -581,7 +581,7 @@ User: "OpenAI vs Anthropic 경쟁 구도 분석"
 | 스텝 | 유형 | 원칙 |
 |------|------|------|
 | Step 0: 큐레이터 프로필 로드 | deterministic | 파일 읽기 — 결과 예측 가능, 성공 확인 후 진행 |
-| Step 1: Source Collection (Layer 1-3) | deterministic | WebSearch/WebFetch — 소스 수 검증 후 다음 단계 |
+| Step 1: Source Collection (Layer 1-3) | deterministic | WebSearch/Scrapling — 소스 수 검증 후 다음 단계 |
 | Step 1.5: 중복 필터링 | deterministic | 파일 대조 — 규칙 기반 판정 |
 | Step 2: Signal Detection | agentic | LLM 판단 포함 — 강도/유형 분류 |
 | Step 3: Multi-Perspective Analysis (3 agents) | agentic | MAX 추론 (architect × 3 병렬) |
@@ -615,7 +615,7 @@ User: "OpenAI vs Anthropic 경쟁 구도 분석"
 | 실패 유형 | 처리 |
 |-----------|------|
 | 동일 WebSearch 쿼리 2회 실패 | 쿼리 변경 또는 다른 소스 레이어로 이동 |
-| WebFetch 실패 | 해당 URL 건너뜀, 실패 기록 후 다음 소스 |
+| Scrapling(web_fetch.py) 실패 | 해당 URL 건너뜀, 실패 기록 후 다음 소스 |
 | 분석 에이전트 1개 실패 | 나머지 2개 결과로 진행 (부분 성공 허용) |
 | 메모리 파일 쓰기 실패 | 경고 표시 후 도시에 결과는 유지 |
 

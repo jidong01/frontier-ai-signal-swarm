@@ -1,0 +1,78 @@
+{
+  "memos": [
+    {
+      "id": "e5ad84b6-9b3a-498a-8033-6f63f591be31",
+      "content": "Google DeepMind의 Gemini Deep Think 모델이 수학·과학 문제 해결에서 성과",
+      "feed_item_ids": [
+        "0ac29f35-037e-4457-a317-a1ea63b5b275"
+      ],
+      "created_at": "2026-03-02T09:44:05.731Z",
+      "updated_at": "2026-03-02T09:44:05.731Z"
+    },
+    {
+      "id": "a230bea2-b7a0-4a50-a801-a37a2d69948d",
+      "content": "Anthropic의 AI 모델 복지(welfare) 연구",
+      "feed_item_ids": [
+        "8b229062-0566-4b9d-8fc8-79b27e835910"
+      ],
+      "created_at": "2026-03-02T09:44:05.790Z",
+      "updated_at": "2026-03-02T09:44:05.790Z"
+    },
+    {
+      "id": "a6701483-7c9f-40a6-a731-92a8850fd496",
+      "content": "DeepMind AlphaGenome으로 유전체 기능 예측",
+      "feed_item_ids": [
+        "6c61e99f-ea88-4e8c-85de-ba4138de4f24"
+      ],
+      "created_at": "2026-03-02T09:44:05.814Z",
+      "updated_at": "2026-03-02T09:44:05.814Z"
+    },
+    {
+      "id": "376bd0fe-96cf-42ac-bcc6-5cb1fb812e2f",
+      "content": "관심 없음",
+      "feed_item_ids": [
+        "6c61e99f-ea88-4e8c-85de-ba4138de4f24"
+      ],
+      "created_at": "2026-03-02T10:13:06.303Z",
+      "updated_at": "2026-03-02T10:13:06.303Z"
+    },
+    {
+      "id": "3c79b71c-ec03-44e2-8de3-27a33fdbba30",
+      "content": "MoE와 Engram의 핵심 차이: 연산 vs 메모리의 조건부 활성화. 이 구분이 향후 아키텍처 설계에 중요한 축이 될 수 있다.",
+      "feed_item_ids": [],
+      "created_at": "2026-03-04T07:25:50.772Z",
+      "updated_at": "2026-03-04T07:25:50.772Z"
+    },
+    {
+      "id": "24541c97-0738-481f-a324-763e5016b6b3",
+      "content": "결국 성능이 임계에 오면서 최적화에 대한 고민 늘어나는 듯",
+      "feed_item_ids": [],
+      "created_at": "2026-03-04T07:26:57.647Z",
+      "updated_at": "2026-03-04T07:26:57.647Z"
+    },
+    {
+      "id": "c60e7d42-766e-471d-afa7-2b542c423afb",
+      "content": "이런거는 관심 없음",
+      "feed_item_ids": [],
+      "created_at": "2026-03-04T15:58:19.430Z",
+      "updated_at": "2026-03-04T15:58:19.430Z"
+    },
+    {
+      "id": "f693b2a3-1a87-4803-bb0b-abb9aa4d5de3",
+      "content": "재밌고 좋아하는 일을 하는게 결국 해자다",
+      "feed_item_ids": [
+        "e6f99f8a-4bb4-4a21-a16a-aa59e811d6e8"
+      ],
+      "created_at": "2026-03-04T15:59:34.160Z",
+      "updated_at": "2026-03-04T15:59:34.160Z"
+    },
+    {
+      "id": "cf2b160f-6bca-4600-b004-4c845b595423",
+      "content": "스파이를 심는것가 똑같다, 뭔가 소프트웨어 레벨에서의 액션들이 인간 세계와 비슷해지는 느낌?",
+      "feed_item_ids": [],
+      "created_at": "2026-03-05T03:03:09.519Z",
+      "updated_at": "2026-03-05T03:03:09.519Z"
+    }
+  ],
+  "last_updated": "2026-03-05T03:03:09.520Z"
+}

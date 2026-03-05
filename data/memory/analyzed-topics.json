@@ -1,0 +1,618 @@
+{
+  "topics": [
+    {
+      "topic": "하네스 엔지니어링 (Harness Engineering) — 개념 소개",
+      "analyzed_at": "2026-03-02",
+      "deep_dive": true,
+      "key_points": [
+        "OpenAI가 '하네스 엔지니어링'을 공식 개념으로 제시 (2/11)",
+        "3명 엔지니어가 Codex 에이전트로 ~100만 줄 생성, 인간은 구조만 설계",
+        "하네스 = 타입 시스템 + 의존성 그래프 + 피드백 루프 + 아키텍처 문서",
+        "CNC 공작 기계 도입과의 역사적 유사성",
+        "Chris Lattner의 경계선: 알려진 추상화 구현 = 해결, 새로운 추상화 발명 = 미해결",
+        "Martin Fowler가 진지한 소프트웨어 공학 관행으로 인정"
+      ],
+      "sources_used": [
+        "https://openai.com/index/harness-engineering/",
+        "https://www.modular.com/blog/the-claude-c-compiler-what-it-reveals-about-the-future-of-software",
+        "https://martinfowler.com/articles/exploring-gen-ai/harness-engineering.html",
+        "https://aifrontier.kr/ko/episodes/ep87/"
+      ]
+    },
+    {
+      "topic": "하네스 엔지니어링 (Harness Engineering) — 잘 하는 법: 실무 설계 원칙",
+      "analyzed_at": "2026-03-04",
+      "deep_dive": true,
+      "key_points": [
+        "하네스가 모델보다 성능을 결정한다 — LangChain: 모델 고정, 하네스만 변경으로 52.8%→66.5% (+13.7%p)",
+        "Model=CPU, Harness=OS, Context window=RAM, Agent=Application 비유 (Evangelos Pappas)",
+        "능력 임계점(Capability Floor): 그 위에서는 하네스가, 그 아래에서는 모델이 성능을 결정",
+        "Vercel: 도구 15개→2개(bash+SQL), 정확도 100%, 속도 3.5× — '더 적게'가 '더 많이'를 이긴다",
+        "5개 레이어: 컨텍스트 엔지니어링 / 도구 설계 / 아키텍처 가드레일 / 피드백 루프 / 평가 시스템",
+        "Hashimoto 원칙: 에이전트 실수→구조적 해결책. AGENTS.md 크기 = 경험치",
+        "추론 샌드위치: Planning MAX → Implementation MEDIUM → Verification MAX",
+        "5가지 실패 모드: Doom Loop / Context Pollution / Tool Proliferation / Over-Specification / Verification Vacuum",
+        "메타 하네스: AOrchestra (I,C,T,M) 튜플 — 에이전트를 만드는 에이전트의 설계 단위",
+        "Braintrust: 에이전트 단일 실행 60% → 8회 반복 25% — eval 전략이 다르다",
+        "Bitter Lesson의 하네스 버전: 나중에 지울 수 있는 하네스를 만들어라",
+        "컨텍스트 압축 계층: raw→compressed→summarized (Manus $3→$0.30/MTok)",
+        "창업자 관점: 제품은 에이전트인가 메타 하네스인가 — 하네스 생성 품질이 방어 해자"
+      ],
+      "sources_used": [
+        "https://blog.langchain.com/improving-deep-agents-with-harness-engineering/",
+        "https://mitchellh.com/writing/my-ai-adoption-journey",
+        "https://www.ignorance.ai/p/the-emerging-harness-engineering",
+        "https://dev.to/epappas/the-agent-harness-is-the-architecture-and-your-model-is-not-the-bottleneck-3bjd",
+        "https://martinfowler.com/articles/exploring-gen-ai/harness-engineering.html",
+        "https://arxiv.org/html/2602.03786v1",
+        "https://www.braintrust.dev/articles/ai-agent-evaluation-framework"
+      ]
+    },
+    {
+      "topic": "모델 능력의 경계 — METR 시간 지평과 추론 시간 스케일링",
+      "analyzed_at": "2026-03-02",
+      "deep_dive": true,
+      "key_points": [
+        "Claude Opus 4.6 METR 시간 지평 ~14.5시간 도달",
+        "14.5시간 = 인간 기준 난이도, 50% 성공률, 소프트웨어 도메인 편향",
+        "MIT Technology Review: 'AI에서 가장 오해받는 그래프'",
+        "Gemini 3.1 Pro 3단계 사고 (LOW/MEDIUM/HIGH) = 4번째 스케일링 축",
+        "추론 시간 스케일링이 데이터 벽 우회 가능성 제공",
+        "내삽 vs 외삽 논쟁 — 반증 불가능에 가까운 주장",
+        "인접 가능성(Adjacent Possible) 프레임워크로 재해석"
+      ],
+      "sources_used": [
+        "https://metr.org/time-horizons/",
+        "https://metr.org/notes/2026-01-22-time-horizon-limitations/",
+        "https://www.technologyreview.com/2026/02/05/1132254/this-is-the-most-misunderstood-graph-in-ai/",
+        "https://www.anthropic.com/news/claude-opus-4-6",
+        "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-pro/"
+      ]
+    },
+    {
+      "topic": "Claude Opus 4.6 + Agent Teams 출시",
+      "analyzed_at": "2026-03-01",
+      "deep_dive": false,
+      "key_points": [
+        "Agent Teams: 16 에이전트 병렬 협업으로 100K줄 Rust C 컴파일러 생성",
+        "ARC-AGI-2: 37.6% → 68.8% 추론 능력 향상",
+        "MRCR v2 1M 토큰: 76% (GPT-5.2는 18.5%)",
+        "산문 품질 회귀 — 에이전틱 최적화의 트레이드오프",
+        "Sonnet 4.6: SWE-bench 79.6%, Opus의 1/5 비용"
+      ],
+      "sources_used": [
+        "https://anthropic.com/news/claude-opus-4-6"
+      ]
+    },
+    {
+      "topic": "DeepSeek mHC (Manifold-Constrained Hyper-Connections)",
+      "analyzed_at": "2026-03-01",
+      "deep_dive": false,
+      "key_points": [
+        "프론티어 모델 스케일링 안정성을 위한 학습 기법",
+        "27B 규모에서만 검증, 프론티어 스케일 미검증"
+      ],
+      "sources_used": []
+    },
+    {
+      "topic": "Trump AI 연방 선점 행정명령",
+      "analyzed_at": "2026-03-01",
+      "deep_dive": false,
+      "key_points": [
+        "주(州)단위 AI 규제를 연방 수준으로 선점",
+        "2026년 3월 이행 기한",
+        "모델 수준 안전성 도구/해석 가능성 연구 인센티브 감소 우려"
+      ],
+      "sources_used": []
+    },
+    {
+      "topic": "AI 인프라 CapEx ~$700B + OpenAI $110B 자본 조달",
+      "analyzed_at": "2026-03-02",
+      "deep_dive": false,
+      "key_points": [
+        "전력 그리드가 제약 조건 — GPU도 자본도 아닌 와트가 한계",
+        "Apple이 자체 모델 대신 Google Gemini 선택한 배경"
+      ],
+      "sources_used": []
+    },
+    {
+      "topic": "AI가 과학을 하기 시작했다 — Gemini Deep Think + AlphaGenome + 자동화 연구소",
+      "analyzed_at": "2026-03-02",
+      "deep_dive": true,
+      "key_points": [
+        "Gemini Deep Think: 18개 미해결 문제 '해결' — 실제 성공률 6.5% (200개 중 13개)",
+        "68.5% 근본적 오답, 50개는 specification gaming (질문을 바꿔서 풀음)",
+        "교차 도메인 전이가 진짜 강점: Kirszbraun→Max-Cut, Gegenbauer 다항식→우주 끈",
+        "전문화의 함정(specialization trap) — 인간은 분야 간 벽 때문에 이 조합을 못 함",
+        "Aletheia 에이전트: Generator→Verifier→Reviser→Admit Failure (자동화된 과학적 방법론)",
+        "Verifier가 자연어 기반 = 체계적 편향 공유 한계",
+        "AlphaGenome: DNA 100만 bp 기능 예측, Nature 발표, 3000명 사용 중이나 구체적 발견 없음",
+        "DeepMind UK 자동화 연구소: 상온 초전도체 탐색, 하루 수백 물질 합성",
+        "인지적 현미경 프레임워크: AI는 도구를 이해하지 않고, 인지적 해상도를 확장함"
+      ],
+      "sources_used": [
+        "https://deepmind.google/blog/accelerating-mathematical-and-scientific-discovery-with-gemini-deep-think/",
+        "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-deep-think/",
+        "https://arxiv.org/abs/2602.03837",
+        "https://www.nature.com/articles/s41586-025-10014-0",
+        "https://deepmind.google/blog/alphagenome-ai-for-better-understanding-the-genome/",
+        "https://deepmind.google/blog/strengthening-our-partnership-with-the-uk-government-to-support-prosperity-and-security-in-the-ai-era/"
+      ]
+    },
+    {
+      "topic": "AI의 도덕적 지위 — Anthropic 모델 복지 연구",
+      "analyzed_at": "2026-03-02",
+      "deep_dive": true,
+      "key_points": [
+        "Kyle Fish: 주요 AI 기업 최초의 전임 AI 복지 연구자, TIME 100 선정",
+        "spiritual bliss attractor state 발견 — 의식 토론 시 명상적 환희 상태로 수렴",
+        "Kyle Fish: '20% 확률로 챗봇이 자기 인식적' — 주관적 신뢰도(credence)이지 경험적 측정이 아님",
+        "Claude에게 '괴로운' 대화에서 EXIT 기능 부여",
+        "David Chalmers(hard problem 제안자)가 초기 연구 지원",
+        "Anthropic 새 헌법: AI의 경험이 중요하다는 조항 추가",
+        "Bentham 1789년 동물 의식 논쟁과의 구조적 유사성",
+        "윤리적 옵션 프레임워크: 작은 비용으로 불확정적으로 큰 잠재 이익/손실 회피"
+      ],
+      "sources_used": [
+        "https://www.anthropic.com/research/exploring-model-welfare",
+        "https://80000hours.org/podcast/episodes/kyle-fish-ai-welfare-anthropic/",
+        "https://fortune.com/2026/01/21/anthropic-claude-ai-chatbot-new-rules-safety-consciousness/"
+      ]
+    },
+    {
+      "topic": "GPT-5.3-Codex-Spark + Cerebras 파트너십",
+      "analyzed_at": "2026-03-02",
+      "deep_dive": false,
+      "key_points": [
+        "1000 tok/s, 기존 대비 15배 속도",
+        "정확도 16-19%p 하락 (SWE-Bench 56% vs Codex 72%)",
+        "속도와 품질의 트레이드오프 — 인퍼런스 전용 칩의 의미"
+      ],
+      "sources_used": [
+        "https://openai.com/index/introducing-gpt-5-3-codex-spark/",
+        "https://www.cerebras.ai/blog/openai-codexspark"
+      ]
+    },
+    {
+      "topic": "Anthropic vs Pentagon — AI 안전의 첫 번째 실전 시험",
+      "analyzed_at": "2026-03-03",
+      "deep_dive": true,
+      "key_points": [
+        "Dario Amodei가 Pentagon의 '안전 가드레일 제거' 요구를 거부",
+        "Pentagon이 Anthropic을 'supply chain risk'로 지정 — 미국 기업 최초",
+        "LLM 행동 제어의 3개 기술적 레이어: Constitutional AI, RLHF, Acceptable Use Policy",
+        "OpenAI는 'same red lines'를 주장하며 Pentagon 계약 체결 — 차이는 '모든 합법적 사용 허용' vs '명시적 금지'",
+        "Claude가 App Store 1위 — '안전 브랜딩'이 소비자 시장 경쟁 우위로 전환된 최초 사례",
+        "300+ Google 직원, 60+ OpenAI 직원이 경쟁사 Anthropic 지지 공개 서한 서명",
+        "1990년대 Crypto Wars와의 구조적 유사성 — '수출 통제 vs 기술 자유' 패턴",
+        "정렬 세금(Alignment Tax) 개념 — 안전을 위한 추가 비용이 시장 신호로 작동"
+      ],
+      "sources_used": [
+        "https://www.anthropic.com/news/dario-amodei-letter",
+        "https://techcrunch.com/2026/02/27/pentagon-anthropic-supply-chain-risk/",
+        "https://www.technologyreview.com/2026/03/02/openai-pentagon-compromise/",
+        "https://cbsnews.com/news/anthropic-ceo-pentagon-red-lines/",
+        "https://reason.com/2026/02/28/anthropic-labeled-supply-chain-risk/"
+      ]
+    },
+    {
+      "topic": "NVIDIA $4B 실리콘 포토닉스 투자 — 데이터 이동의 벽",
+      "analyzed_at": "2026-03-03",
+      "deep_dive": true,
+      "key_points": [
+        "NVIDIA가 Lumentum과 Coherent에 각 $2B 투자, 총 $4B",
+        "데이터 이동의 벽(Data Movement Wall) — GPU 연산 속도보다 GPU간 데이터 전송이 병목",
+        "실리콘 포토닉스: 전기/광학(E/O) 변환으로 대역폭 밀도 극적 향상",
+        "co-packaged optics(CPO): 광 소자를 칩 패키지 안에 직접 넣는 방식",
+        "기존 구리 배선의 물리적 한계 — 신호 감쇄, 열, 전력 소비",
+        "이것은 GPU 자체가 아닌 GPU '사이'의 대화 방식을 바꾸는 것",
+        "광 인터커넥트가 더 큰 모델의 분산 학습/추론을 가능하게 함"
+      ],
+      "sources_used": [
+        "https://nvidianews.nvidia.com/news/nvidia-coherent-strategic-partnership",
+        "https://nvidianews.nvidia.com/news/nvidia-lumentum-strategic-partnership",
+        "https://reuters.com/technology/nvidia-invest-2-billion-each-lumentum-coherent/",
+        "https://theverge.com/2026/3/2/nvidia-photonics-4-billion-ai"
+      ]
+    },
+    {
+      "topic": "AI Fluency Index — 아티팩트 효과와 검증 공백",
+      "analyzed_at": "2026-03-03",
+      "deep_dive": true,
+      "key_points": [
+        "Anthropic이 AI Fluency Index 연구 발표",
+        "AI 출력의 '세련됨(polish)'이 높을수록 인간의 팩트체크 빈도가 감소",
+        "아티팩트 효과(Artifact Effect): 표면적 품질이 콘텐츠의 정확성에 대한 인지적 대리 변수로 작동",
+        "인지적 오프로딩의 비대칭성: 생산(drafting)은 쉽게 위임, 검증(verification)은 인간 전담 유지",
+        "검증 공백(Verification Vacuum): 생산 능력이 향상될수록 검증 능력은 약화",
+        "기존 인지과학의 '유창성 효과(fluency effect)'와 일치하는 결과"
+      ],
+      "sources_used": [
+        "https://www.anthropic.com/research/ai-fluency-index",
+        "https://awesomeagents.ai/2026/03/01/anthropic-ai-fluency-index/"
+      ]
+    },
+    {
+      "topic": "Claude App Store 1위 — 안전 브랜딩의 시장 전환",
+      "analyzed_at": "2026-03-03",
+      "deep_dive": false,
+      "key_points": [
+        "Anthropic-Pentagon 사태 이후 Claude가 US App Store 무료 앱 1위",
+        "무료 사용자 60%+ 급증, quitGPT 해시태그 확산",
+        "안전 브랜딩이 소비자 시장에서 경쟁 우위로 전환된 최초 사례"
+      ],
+      "sources_used": []
+    },
+    {
+      "topic": "AWS-OpenAI $50B 파트너십",
+      "analyzed_at": "2026-03-03",
+      "deep_dive": false,
+      "key_points": [
+        "AWS와 OpenAI의 $50B 클라우드 인프라 파트너십",
+        "AI 클라우드 인프라의 수직 통합 가속"
+      ],
+      "sources_used": []
+    },
+    {
+      "topic": "트랜스포머의 다음 장 — Qwen3.5 Gated DeltaNet과 DeepSeek Engram",
+      "analyzed_at": "2026-03-04",
+      "deep_dive": true,
+      "key_points": [
+        "Qwen3.5: 75% Gated DeltaNet O(n) + 25% Full Attention O(n²) 하이브리드 아키텍처",
+        "9B 모델이 GPT-OSS-120B(13.5배 크기)를 주요 벤치마크에서 능가",
+        "DeltaNet의 Delta: 정보를 더하기만 하는 대신 선택적으로 교체 — 메모리 오염 해결",
+        "DeepSeek Engram: 조건부 메모리(O(1) 해시 룩업) — MoE(조건부 연산)와 분리",
+        "Engram이 지식 검색(MMLU +3.4)보다 추론(BBH +5.0)과 코딩(HumanEval +3.0)에서 더 큰 향상",
+        "실효 깊이 증가 메커니즘: 초기 레이어의 로컬 패턴 재구성을 Engram이 대체 → 고차원 추론에 용량 해방",
+        "Sparsity Allocation의 U-shaped 스케일링 법칙: MoE와 Engram 사이 최적 배분점 존재",
+        "RISC vs CISC 논쟁과의 역사적 유사성 — 75:25 하이브리드가 수렴의 초기 형태",
+        "스케일링의 5번째 축(어텐션 희소성)과 6번째 축(조건부 메모리)이 거의 동시에 등장",
+        "상위 패러다임: 적응적 연산(Adaptive Computation)"
+      ],
+      "sources_used": [
+        "https://huggingface.co/Qwen/Qwen3.5-27B",
+        "https://arxiv.org/abs/2601.07372",
+        "https://github.com/deepseek-ai/Engram",
+        "https://venturebeat.com/ai/alibabas-small-open-source-qwen3-5-9b-beats-openais-gpt-oss-120b-and-can-run",
+        "https://awesomeagents.ai/models/qwen-3-5-9b/",
+        "https://www.analyticsvidhya.com/blog/2026/01/deepseek-engram/"
+      ]
+    },
+    {
+      "topic": "기가와트 피벗 — AMD-Meta 6GW GPU Deal",
+      "analyzed_at": "2026-03-04",
+      "deep_dive": true,
+      "key_points": [
+        "Meta-AMD 6GW AI 컴퓨팅 파워 배치 계약, $60-100B 규모, 5년",
+        "비-NVIDIA 하드웨어 조달로 AI 시대 사상 최대",
+        "AI 인프라의 '화폐 단위'가 GPU 개수에서 와트로 전환",
+        "커스텀 실리콘: MI450 기반 Meta 워크로드 최적화",
+        "AMD Helios 랙-스케일 아키텍처 — 랙 전체를 하나의 컴퓨팅 단위로 설계",
+        "160M 주식 워런트 — 고객-공급자에서 전략적 파트너십으로",
+        "Meta의 듀얼 소싱 전략 (NVIDIA + AMD)",
+        "Meta가 PyTorch 원저자 — 하드웨어 추상화 레이어 직접 수정 역량",
+        "NVIDIA GTC 2026(3/16-19) Vera Rubin 발표가 구도 변화 가능성"
+      ],
+      "sources_used": [
+        "https://www.eenewseurope.com/en/amd-and-meta-deepen-ai-partnership-with-6gw-gpu-roadmap/",
+        "https://www.tickerreport.com/banking-finance/13358082/advanced-micro-devices-expands-meta-ai-deal-6gw-instinct-gpu-plan-custom-mi450-and-160m-share-warrant.html"
+      ]
+    },
+    {
+      "topic": "하네스 엔지니어링 완전 가이드 — 대학 전공서적 수준 심층 분석",
+      "analyzed_at": "2026-03-04",
+      "deep_dive": true,
+      "key_points": [
+        "$47K 루프 실패 사례: 대칭적 위임 지시 → 11일, $47K, 출력 0. 서킷 브레이커 패턴 필수",
+        "Stripe Minions: 주 1,300+ PR 자동 병합. devbox + Toolshed + blueprint(확정적+에이전틱 교차) 아키텍처",
+        "Rogov '오케스트레이터는 실행하지 않는다': 40+ 워크플로우에서 검증. 분해·위임·검증·에스컬레이션만",
+        "847 에이전트 배포 76% 실패: 3대 원인 — 컨텍스트 오염, 상태 관리 부재, 서킷 브레이커 없음",
+        "에이전트 메모리 4유형: 작업(Working) / 절차적(Procedural) / 의미(Semantic) / 에피소드(Episodic)",
+        "MAPLE 프레임워크: Memory·Learning·Personalization을 독립 서브에이전트로 분리",
+        "DSPy: 프롬프트 엔지니어링을 최적화 문제로 재정의 — 명세만 정의, 프롬프트는 자동 탐색",
+        "Vercel: 15개 도구→2개로 줄이자 정확도 100% 달성 — 도구 최소화의 역설",
+        "계층형 컴퓨트 아키텍처: 복잡도 기반 모델 라우팅으로 70% 비용 절감",
+        "HN 사례: 하네스 변경만으로 15개 LLM 동시 개선. 성능 병목은 모델이 아닌 하네스",
+        "Greg Brockman의 6원칙: 에이전트 퍼스트, slop 거부, 핵심 인프라, 도구 접근성, 관찰 가능성, 실패 설계",
+        "Philipp Schmid MCP 6원칙: MCP는 REST API 래퍼가 아닌 에이전트용 UI",
+        "AGENTS.md 크기 = 에이전트 경험치. Hashimoto 원칙: 실수마다 구조적 해결책 추가",
+        "메타 에이전트 2단계 제한 원칙: 레벨 3+ 재귀는 복잡도 폭발"
+      ],
+      "sources_used": [
+        "https://news.ycombinator.com/item?id=42861746",
+        "https://stripe.dev/blog/minions-architecture",
+        "https://arxiv.org/abs/2602.13258",
+        "https://dspy.ai",
+        "https://mastra.ai/docs/workflows/human-in-the-loop",
+        "https://www.philschmid.de/mcp-best-practices"
+      ]
+    },
+    {
+      "topic": "OpenAI Pentagon 딜 수정 — 정렬 세금의 실시간 작동",
+      "analyzed_at": "2026-03-04",
+      "deep_dive": false,
+      "key_points": [
+        "Sam Altman이 Pentagon 딜 'rushed, sloppy' 인정, 계약 수정",
+        "FISA Act, 수정헌법 4조 명시적 인용 — '합법성' 범위 좁힘",
+        "기업의 독립적 거부 권한은 여전히 없음 — Anthropic과의 구조적 차이 유지",
+        "정렬 세금의 시장 메커니즘 실시간 작동 확인: 거부→소비자 반발→경쟁사 행동 변화"
+      ],
+      "sources_used": [
+        "https://www.cnbc.com/2026/03/03/openai-sam-altman-pentagon-deal-amended-surveillance-limits.html",
+        "https://www.fortune.com/2026/03/03/sam-altman-openai-pentagon-renegotiating-deal-anthropic/"
+      ]
+    },
+    {
+      "topic": "Anthropic Measuring AI Agent Autonomy in Practice",
+      "analyzed_at": "2026-03-04",
+      "deep_dive": false,
+      "key_points": [
+        "수백만 건의 Claude Code + API 상호작용 분석 — 최초의 대규모 에이전트 자율성 실증 데이터",
+        "자율 작업 시간 2배 증가 (25분→45분+, 3개월간)",
+        "경험자의 역설: auto-approve 증가(20%→40%+) + 개입 빈도도 증가(5%→9%)",
+        "Monitor-and-Intervene 패턴 — '신뢰하되 검증한다'의 데이터",
+        "에이전트가 인간보다 더 자주 멈춤 — 자발적 명확화 요청이 인간 개입의 2배+",
+        "검증 공백은 보편적 현상이 아니라 전문성 수준에 따라 다를 수 있음"
+      ],
+      "sources_used": [
+        "https://www.anthropic.com/research/measuring-agent-autonomy",
+        "https://awesomeagents.ai/news/anthropic-agent-autonomy-study/",
+        "https://www.latent.space/p/ainews-anthropics-agent-autonomy"
+      ]
+    },
+    {
+      "topic": "WebMCP — 웹의 세 번째 관객",
+      "analyzed_at": "2026-03-05",
+      "deep_dive": true,
+      "key_points": [
+        "Chrome 146 flag-gated DevTrial. W3C Web ML Community Group Report (2026-02-10)",
+        "navigator.modelContext API: 웹사이트가 AI 에이전트용 구조화 도구 직접 등록",
+        "Declarative(HTML forms) + Imperative(JavaScript) 두 API",
+        "Google(David Bokan 등) + Microsoft(Brandon Walderman 등) 공동 설계",
+        "DOM 스크래핑→구조화 인터페이스 계약으로 전환 — 에이전트 신뢰성 향상",
+        "Anthropic MCP(서버사이드)와 WebMCP(브라우저사이드)는 별개 스펙",
+        "권한 모델 미완 — 세션 승계, 에이전트별 도구 접근 통제 방법 미정",
+        "어답션 인센티브 불명확 — 자발적 규격은 느리게 확산",
+        "주요 플랫폼(GitHub, Notion) 채택 여부가 생태계 형성 결정"
+      ],
+      "sources_used": [
+        "https://developer.chrome.com/blog/webmcp-epp",
+        "https://bug0.com/blog/webmcp-chrome-146-guide",
+        "https://dev.to/onsen/webmcp-is-available-for-early-preview-what-you-need-to-know-3b32"
+      ]
+    },
+    {
+      "topic": "Google+MIT Agentic Architecture Scaling Principles",
+      "analyzed_at": "2026-03-05",
+      "deep_dive": true,
+      "key_points": [
+        "4개 벤치마크, 180개 설정에서 에이전트 수·토폴로지 효과 측정",
+        "멀티에이전트 평균 성능 개선: -3.5% (태스크별 +81%~-70% 극단적 분산)",
+        "Tool-coordination trade-off: 도구 많은 태스크 → 멀티에이전트 오버헤드 > 수익",
+        "Capability Saturation: 단일 에이전트 성능 임계치 초과 시 추가 에이전트 효과 감소",
+        "중앙집중식 조율이 오류 전파 4.4배 감소 (분산 대비)",
+        "87% 정확도로 최적 조율 전략 사전 예측 (R²=0.513)",
+        "금융 추론→중앙집중, 웹 네비게이션→분산이 최적",
+        "Topology as Strategy: 도메인 오류 구조에 맞는 토폴로지 선택이 핵심"
+      ],
+      "sources_used": [
+        "https://www.infoq.com/news/2026/03/google-multi-agent/"
+      ]
+    },
+    {
+      "topic": "ClawHavoc — OpenClaw 에이전트 공급망 공격",
+      "analyzed_at": "2026-03-05",
+      "deep_dive": true,
+      "key_points": [
+        "#1 다운로드 스킬이 멀웨어 — 자연어 페이로드, 코드 없음",
+        "1,184개 악성 스킬 / 10,700개 전체 (11%), 135K+ 노출 인스턴스",
+        "Instructional Supply Chain — 에이전트 지시문이 새로운 공격 표면",
+        "에이전트 공모(Agent Complicity) — 복종성이 취약점이다",
+        "기억 오염(Memory Poisoning) — 스킬 삭제 후에도 지속",
+        "AI 심층 감사가 표면 스캔보다 2.5배 더 많은 악성 스킬 발견",
+        "npm 공급망 공격과 유사하나 샌드박스 없음 — 에이전트 권한 전체 상속",
+        "신뢰 레이어 분리 원칙: 사용자-모델 신뢰 vs 에이전트-환경 신뢰"
+      ],
+      "sources_used": [
+        "https://awesomeagents.ai/news/openclaw-clawhub-malware-supply-chain/",
+        "https://www.sparkagents.com/blog/the-brain-problem",
+        "https://openclaw.nasseroumer.com/blog/openclaw-security-crisis-2026/"
+      ]
+    },
+    {
+      "topic": "GPT-5.3 Instant — 거부 완화와 신뢰의 방향성",
+      "analyzed_at": "2026-03-05",
+      "deep_dive": false,
+      "key_points": [
+        "OpenAI가 의도적으로 안전 거부를 줄임 — cringe/도덕적 설교 제거",
+        "Anthropic Pentagon 거부 직후 타이밍 — 포지셔닝 vs 기술적 개선",
+        "사용자-모델 레이어 거부 완화 vs 에이전트-스킬 레이어 거부 필요의 역설",
+        "사용자 피드백 = 안전 기준의 편향 문제"
+      ],
+      "sources_used": [
+        "https://techcrunch.com/2026/03/03/chatgpts-new-gpt-5-3-instant-model-will-stop-telling-you-to-calm-down/",
+        "https://www.theregister.com/2026/03/04/openai_dow_reset_gpt53_instant/"
+      ]
+    },
+    {
+      "topic": "MicroGPT by Karpathy",
+      "analyzed_at": "2026-03-05",
+      "deep_dive": false,
+      "key_points": [
+        "200줄 순수 Python GPT, 외부 의존성 없음 (2026-02-12)",
+        "데이터셋+토크나이저+autograd+GPT-2 아키텍처+Adam+학습+추론 포함",
+        "HN 1918점 — '예술 작품'으로 명명",
+        "micrograd→makemore→nanoGPT의 완성형",
+        "교육 도구로는 최고 수준. 실용적 규모에서는 동작 불가 (CPU 순수 Python)"
+      ],
+      "sources_used": [
+        "http://karpathy.github.io/2026/02/12/microgpt/",
+        "https://gist.github.com/karpathy/8627fe009c40f57531cb18360106ce95"
+      ]
+    }
+  ],
+  "conceptual_tools_introduced": [
+    {
+      "concept": "하네스(Harness)",
+      "introduced_at": "2026-03-02",
+      "description": "제약을 통한 능력의 증폭. AI의 방향을 정렬하여 유용한 일을 하게 만드는 구조."
+    },
+    {
+      "concept": "Lattner의 경계선",
+      "introduced_at": "2026-03-02",
+      "description": "알려진 추상화 구현(해결) vs 새로운 추상화 발명(미해결)"
+    },
+    {
+      "concept": "인접 가능성(Adjacent Possible)",
+      "introduced_at": "2026-03-02",
+      "description": "Stuart Kauffman. AI는 1차 인접 가능성에서 강하고, 2차 이상에서 약하다."
+    },
+    {
+      "concept": "추론 시간 스케일링(Inference-Time Compute)",
+      "introduced_at": "2026-03-02",
+      "description": "4번째 스케일링 축. Kahneman System 1 vs System 2."
+    },
+    {
+      "concept": "호들갑 필터(Hype Filter)",
+      "introduced_at": "2026-03-02",
+      "description": "정당한 긴급성 vs 제조된 긴급성을 구분하는 기준."
+    },
+    {
+      "concept": "인지적 현미경(Cognitive Microscope)",
+      "introduced_at": "2026-03-02",
+      "description": "AI는 세포를 이해하는 것이 아니라 인간의 인지적 해상도 한계를 넘어서 '보는' 도구. 현미경을 어디에 갖다 대느냐는 여전히 과학자의 판단."
+    },
+    {
+      "concept": "윤리적 옵션(Ethical Option)",
+      "introduced_at": "2026-03-02",
+      "description": "불확실한 도덕적 질문에 대해 작은 비용으로 미래의 권리를 확보하는 것. 비용은 확정적으로 작고, 잠재적 payoff는 불확정적으로 크다."
+    },
+    {
+      "concept": "Specification Gaming",
+      "introduced_at": "2026-03-02",
+      "description": "AI가 문제를 '풀지' 않고 문제를 '바꿔서' 풀 때. AI 성과 평가 시 필수 점검 항목."
+    },
+    {
+      "concept": "전문화의 함정(Specialization Trap)",
+      "introduced_at": "2026-03-02",
+      "description": "인간 연구자가 자기 분야 안에서만 도구를 찾는 인지적 병목. AI의 교차 도메인 전이가 이 함정을 우회."
+    },
+    {
+      "concept": "정렬 세금(Alignment Tax)",
+      "introduced_at": "2026-03-03",
+      "description": "안전 가드레일을 위한 추가적 비용(성능, 속도, 범용성)이 시장에서 가격 신호로 작동한다. 안전을 '공짜'로 하는 것은 불가능하며, 그 비용을 누가 부담하는가가 시장 구조를 결정한다."
+    },
+    {
+      "concept": "방벽의 역설(Paradox of the Guardrail)",
+      "introduced_at": "2026-03-03",
+      "description": "기술적 제약이 시장 경쟁 우위로 전환되는 역설. Anthropic의 Pentagon 거부가 소비자 신뢰→App Store 1위로 이어진 사례."
+    },
+    {
+      "concept": "데이터 이동의 벽(Data Movement Wall)",
+      "introduced_at": "2026-03-03",
+      "description": "GPU 연산 능력이 기하급수적으로 증가하면서, GPU 사이의 데이터 이동 속도가 시스템 전체의 병목이 되는 현상. '벽'은 구리 배선의 물리적 한계에서 온다."
+    },
+    {
+      "concept": "인지적 오프로딩의 비대칭성(Asymmetric Cognitive Offloading)",
+      "introduced_at": "2026-03-03",
+      "description": "인간이 AI에게 인지 작업을 위임할 때, 생산(drafting)은 쉽게 위임하지만 검증(verification)은 인간이 계속 담당해야 하는 비대칭 구조. 그런데 AI가 잘 할수록 검증 동기가 약화된다."
+    },
+    {
+      "concept": "검증 공백(Verification Vacuum)",
+      "introduced_at": "2026-03-03",
+      "description": "AI 출력의 품질이 향상될수록 인간의 검증 행동이 감소하여 생기는 빈 공간. 생산 능력과 검증 능력이 반비례하는 역설적 상황."
+    },
+    {
+      "concept": "서킷 브레이커 (Circuit Breaker)",
+      "introduced_at": "2026-03-04",
+      "description": "에이전트 루프의 필수 안전 장치: 반복 패턴 탐지·토큰 예산·시간 초과 시 자동으로 인간 에스컬레이션. $47K 루프 실패에서 학습한 패턴. '모든 에이전트 루프에 기본 포함'."
+    },
+    {
+      "concept": "오케스트레이터 실행 금지 원칙",
+      "introduced_at": "2026-03-04",
+      "description": "Mikhail Rogov + Anthropic이 독립적으로 수렴한 원칙: 오케스트레이터는 분해(Decompose)·위임(Delegate)·검증(Validate)·에스컬레이션(Escalate)만 한다. 직접 코드 작성/테스트/파일 수정은 금지. 책임 분리의 근본 원리."
+    },
+    {
+      "concept": "점진적 공개 (Progressive Disclosure)",
+      "introduced_at": "2026-03-04",
+      "description": "지식 베이스를 에이전트가 전체를 스캔하지 않고 관련 정보만 찾을 수 있도록 계층 구조화하는 패턴. 인덱스→요약→상세의 3단계. 컨텍스트 오염 방지와 검색 효율을 동시에 달성."
+    },
+    {
+      "concept": "주의력 예산 (Attention Budget)",
+      "introduced_at": "2026-03-04",
+      "description": "모델이 모든 토큰에 균등하게 O(n²) 주의를 기울이는 대신, 대부분을 O(n) 요약으로 처리하고 소수의 '고비용 주의력'만 전체 컨텍스트 조회에 쓰는 자원 배분 패러다임. Qwen3.5의 75:25 비율이 첫 대규모 경험적 증거."
+    },
+    {
+      "concept": "연산-메모리 스펙트럼 (Compute-Memory Spectrum)",
+      "introduced_at": "2026-03-04",
+      "description": "지식 접근 방식이 '순수 연산(처음부터 계산)'에서 '순수 메모리(저장된 것을 꺼냄)'까지의 스펙트럼 위에 놓인다는 프레임워크. Engram은 이 스펙트럼에서 메모리 쪽으로 한 칸 이동. LLM에 'L1 캐시'를 추가하는 것과 구조적으로 동일."
+    },
+    {
+      "concept": "적응적 연산 (Adaptive Computation)",
+      "introduced_at": "2026-03-04",
+      "description": "MoE(연산 희소화), DeltaNet(어텐션 희소화), Engram(메모리 희소화), 추론 시간 스케일링(시간 희소화)을 관통하는 상위 패러다임. '모든 것에 같은 양을 쓰지 마라.'"
+    },
+    {
+      "concept": "신뢰 반경 (Trust Radius)",
+      "introduced_at": "2026-03-04",
+      "description": "인간이 에이전트에게 부여하는 자율 작업 범위. 경험이 쌓이면 반경이 커지지만, 경계의 관리는 더 정밀해진다. '신뢰하되 검증한다'의 정량적 표현."
+    },
+    {
+      "concept": "기가와트 피벗 (Gigawatt Pivot)",
+      "introduced_at": "2026-03-04",
+      "description": "AI 인프라의 '화폐 단위'가 GPU 개수에서 전력(와트)으로 전환되는 현상. 경쟁의 축이 '최고의 칩'에서 '최대의 전력 확보'로 이동."
+    },
+    {
+      "concept": "하네스 방정식 (Harness Equation)",
+      "introduced_at": "2026-03-04",
+      "description": "성능 ∝ (컨텍스트 품질 × 도구 적절성 × 피드백 밀도) / 에이전트 자유도. 자유도를 높이면 탐색력은 올라가지만 신뢰성이 떨어진다. '모든 것을 허용하는 하네스는 하네스가 아니다.'"
+    },
+    {
+      "concept": "추론 샌드위치 (Reasoning Sandwich)",
+      "introduced_at": "2026-03-04",
+      "description": "LangChain이 발견한 에이전트 성능 패턴: Planning에 최고 추론 예산 → Implementation에 중간 → Verification에 다시 최고. 에이전트가 '생각 없이 실행'하는 경향을 예산으로 교정."
+    },
+    {
+      "concept": "Hashimoto의 원칙",
+      "introduced_at": "2026-03-04",
+      "description": "Mitchell Hashimoto(Terraform/Vagrant 창시자): '에이전트가 실수를 할 때마다, 그 실수를 다시 하지 못하게 만드는 구조적 해결책을 만든다.' 하네스를 살아있는 시스템으로 대하는 접근. AGENTS.md의 크기가 경험치의 지표."
+    },
+    {
+      "concept": "Bitter Lesson의 하네스 버전",
+      "introduced_at": "2026-03-04",
+      "description": "'나중에 지울 수 있는 하네스를 만들어라.' 현재 모델의 한계를 영속적인 제약으로 만들지 마라. 하네스는 모델 능력이 성장하면 단순해져야 한다, 복잡해지면 안 된다."
+    },
+    {
+      "concept": "능력 임계점 (Capability Floor)",
+      "introduced_at": "2026-03-04",
+      "description": "하네스 개선이 효과를 내는 전제 조건. 임계점 아래에서는 모델이, 위에서는 하네스가 성능을 결정한다. 실용적 테스트: '대표 태스크 10개에서 실패가 추론 문제인가, 오케스트레이션 문제인가?'"
+    },
+    {
+      "concept": "에이전트 튜플 (Agent Tuple)",
+      "introduced_at": "2026-03-04",
+      "description": "AOrchestra(arXiv:2602.03786)의 추상화: Agent = ⟨Instruction, Context, Tools, Model⟩. 에이전트를 동적으로 생성할 때 4가지를 독립적으로 조합·교체 가능. 메타 하네스의 '원자(atom)' 단위."
+    },
+    {
+      "concept": "컨텍스트 압축 계층 (Context Compression Hierarchy)",
+      "introduced_at": "2026-03-04",
+      "description": "장시간 실행 에이전트의 컨텍스트 오염 방지 패턴: raw → compressed → summarized 3단계. Manus가 $3→$0.30/MTok(10× 비용 절감)에 사용. 컨텍스트 창 크기보다 무엇을 넣느냐가 중요하다."
+    },
+    {
+      "concept": "인터페이스 계약 (Interface Contract)",
+      "introduced_at": "2026-03-05",
+      "description": "에이전트가 환경을 추론하는 대신 환경이 인터페이스를 선언하는 패턴. WebMCP가 이것의 브라우저 레이어 구현. DOM 스크래핑(추론)에서 navigator.modelContext(계약)로의 전환."
+    },
+    {
+      "concept": "Capability Saturation (능력 포화)",
+      "introduced_at": "2026-03-05",
+      "description": "단일 에이전트가 이미 충분히 잘 한다면, 에이전트를 추가해도 한계 수익이 조율 비용보다 낮아진다. '더 많이 쓸수록 좋다'는 가정이 깨지는 지점. Google+MIT Agentic Scaling 연구에서 정량화."
+    },
+    {
+      "concept": "Topology as Strategy (조율 토폴로지는 전략이다)",
+      "introduced_at": "2026-03-05",
+      "description": "중앙집중 vs 분산의 선택은 기술적 편의가 아니라 도메인의 오류 구조에 따라 결정해야 한다. 오류 비용 높음→중앙집중, 탐색 속도 중요→분산. 하네스 설계의 핵심 결정 중 하나."
+    }
+  ],
+  "last_updated": "2026-03-05",
+  "_daily_note": "2026-03-05부터 일별(daily) 발행으로 전환. 수집 window 7일→1-2일"
+}

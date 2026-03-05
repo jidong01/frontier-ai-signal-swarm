@@ -1,0 +1,291 @@
+{
+  "entries": [
+    {
+      "signal_id": "cf0195b0-dbb4-4195-b479-b99584694435",
+      "event_id": "9e7569b4-b7a7-41f1-a6ee-22e4b6257b7e",
+      "signal_type": "product",
+      "signal_strength": "strong",
+      "summary": "Anthropic Releases Claude Opus 4.6 with Agent Teams and 1M Context Window — Agent Teams represents a paradigm shift from single-model to orchestrated multi-agent AI systems for complex engineering workflows",
+      "key_themes": [
+        "product",
+        "technology",
+        "market",
+        "ecosystem"
+      ],
+      "related_signal_ids": [],
+      "pattern_ids": [],
+      "stored_at": "2026-03-01T16:19:18.858Z"
+    },
+    {
+      "signal_id": "a276ed60-723c-45bf-b66f-cef3ef4bc9fc",
+      "event_id": "9b49c7de-a658-4a9b-b1eb-5550d4489d8c",
+      "signal_type": "architecture",
+      "signal_strength": "moderate",
+      "summary": "DeepSeek Publishes mHC: Manifold-Constrained Hyper-Connections for Stable Frontier Model Scaling — Infrastructure-level training technique that could shift the compute-optimal frontier toward deeper models and reduce capital risk of frontier training runs",
+      "key_themes": [
+        "architecture",
+        "technology",
+        "ecosystem"
+      ],
+      "related_signal_ids": [
+        "cf0195b0-dbb4-4195-b479-b99584694435"
+      ],
+      "pattern_ids": [],
+      "stored_at": "2026-03-01T16:19:18.858Z"
+    },
+    {
+      "signal_id": "71f5bada-6f47-4eae-90d4-7d3a8c3f1b43",
+      "event_id": "48ce349b-16c7-4627-9818-c63b8ab1ea53",
+      "signal_type": "regulation",
+      "signal_strength": "moderate",
+      "summary": "Trump Executive Order Mandates Federal AI Preemption Framework — March 2026 Deadlines Now Active — Federal preemption of state AI regulation reshapes the compliance landscape and reduces incentives for model-level safety tooling and interpretability research",
+      "key_themes": [
+        "regulation",
+        "market",
+        "ecosystem",
+        "geopolitical"
+      ],
+      "related_signal_ids": [
+        "cf0195b0-dbb4-4195-b479-b99584694435"
+      ],
+      "pattern_ids": [],
+      "stored_at": "2026-03-01T16:19:18.858Z"
+    },
+    {
+      "signal_id": "b3e7f92a-1d4c-4f8e-a2b5-9c0e6d3f7a14",
+      "event_id": "e5a2c841-7b3d-4e9f-b6c0-2d8f1a4e7b93",
+      "signal_type": "regulation",
+      "signal_strength": "critical",
+      "summary": "Anthropic CEO Dario Amodei refuses Pentagon demand to remove safety guardrails from Claude — Pentagon designates Anthropic as 'supply chain risk', first such designation for a US company. Claude surges to #1 on App Store. OpenAI announces Pentagon deal with claimed similar red lines.",
+      "key_themes": [
+        "regulation",
+        "ecosystem",
+        "geopolitical",
+        "market"
+      ],
+      "related_signal_ids": [
+        "71f5bada-6f47-4eae-90d4-7d3a8c3f1b43"
+      ],
+      "pattern_ids": [],
+      "stored_at": "2026-03-03T00:00:00.000Z"
+    },
+    {
+      "signal_id": "4f9c2d7e-83a1-4b6f-c5e8-1a7d9f2c4b80",
+      "event_id": "7c3e5a91-2f8b-4d0e-b7a4-6e2c8f5a1d37",
+      "signal_type": "infrastructure",
+      "signal_strength": "strong",
+      "summary": "NVIDIA invests $4B in silicon photonics partnerships with Lumentum and Coherent — signals fundamental shift from electrical to optical interconnects for AI data center networking, addressing the 'data movement wall' bottleneck.",
+      "key_themes": [
+        "infrastructure",
+        "technology",
+        "capital"
+      ],
+      "related_signal_ids": [],
+      "pattern_ids": [],
+      "stored_at": "2026-03-03T00:00:00.000Z"
+    },
+    {
+      "signal_id": "a8d1e6b3-5c2f-4a7d-9e0b-3f6c1a8e5d92",
+      "event_id": "2b4f7c0e-9a3d-4e8b-c1f5-8d0a2e7b4c61",
+      "signal_type": "research",
+      "signal_strength": "moderate",
+      "summary": "Anthropic publishes AI Fluency Index research showing that as AI output quality improves, human verification behavior decreases — creating an 'asymmetric cognitive offloading' pattern and 'verification vacuum'.",
+      "key_themes": [
+        "research",
+        "technology",
+        "ecosystem"
+      ],
+      "related_signal_ids": [],
+      "pattern_ids": [],
+      "stored_at": "2026-03-03T00:00:00.000Z"
+    },
+    {
+      "signal_id": "e1a2b3c4-5d6e-7f8a-9b0c-1d2e3f4a5b6c",
+      "event_id": "f7a8b9c0-1d2e-3f4a-5b6c-7d8e9f0a1b2c",
+      "signal_type": "architecture",
+      "signal_strength": "strong",
+      "summary": "Qwen3.5 Gated DeltaNet hybrid architecture: 75% linear attention O(n) + 25% full attention O(n²). 9B model beats GPT-OSS-120B. Demonstrates that 75% of transformer attention layers don't need O(n²) computation. Apache 2.0 open source.",
+      "key_themes": [
+        "architecture",
+        "opensource",
+        "technology"
+      ],
+      "related_signal_ids": [
+        "a276ed60-723c-45bf-b66f-cef3ef4bc9fc"
+      ],
+      "pattern_ids": [],
+      "stored_at": "2026-03-04T00:00:00.000Z"
+    },
+    {
+      "signal_id": "d2b3c4d5-6e7f-8a9b-0c1d-2e3f4a5b6c7d",
+      "event_id": "a8b9c0d1-2e3f-4a5b-6c7d-8e9f0a1b2c3d",
+      "signal_type": "infrastructure",
+      "signal_strength": "strong",
+      "summary": "AMD-Meta 6GW AI computing power deal worth $60-100B over 5 years. Largest non-NVIDIA hardware procurement in AI era. Marks 'Gigawatt Pivot' — AI infrastructure currency shifting from GPU count to watts. Custom MI450 silicon, Helios rack-scale architecture, 160M share warrants.",
+      "key_themes": [
+        "infrastructure",
+        "capital",
+        "technology"
+      ],
+      "related_signal_ids": [
+        "4f9c2d7e-83a1-4b6f-c5e8-1a7d9f2c4b80"
+      ],
+      "pattern_ids": [],
+      "stored_at": "2026-03-04T00:00:00.000Z"
+    },
+    {
+      "signal_id": "c3d4e5f6-7a8b-9c0d-1e2f-3a4b5c6d7e8f",
+      "event_id": "b9c0d1e2-3f4a-5b6c-7d8e-9f0a1b2c3d4e",
+      "signal_type": "architecture",
+      "signal_strength": "moderate",
+      "summary": "DeepSeek Engram: Conditional memory via O(1) hash lookup as complement to MoE conditional computation. Separates knowledge retrieval from reasoning. Paradoxically improves reasoning (BBH +5.0) more than knowledge retrieval (MMLU +3.4). U-shaped sparsity allocation law between MoE and Engram.",
+      "key_themes": [
+        "architecture",
+        "research",
+        "technology"
+      ],
+      "related_signal_ids": [
+        "e1a2b3c4-5d6e-7f8a-9b0c-1d2e3f4a5b6c",
+        "a276ed60-723c-45bf-b66f-cef3ef4bc9fc"
+      ],
+      "pattern_ids": [],
+      "stored_at": "2026-03-04T00:00:00.000Z"
+    },
+    {
+      "signal_id": "b4e5f6a7-8b9c-0d1e-2f3a-4b5c6d7e8f9a",
+      "event_id": "c0d1e2f3-4a5b-6c7d-8e9f-0a1b2c3d4e5f",
+      "signal_type": "regulation",
+      "signal_strength": "moderate",
+      "summary": "Sam Altman admits Pentagon deal was 'rushed, sloppy', amends contract with explicit FISA Act and 4th Amendment surveillance limitations. Alignment Tax market mechanism operating in real-time: Anthropic refusal → consumer backlash → competitor behavior change.",
+      "key_themes": [
+        "regulation",
+        "ecosystem",
+        "market"
+      ],
+      "related_signal_ids": [
+        "b3e7f92a-1d4c-4f8e-a2b5-9c0e6d3f7a14"
+      ],
+      "pattern_ids": [],
+      "stored_at": "2026-03-04T00:00:00.000Z"
+    },
+    {
+      "signal_id": "a5f6b7c8-9d0e-1f2a-3b4c-5d6e7f8a9b0c",
+      "event_id": "d1e2f3a4-5b6c-7d8e-9f0a-1b2c3d4e5f6a",
+      "signal_type": "research",
+      "signal_strength": "moderate",
+      "summary": "Anthropic publishes 'Measuring AI Agent Autonomy in Practice' — first large-scale empirical data on agent autonomy from millions of Claude Code interactions. Autonomous session duration doubled in 3 months. 'Monitor-and-Intervene' pattern: experienced users grant more autonomy while checking more frequently.",
+      "key_themes": [
+        "research",
+        "ecosystem",
+        "technology"
+      ],
+      "related_signal_ids": [
+        "a8d1e6b3-5c2f-4a7d-9e0b-3f6c1a8e5d92"
+      ],
+      "pattern_ids": [],
+      "stored_at": "2026-03-04T00:00:00.000Z"
+    }
+  ],
+  "patterns": [
+    {
+      "pattern_id": "dfb9e31a-8980-4994-a0e6-829325a19c6b",
+      "pattern_type": "simultaneous",
+      "description": "Concurrent optimization for agentic AI capability: Anthropic Agent Teams and DeepSeek mHC both optimize different layers of the stack for more capable, scalable AI agents — one at the application layer, one at the training infrastructure layer",
+      "connected_event_ids": [
+        "9e7569b4-b7a7-41f1-a6ee-22e4b6257b7e",
+        "9b49c7de-a658-4a9b-b1eb-5550d4489d8c"
+      ],
+      "evidence": [
+        "Agent Teams optimizes multi-agent coordination at inference time",
+        "mHC optimizes training stability for larger base models",
+        "Both reduce barriers to more capable AI systems"
+      ],
+      "first_detected": "2026-03-01T16:19:18.855Z",
+      "last_updated": "2026-03-01T16:19:18.855Z",
+      "occurrence_count": 1
+    },
+    {
+      "pattern_id": "9a7be52a-8d3f-4a49-ba90-cf23b1fe95b8",
+      "pattern_type": "ecosystem_shift",
+      "description": "Regulatory environment aligning with frontier AI scaling: Federal preemption removes state-level compliance friction simultaneously as frontier labs demonstrate new capability thresholds, creating a permissive environment for rapid agentic AI deployment",
+      "connected_event_ids": [
+        "9e7569b4-b7a7-41f1-a6ee-22e4b6257b7e",
+        "48ce349b-16c7-4627-9818-c63b8ab1ea53"
+      ],
+      "evidence": [
+        "Federal preemption reduces compliance requirements for AI deployment",
+        "Agent Teams demonstrates production-scale autonomous coding",
+        "Reduced regulation + increased capability = accelerated deployment trajectory"
+      ],
+      "first_detected": "2026-03-01T16:19:18.855Z",
+      "last_updated": "2026-03-01T16:19:18.855Z",
+      "occurrence_count": 1
+    },
+    {
+      "pattern_id": "2cdcbf39-8416-411a-b8d6-4e1b59adcb74",
+      "pattern_type": "recurring",
+      "description": "Benchmark-driven capability claims masking fundamental trade-offs: Both Anthropic's prose regression and DeepSeek's unproven frontier-scale validation reveal a recurring pattern where capability claims outpace verified, general-purpose improvements",
+      "connected_event_ids": [
+        "9e7569b4-b7a7-41f1-a6ee-22e4b6257b7e",
+        "9b49c7de-a658-4a9b-b1eb-5550d4489d8c"
+      ],
+      "evidence": [
+        "Opus 4.6 prose regression suggests benchmark optimization at cost of general quality",
+        "mHC results only demonstrated at 27B, not frontier scale",
+        "Industry trend of impressive demonstrations with undisclosed limitations"
+      ],
+      "first_detected": "2026-03-01T16:19:18.855Z",
+      "last_updated": "2026-03-01T16:19:18.855Z",
+      "occurrence_count": 1
+    },
+    {
+      "pattern_id": "c7f4a2e9-6b0d-4c8f-a1e3-5d9b7f0c2a46",
+      "pattern_type": "simultaneous",
+      "description": "Constraint as Capability paradox emerging across three domains: Anthropic's safety guardrails becoming market advantage (regulation→market), NVIDIA's photonics addressing interconnect constraints (infrastructure), AI fluency creating verification constraints (research). All three reveal that limitations drive innovation and competitive advantage.",
+      "connected_event_ids": [
+        "e5a2c841-7b3d-4e9f-b6c0-2d8f1a4e7b93",
+        "7c3e5a91-2f8b-4d0e-b7a4-6e2c8f5a1d37",
+        "2b4f7c0e-9a3d-4e8b-c1f5-8d0a2e7b4c61"
+      ],
+      "evidence": [
+        "Anthropic's refusal to remove safety guardrails drives consumer trust surge to App Store #1",
+        "NVIDIA's photonics investment addresses electrical interconnect wall — constraint becomes product strategy",
+        "AI Fluency Index reveals that higher AI quality paradoxically reduces human verification — constraint on epistemic vigilance"
+      ],
+      "first_detected": "2026-03-03T00:00:00.000Z",
+      "last_updated": "2026-03-03T00:00:00.000Z",
+      "occurrence_count": 1
+    },
+    {
+      "pattern_id": "d2a8e5f1-3c6b-4d9e-b0a7-4f1c8e2d6a93",
+      "pattern_type": "ecosystem_shift",
+      "description": "AI safety transitioning from abstract principle to concrete legal and market force: Pentagon supply-chain risk designation, court challenges, consumer 'voting with downloads', employee cross-company solidarity letters — safety constraints now have measurable economic and political consequences.",
+      "connected_event_ids": [
+        "e5a2c841-7b3d-4e9f-b6c0-2d8f1a4e7b93"
+      ],
+      "evidence": [
+        "Pentagon supply-chain risk designation is a legally significant formal action, first for any US AI company",
+        "Claude App Store #1 ranking shows consumer market responding to safety positioning",
+        "Cross-company employee solidarity letters indicate safety norms becoming industry-wide expectation",
+        "OpenAI's claimed similar red lines signals competitive pressure around safety framing"
+      ],
+      "first_detected": "2026-03-03T00:00:00.000Z",
+      "last_updated": "2026-03-03T00:00:00.000Z",
+      "occurrence_count": 1
+    }
+  ],
+  "recurring_themes": {
+    "product": 1,
+    "technology": 7,
+    "market": 4,
+    "ecosystem": 7,
+    "architecture": 3,
+    "regulation": 4,
+    "geopolitical": 2,
+    "infrastructure": 2,
+    "capital": 2,
+    "research": 3,
+    "opensource": 1
+  },
+  "last_updated": "2026-03-04T00:00:00.000Z"
+}

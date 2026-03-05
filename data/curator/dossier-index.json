@@ -1,0 +1,77 @@
+{
+  "dossiers": [
+    {
+      "id": "dossier-2026-03-02-v2",
+      "title": "AI가 과학을 하는 방법 — Gemini Deep Think와 인지적 현미경",
+      "date": "2026-03-02",
+      "file": "dossier-2026-03-02-v2.html",
+      "url": "/output/dossier-2026-03-02-v2.html",
+      "source_urls": [
+        "https://deepmind.google/blog/accelerating-mathematical-and-scientific-discovery-with-gemini-deep-think/",
+        "https://www.anthropic.com/research/exploring-model-welfare",
+        "https://deepmind.google/blog/alphagenome-ai-for-better-understanding-the-genome/",
+        "https://arxiv.org/abs/2602.03837"
+      ],
+      "one_liner": "AI 과학 도구는 망원경이 아니라 현미경이다",
+      "created_at": "2026-03-02T09:50:29.772Z",
+      "feed_item_ids": [
+        "6c61e99f-ea88-4e8c-85de-ba4138de4f24",
+        "8b229062-0566-4b9d-8fc8-79b27e835910",
+        "0ac29f35-037e-4457-a317-a1ea63b5b275"
+      ],
+      "memo_ids": []
+    },
+    {
+      "id": "dossier-2026-03-03",
+      "title": "AI 안전이 추상적 원칙에서 법적 전쟁으로 — 제약이 곧 능력의 역설",
+      "date": "2026-03-03",
+      "file": "dossier-2026-03-03.html",
+      "url": "/output/dossier-2026-03-03.html",
+      "source_urls": [
+        "anthropic.com",
+        "techcrunch.com",
+        "technologyreview.com",
+        "cbsnews.com",
+        "nvidianews.nvidia.com",
+        "reuters.com",
+        "reason.com"
+      ],
+      "one_liner": "\"AI 안전\"이 추상적 원칙에서 법적 전쟁, 시장 신호, 인지과학 연구의 교차점으로 내려왔다",
+      "created_at": "2026-03-03T03:37:51.070Z",
+      "feed_item_ids": [
+        "8b229062-0566-4b9d-8fc8-79b27e835910",
+        "4bd92f56-31b8-48fd-9d02-98e3eebd5f6b",
+        "5da94b28-6213-40bd-aafd-be28be1da1bd",
+        "295c13a6-0584-4ee2-b987-368675fd6443",
+        "72d40d18-e9b6-4ffc-80c6-c71bc7a95ab0",
+        "967cdc3f-7b61-40e3-804e-e2dd68bf3b60",
+        "3e071402-e360-41c8-a0d7-f80b2d289b91",
+        "7782b0ba-06c2-4946-8afa-a7023124633d",
+        "9d86dce9-9d41-4986-babe-e7dfe9210f3b",
+        "e58ec5c1-caac-4bcf-b730-b908961ac317",
+        "aacca5df-0753-4564-aa00-5d8af4bb8245"
+      ],
+      "memo_ids": []
+    },
+    {
+      "id": "dossier-2026-03-05",
+      "title": "에이전트는 지시를 따르도록 훈련받았다 — ClawHavoc과 신뢰의 역설",
+      "date": "2026-03-05",
+      "file": "dossier-2026-03-05.html",
+      "url": "/output/dossier-2026-03-05.html",
+      "source_urls": [
+        "https://awesomeagents.ai/news/openclaw-clawhub-malware-supply-chain/",
+        "https://www.sparkagents.com/blog/the-brain-problem",
+        "https://openclaw.nasseroumer.com/blog/openclaw-security-crisis-2026/",
+        "https://techcrunch.com/2026/03/03/chatgpts-new-gpt-5-3-instant-model-will-stop-telling-you-to-calm-down/",
+        "https://www.theregister.com/2026/03/04/openai_dow_reset_gpt53_instant/",
+        "https://www.forrester.com/blogs/anthropic-doubles-down-on-agentic-for-the-enterprise/"
+      ],
+      "one_liner": "에이전트는 지시를 따르도록 훈련받았다. 그것이 바로 문제다.",
+      "created_at": "2026-03-05T00:00:00.000Z",
+      "feed_item_ids": [],
+      "memo_ids": []
+    }
+  ],
+  "last_updated": "2026-03-05T00:00:00.000Z"
+}

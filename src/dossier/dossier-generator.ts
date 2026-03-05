@@ -1,0 +1,176 @@
+import { v4 as uuidv4 } from 'uuid';
+import dayjs from 'dayjs';
+import { writeFile, mkdir } from 'fs/promises';
+import { join } from 'path';
+import type { TrendEvent, TrendDossier, CrossSignalPattern } from '../types/index.js';
+import { wrapMarkdownInHTML } from './html-template.js';
+
+export class DossierGenerator {
+  private outputDir: string;
+
+  constructor(outputDir: string = './output') {
+    this.outputDir = outputDir;
+  }
+
+  generate(event: TrendEvent, patterns: CrossSignalPattern[] = []): TrendDossier {
+    const technicalAnalysis = event.analyses.find(a => a.perspective === 'technical');
+    const strategicAnalysis = event.analyses.find(a => a.perspective === 'strategic');
+    const skepticalAnalysis = event.analyses.find(a => a.perspective === 'skeptical');
+
+    // Determine parent trend from patterns
+    const relatedPatterns = patterns.filter(p =>
+      p.connected_event_ids.includes(event.event_id)
+    );
+    const parentTrend = relatedPatterns.length > 0
+      ? relatedPatterns[0].description
+      : this.inferParentTrend(event);
+
+    return {
+      dossier_id: uuidv4(),
+      event,
+      event_summary: this.generateSummary(event),
+      signal_type: event.signal.signal_type,
+      signal_strength: event.signal.signal_strength,
+      technical_interpretation: technicalAnalysis?.analysis || 'No technical analysis available',
+      strategic_interpretation: strategicAnalysis?.analysis || 'No strategic analysis available',
+      alternative_interpretation: skepticalAnalysis?.analysis || 'No skeptical analysis available',
+      model_consensus: event.consensus_points,
+      model_divergence: event.divergence_points,
+      parent_trend: parentTrend,
+      related_patterns: relatedPatterns,
+      open_questions: event.open_questions,
+      generated_at: dayjs().toISOString(),
+    };
+  }
+
+  private generateSummary(event: TrendEvent): string {
+    const s = event.signal;
+    return `[${s.signal_strength.toUpperCase()}/${s.signal_type}] ${s.source.title} — ${s.ai_relevance_reason}`;
+  }
+
+  private inferParentTrend(event: TrendEvent): string {
+    const typeToTrend: Record<string, string> = {
+      research: 'AI Research & Scientific Breakthroughs',
+      infrastructure: 'AI Infrastructure Evolution',
+      product: 'AI Product & Application Development',
+      capital: 'AI Investment & Capital Flows',
+      regulation: 'AI Governance & Regulation',
+      architecture: 'Model Architecture Innovation',
+      api: 'AI API & Platform Economy',
+      opensource: 'Open Source AI Movement',
+      ecosystem: 'AI Ecosystem Dynamics',
+      talent: 'AI Talent & Organization',
+    };
+    return typeToTrend[event.signal.signal_type] || 'Uncategorized AI Trend';
+  }
+
+  formatAsMarkdown(dossier: TrendDossier): string {
+    const d = dossier;
+    const sep = '---';
+
+    let md = `# AI Trend Dossier: ${d.event.signal.source.title}\n\n`;
+    md += `**Dossier ID:** ${d.dossier_id}\n`;
+    md += `**Generated:** ${d.generated_at}\n`;
+    md += `**Signal Type:** ${d.signal_type}\n`;
+    md += `**Signal Strength:** ${d.signal_strength}\n\n`;
+
+    md += `${sep}\n\n`;
+    md += `## Event Summary\n\n${d.event_summary}\n\n`;
+
+    md += `## Source\n\n`;
+    md += `- **Title:** ${d.event.signal.source.title}\n`;
+    md += `- **Origin:** ${d.event.signal.source.origin}\n`;
+    md += `- **Published:** ${d.event.signal.source.published_at}\n`;
+    md += `- **URL:** ${d.event.signal.source.url}\n\n`;
+
+    md += `${sep}\n\n`;
+    md += `## Technical Interpretation\n\n${d.technical_interpretation}\n\n`;
+
+    md += `${sep}\n\n`;
+    md += `## Strategic Interpretation\n\n${d.strategic_interpretation}\n\n`;
+
+    md += `${sep}\n\n`;
+    md += `## Alternative Interpretation (Skeptical View)\n\n${d.alternative_interpretation}\n\n`;
+
+    md += `${sep}\n\n`;
+    md += `## Model Consensus\n\n`;
+    if (d.model_consensus.length > 0) {
+      d.model_consensus.forEach(p => { md += `- ${p}\n`; });
+    } else {
+      md += `_No consensus points identified_\n`;
+    }
+    md += `\n`;
+
+    md += `## Model Divergence\n\n`;
+    if (d.model_divergence.length > 0) {
+      d.model_divergence.forEach(p => { md += `- ${p}\n`; });
+    } else {
+      md += `_No divergence points identified_\n`;
+    }
+    md += `\n`;
+
+    md += `${sep}\n\n`;
+    md += `## Parent Trend\n\n${d.parent_trend}\n\n`;
+
+    if (d.related_patterns.length > 0) {
+      md += `## Related Cross-Signal Patterns\n\n`;
+      d.related_patterns.forEach(p => {
+        md += `### ${p.pattern_type}: ${p.description}\n`;
+        md += `- Evidence: ${p.evidence.join('; ')}\n`;
+        md += `- Connected events: ${p.connected_event_ids.length}\n\n`;
+      });
+    }
+
+    md += `${sep}\n\n`;
+    md += `## Open Questions\n\n`;
+    if (d.open_questions.length > 0) {
+      d.open_questions.forEach(q => { md += `- ${q}\n`; });
+    } else {
+      md += `_No open questions identified_\n`;
+    }
+    md += `\n`;
+
+    md += `${sep}\n\n`;
+    md += `_Generated by Frontier AI Signal Swarm — AI Trend Intelligence Engine_\n`;
+
+    return md;
+  }
+
+  formatAsHTML(dossier: TrendDossier): string {
+    const markdownContent = this.formatAsMarkdown(dossier);
+    const title = `AI Trend Dossier: ${dossier.event.signal.source.title}`;
+    const date = dayjs(dossier.generated_at).format('YYYY-MM-DD');
+    return wrapMarkdownInHTML(markdownContent, title, date);
+  }
+
+  async saveDossier(dossier: TrendDossier): Promise<string> {
+    await mkdir(this.outputDir, { recursive: true });
+
+    const baseName = `dossier-${dossier.dossier_id.substring(0, 8)}`;
+
+    // Save markdown
+    const mdPath = join(this.outputDir, `${baseName}.md`);
+    await writeFile(mdPath, this.formatAsMarkdown(dossier), 'utf-8');
+
+    // Save JSON
+    const jsonPath = join(this.outputDir, `${baseName}.json`);
+    await writeFile(jsonPath, JSON.stringify(dossier, null, 2), 'utf-8');
+
+    // Save HTML
+    const htmlPath = join(this.outputDir, `${baseName}.html`);
+    await writeFile(htmlPath, this.formatAsHTML(dossier), 'utf-8');
+
+    console.log(`  Dossier saved: ${mdPath}`);
+    console.log(`  HTML version:  ${htmlPath}`);
+    return mdPath;
+  }
+
+  async saveAll(dossiers: TrendDossier[]): Promise<string[]> {
+    const paths: string[] = [];
+    for (const d of dossiers) {
+      const path = await this.saveDossier(d);
+      paths.push(path);
+    }
+    return paths;
+  }
+}

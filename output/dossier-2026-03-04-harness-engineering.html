@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>하네스 엔지니어링을 잘 하는 법</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Serif+KR:wght@400;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <style>
+    /* === Reset & Base === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #fafaf8;
+      --text: #1a1a1a;
+      --heading: #111;
+      --accent: #c45d2c;
+      --secondary: #6b7280;
+      --card-bg: #f5f3ef;
+      --border: #e5e2db;
+      --badge-noise: #9ca3af;
+      --badge-weak: #60a5fa;
+      --badge-moderate: #f59e0b;
+      --badge-strong: #f97316;
+      --badge-critical: #ef4444;
+      --blockquote-bg: #f9f7f4;
+      --blockquote-border: #c45d2c;
+      --code-bg: #f0ede8;
+      --table-header-bg: #f0ede8;
+      --table-stripe: #faf8f5;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1a1e;
+        --text: #e4e4e4;
+        --heading: #f0f0f0;
+        --accent: #e07a4f;
+        --secondary: #9ca3af;
+        --card-bg: #252528;
+        --border: #3a3a3e;
+        --blockquote-bg: #222225;
+        --blockquote-border: #e07a4f;
+        --code-bg: #2a2a2e;
+        --table-header-bg: #28282c;
+        --table-stripe: #1f1f23;
+      }
+    }
+
+    html {
+      font-size: 17px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Serif KR', 'Georgia', serif;
+      line-height: 1.8;
+      padding: 2rem 1rem 4rem;
+    }
+
+    /* === Layout === */
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* === Typography === */
+    h1, h2, h3, h4 {
+      font-family: 'Inter', sans-serif;
+      color: var(--heading);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      line-height: 1.25;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      line-height: 1.3;
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      line-height: 1.35;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      margin-bottom: 1.2rem;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s;
+    }
+    a:hover {
+      border-bottom-color: var(--accent);
+    }
+
+    strong { font-weight: 700; }
+    em { font-style: italic; }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88em;
+      background: var(--code-bg);
+      padding: 0.15em 0.4em;
+      border-radius: 3px;
+    }
+
+    pre {
+      background: var(--code-bg);
+      border-radius: 6px;
+      padding: 1.2rem 1.4rem;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+      line-height: 1.55;
+    }
+    pre code {
+      background: none;
+      padding: 0;
+      font-size: 0.85rem;
+    }
+
+    /* === Header === */
+    .dossier-header {
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .dossier-meta {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: var(--secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.8rem;
+    }
+
+    .one-liner {
+      font-size: 1.25rem;
+      line-height: 1.6;
+      color: var(--secondary);
+      margin-top: 1rem;
+      font-style: italic;
+    }
+
+    /* === Section Dividers === */
+    .section-divider {
+      width: 40px;
+      height: 1px;
+      background: var(--border);
+      margin: 3rem auto;
+    }
+
+    /* === Signal Table === */
+    .signal-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0 2rem;
+      font-size: 0.92rem;
+    }
+
+    .signal-table thead {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--secondary);
+    }
+
+    .signal-table th {
+      background: var(--table-header-bg);
+      text-align: left;
+      padding: 0.7rem 1rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .signal-table td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .signal-table tbody tr:nth-child(even) {
+      background: var(--table-stripe);
+    }
+
+    .signal-table .signal-name {
+      font-weight: 600;
+      color: var(--heading);
+    }
+
+    /* === Signal Badges === */
+    .badge {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.2em 0.6em;
+      border-radius: 3px;
+      color: #fff;
+      white-space: nowrap;
+    }
+
+    .badge-noise    { background: var(--badge-noise); }
+    .badge-weak     { background: var(--badge-weak); }
+    .badge-moderate { background: var(--badge-moderate); color: #1a1a1a; }
+    .badge-strong   { background: var(--badge-strong); color: #1a1a1a; }
+    .badge-critical { background: var(--badge-critical); }
+
+    .badge-type {
+      background: transparent;
+      border: 1px solid var(--secondary);
+      color: var(--secondary);
+    }
+
+    /* === Deep Dive === */
+    .deep-dive {
+      margin-bottom: 2.5rem;
+    }
+
+    .deep-dive h3 {
+      color: var(--accent);
+    }
+
+    /* === Blockquote === */
+    blockquote {
+      border-left: 3px solid var(--blockquote-border);
+      background: var(--blockquote-bg);
+      padding: 1rem 1.4rem;
+      margin: 1.5rem 0;
+      border-radius: 0 6px 6px 0;
+      font-style: italic;
+      color: var(--secondary);
+    }
+    blockquote p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* === Conceptual Toolkit Cards === */
+    .toolkit-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0 2rem;
+    }
+
+    @media (min-width: 560px) {
+      .toolkit-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .toolkit-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.2rem 1.4rem;
+      transition: box-shadow 0.15s;
+    }
+
+    .toolkit-card:hover {
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .toolkit-card:hover {
+        box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+      }
+    }
+
+    .toolkit-card h4 {
+      font-size: 1.05rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .toolkit-card p {
+      font-size: 0.92rem;
+      line-height: 1.65;
+      margin-bottom: 0;
+      color: var(--text);
+    }
+
+    /* === Open Questions Callout === */
+    .open-questions {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 1.5rem 1.8rem;
+      margin: 1.5rem 0 2rem;
+    }
+
+    .open-questions h2 {
+      margin-top: 0;
+      border-bottom: none;
+      padding-bottom: 0;
+      font-size: 1.3rem;
+    }
+
+    .open-questions ol {
+      margin: 1rem 0 0;
+      padding-left: 1.4rem;
+    }
+
+    .open-questions li {
+      margin-bottom: 0.6rem;
+      line-height: 1.65;
+    }
+
+    /* === Lists === */
+    ul, ol {
+      margin: 0.8rem 0 1.5rem;
+      padding-left: 1.6rem;
+    }
+
+    li {
+      margin-bottom: 0.4rem;
+    }
+
+    li::marker {
+      color: var(--accent);
+    }
+
+    /* === Learning Points === */
+    .learning-points li {
+      padding: 0.2rem 0;
+      line-height: 1.65;
+    }
+
+    /* === Sources === */
+    .sources-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+
+    .sources-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.92rem;
+    }
+
+    .sources-list li:last-child {
+      border-bottom: none;
+    }
+
+    .sources-list a {
+      font-weight: 500;
+    }
+
+    /* === Footer === */
+    .dossier-footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: var(--secondary);
+      letter-spacing: 0.03em;
+    }
+
+    .dossier-footer .brand {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    /* === Generic table (for markdown tables) === */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.92rem;
+    }
+
+    thead {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--secondary);
+    }
+
+    th {
+      background: var(--table-header-bg);
+      text-align: left;
+      padding: 0.7rem 1rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tbody tr:nth-child(even) {
+      background: var(--table-stripe);
+    }
+
+    /* === HR === */
+    hr {
+      border: none;
+      height: 1px;
+      background: var(--border);
+      margin: 2.5rem 0;
+    }
+
+    /* === PDF Download Button === */
+    .pdf-download-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #fff;
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      padding: 0.7rem 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
+      z-index: 1000;
+    }
+
+    .pdf-download-btn:hover {
+      background: #a84920;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+      transform: translateY(-1px);
+    }
+
+    .pdf-download-btn:active {
+      transform: translateY(0);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .pdf-download-btn:hover {
+        background: #c45d2c;
+      }
+    }
+
+    .pdf-download-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    /* === Print === */
+    @media print {
+      .pdf-download-btn { display: none !important; }
+      body {
+        background: #fff;
+        color: #000;
+        padding: 0;
+        font-size: 11pt;
+      }
+      .container {
+        max-width: 100%;
+      }
+      h1, h2, h3, h4 { color: #000; }
+      a { color: #000; border-bottom: none; text-decoration: underline; }
+      .badge { border: 1px solid #999; color: #000 !important; background: #eee !important; }
+      .toolkit-card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+      .open-questions { break-inside: avoid; }
+      .deep-dive { break-inside: avoid; }
+      .dossier-footer { margin-top: 2rem; }
+    }
+
+    /* === Responsive === */
+    @media (max-width: 480px) {
+      html { font-size: 15px; }
+      h1 { font-size: 1.7rem; }
+      h2 { font-size: 1.35rem; }
+      body { padding: 1rem 0.75rem 3rem; }
+      .signal-table { font-size: 0.82rem; }
+      .signal-table th, .signal-table td { padding: 0.5rem 0.6rem; }
+      .toolkit-grid { grid-template-columns: 1fr; }
+    }
+
+    /* === Annotation System === */
+    :root {
+      --ann-highlight: rgba(255, 213, 79, 0.35);
+      --ann-highlight-hover: rgba(255, 213, 79, 0.55);
+      --ann-toolbar-bg: #2d2d2d;
+      --ann-sidebar-width: 320px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ann-highlight: rgba(255, 213, 79, 0.2);
+        --ann-highlight-hover: rgba(255, 213, 79, 0.35);
+        --ann-toolbar-bg: #1a1a1e;
+      }
+    }
+    .ann-highlight {
+      background: var(--ann-highlight);
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .ann-highlight:hover { background: var(--ann-highlight-hover); }
+    .ann-highlight.has-memo { border-bottom: 2px solid var(--accent); }
+    .ann-toolbar {
+      position: absolute;
+      display: none;
+      background: var(--ann-toolbar-bg);
+      border-radius: 8px;
+      padding: 4px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+      z-index: 9000;
+      gap: 2px;
+    }
+    .ann-toolbar.visible { display: flex; }
+    .ann-toolbar button {
+      background: transparent;
+      border: none;
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      transition: background 0.1s;
+    }
+    .ann-toolbar button:hover { background: rgba(255,255,255,0.15); }
+    .ann-section-actions {
+      position: absolute;
+      right: -44px;
+      top: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .deep-dive, .toolkit-card { position: relative; }
+    .deep-dive:hover .ann-section-actions,
+    .toolkit-card:hover .ann-section-actions { opacity: 1; }
+    .ann-section-btn {
+      width: 28px; height: 28px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--card-bg);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      transition: border-color 0.1s;
+    }
+    .ann-section-btn:hover { border-color: var(--accent); }
+    .ann-section-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .ann-memo-indicator {
+      display: inline-block;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+    .ann-sidebar {
+      position: fixed;
+      top: 0; right: 0;
+      width: var(--ann-sidebar-width);
+      height: 100vh;
+      background: var(--bg);
+      border-left: 1px solid var(--border);
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform 0.25s ease;
+      z-index: 8000;
+      padding: 1.5rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+    }
+    .ann-sidebar.open { transform: translateX(0); }
+    .ann-sidebar h3 { font-size: 1rem; margin-bottom: 1rem; color: var(--heading); }
+    .ann-sidebar-item {
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      transition: border-color 0.15s;
+    }
+    .ann-sidebar-item:hover { border-color: var(--accent); }
+    .ann-sidebar-item .ann-type { font-size: 0.7rem; text-transform: uppercase; color: var(--secondary); }
+    .ann-sidebar-item .ann-text { margin-top: 4px; color: var(--text); line-height: 1.4; }
+    .ann-sidebar-item .ann-memo-content { margin-top: 6px; padding: 6px 8px; background: var(--card-bg); border-radius: 4px; font-size: 0.82rem; }
+    .ann-sidebar-item .ann-actions { margin-top: 6px; display: flex; gap: 8px; }
+    .ann-sidebar-item .ann-actions button {
+      background: none; border: none; cursor: pointer;
+      color: var(--secondary); font-size: 0.75rem;
+      font-family: 'Inter', sans-serif;
+    }
+    .ann-sidebar-item .ann-actions button:hover { color: var(--accent); }
+    .ann-sidebar-toggle {
+      position: fixed; bottom: 5rem; right: 2rem;
+      background: var(--accent); color: #fff;
+      border: none; border-radius: 50%;
+      width: 44px; height: 44px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      z-index: 8001;
+      transition: transform 0.1s;
+    }
+    .ann-sidebar-toggle:hover { transform: translateY(-2px); }
+    .ann-sidebar-toggle .ann-count {
+      position: absolute; top: -4px; right: -4px;
+      background: #ef4444; color: #fff;
+      border-radius: 50%; width: 18px; height: 18px;
+      font-size: 0.65rem; display: flex;
+      align-items: center; justify-content: center;
+    }
+    .ann-memo-modal {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.4);
+      display: none;
+      align-items: center; justify-content: center;
+      z-index: 9500;
+    }
+    .ann-memo-modal.visible { display: flex; }
+    .ann-memo-modal-content {
+      background: var(--bg);
+      border-radius: 12px;
+      padding: 1.5rem;
+      width: 90%; max-width: 480px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    }
+    .ann-memo-modal-content h4 { margin-bottom: 0.75rem; font-family: 'Inter', sans-serif; }
+    .ann-memo-modal-content textarea {
+      width: 100%; height: 120px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem;
+      font-family: 'Noto Serif KR', Georgia, serif;
+      font-size: 0.9rem;
+      resize: vertical;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .ann-memo-modal-content .ann-modal-buttons {
+      margin-top: 0.75rem;
+      display: flex; gap: 8px; justify-content: flex-end;
+    }
+    .ann-memo-modal-content .ann-modal-buttons button {
+      padding: 6px 16px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+    }
+    .ann-memo-modal-content .ann-modal-buttons .ann-btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    @media print {
+      .ann-toolbar, .ann-sidebar, .ann-sidebar-toggle,
+      .ann-section-actions, .ann-memo-modal,
+      .ann-memo-indicator { display: none !important; }
+      .ann-highlight { background: none !important; border-bottom: none !important; }
+    }
+    @media (max-width: 480px) {
+      .ann-section-actions { right: -36px; }
+      .ann-sidebar { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header class="dossier-header">
+      <div class="dossier-meta">Frontier AI Signal Swarm &middot; 2026-03-04</div>
+      <h1>하네스 엔지니어링을 잘 하는 법</h1>
+    </header>
+
+    <article>
+      <h2>AI 에이전트를 신뢰할 수 있게 만드는 구조의 설계 원칙</h2>
+<p><strong>발행일:</strong> 2026-03-04 <strong>큐레이터 컨텍스트:</strong> AI 에이전트를 만드는 AI 에이전트를 구축하는 스타트업 창업자 관점 <strong>분석 깊이:</strong> 실무 설계 원칙 + 메타 에이전트 아키텍처</p>
+<hr>
+<h2>이번 도시에 한 줄</h2>
+<p><strong>에이전트의 성능은 모델이 아니라 하네스가 결정한다 — 능력의 임계점을 넘은 순간, 엔지니어링의 전쟁은 모델 선택이 아니라 신뢰의 아키텍처 설계로 이동한다.</strong></p>
+<hr>
+<h2>시그널 요약</h2>
+<table>
+<thead><tr>
+<th>시그널</th>
+<th>유형</th>
+<th>강도</th>
+<th>핵심</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>LangChain: 하네스만 변경으로 Terminal Bench +13.7%p</td>
+<td>에이전트 성능</td>
+<td><strong>strong</strong></td>
+<td>모델 고정, 하네스 개선만으로 52.8%→66.5%</td>
+</tr>
+<tr>
+<td>Vercel: 툴 80% 제거 후 정확도 100%, 속도 3.5×</td>
+<td>도구 설계</td>
+<td><strong>strong</strong></td>
+<td>&quot;더 적게&quot;가 &quot;더 많이&quot;보다 정확하다</td>
+</tr>
+<tr>
+<td>Mitchell Hashimoto: &quot;Step 5 — Engineer the Harness&quot;</td>
+<td>실무 패턴</td>
+<td><strong>moderate</strong></td>
+<td>Terraform/Vagrant 개발자의 6단계 AI 채택 경험</td>
+</tr>
+<tr>
+<td>AOrchestra (Instruction, Context, Tools, Model) 튜플</td>
+<td>메타 에이전트</td>
+<td><strong>moderate</strong></td>
+<td>에이전트를 동적으로 생성하는 통합 추상화</td>
+</tr>
+<tr>
+<td>Braintrust: 에이전트 단일 실행 60% → 8회 반복 25%</td>
+<td>신뢰성 평가</td>
+<td><strong>strong</strong></td>
+<td>에이전트 eval은 LLM eval과 근본적으로 다르다</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>심층 탐구 1: 하네스의 해부학 — 5개 레이어</h2>
+<h3>무슨 일이 일어났는가</h3>
+<p>2026년 2월, LangChain 팀이 실증 데이터를 공개했다. 코딩 에이전트를 Terminal Bench 2.0에서 <strong>52.8%에서 66.5%로 개선</strong>했는데, 모델은 전혀 바꾸지 않았다. 변경한 것은 하네스뿐이었다.</p>
+<p>같은 달, Vercel 팀은 에이전트에 제공하는 도구를 15개에서 2개(bash + SQL)로 줄였더니 정확도가 100%로 올라가고 속도는 3.5배 빨라졌다고 발표했다.</p>
+<p>두 케이스가 가리키는 방향은 동일하다: <strong>하네스가 에이전트의 성능을 결정한다.</strong></p>
+<h3>왜 이것이 흥미로운가</h3>
+<p>직관에 반하기 때문이다. 우리는 AI 시스템을 이야기할 때 보통 &quot;어느 모델이 더 좋은가&quot;를 먼저 묻는다. 하지만 실제 현장에서 쌓이는 데이터는 다른 질문을 가리킨다: &quot;모델을 둘러싼 구조가 얼마나 잘 설계되어 있는가?&quot;</p>
+<p>Evangelos Pappas가 제시한 비유가 명쾌하다:</p>
+<blockquote><p><strong>Model = CPU</strong> (연산 능력) <strong>Harness = OS</strong> (자원 관리, 표준 인터페이스, 태스크 조율) <strong>Context window = RAM</strong> (제한된 작업 메모리) <strong>Agent = Application</strong> (그 위에서 실행되는 사용자 로직)</p></blockquote>
+<p>스마트폰 시대에 프로세서는 빠르게 commodity화되었다. 가치는 iOS/Android가 가져갔다. GPU raw FLOPS가 commodity화되자, 가치는 CUDA/PyTorch 스택으로 이동했다. 지금 에이전트 시대가 열리면서, 비슷한 이동이 시작되고 있다. 모델을 논쟁하는 것은 어느 CPU가 더 빠른지 논쟁하는 것과 같다 — 중요하지만, 결정적이지 않다.</p>
+<p>단, 조건이 있다. <strong>능력 임계점(Capability Floor)</strong> 아래에서는 하네스가 모델 한계를 보완할 수 없다. 임계점의 실용적 테스트: &quot;10개의 대표 태스크에서 실패가 추론 문제인가, 오케스트레이션 문제인가?&quot; 추론 문제라면 모델을, 오케스트레이션 문제라면 하네스를 고쳐야 한다.</p>
+<h3>실제로 어떻게 작동하는가 — 하네스의 5개 레이어</h3>
+<p>좋은 하네스는 5개의 레이어로 구성된다.</p>
+<hr>
+<h4>Layer 1: 컨텍스트 엔지니어링 (무엇을 보여줄 것인가)</h4>
+<p>&quot;컨텍스트 엔지니어링&quot;이란 Tobi Lütke(Shopify CEO)가 2025년에 제시한 개념이다:</p>
+<blockquote><p>&quot;태스크가 LLM에 의해 해결 가능한 수준이 되도록 모든 컨텍스트를 제공하는 기술(art).&quot;</p></blockquote>
+<p>Andrej Karpathy는 이를 더 정밀하게 표현했다:</p>
+<blockquote><p>&quot;컨텍스트 창을 다음 단계를 위해 <strong>딱 맞는 정보로</strong> 채우는 섬세한 기술과 과학.&quot;</p></blockquote>
+<p>핵심 통찰: 컨텍스트 창이 200K 토큰이거나 2M 토큰이거나 — 창이 채워지기 훨씬 전부터 품질이 저하된다. 크기가 아니라 <strong>무엇을 넣느냐</strong>가 결정한다.</p>
+<p><strong>컨텍스트에 포함해야 할 것:</strong></p>
+<ul>
+<li>현재 태스크의 목표와 명시적 제약</li>
+<li>의미적으로 관련된 코드/문서 (전체가 아니라 선택적으로)</li>
+<li>이전 스텝의 결과 (요약 형태, 원문이 아니라)</li>
+<li>실패 이력 (어떤 접근법이 작동하지 않았는가)</li>
+<li>환경 정보 (디렉토리 구조, 사용 가능한 도구 목록)</li>
+<li>시간/비용 예산 경고</li>
+</ul>
+<p><strong>컨텍스트에서 빼야 할 것:</strong></p>
+<ul>
+<li>관련 없는 대화 이력 전체</li>
+<li>이미 완료된 중간 단계의 상세 내용</li>
+<li>중복 정보</li>
+</ul>
+<p>Manus 팀의 실전 패턴: <strong>raw → compressed → summarized</strong> 3단계 압축 계층. KV-cache 최적화와 결합해 50번의 도구 호출 태스크를 $3→$0.30/MTok로 10배 비용 절감 달성.</p>
+<hr>
+<h4>Layer 2: 도구 설계 (무엇을 할 수 있게 할 것인가)</h4>
+<p>Vercel 케이스의 역설: <strong>도구를 줄이면 성능이 올라간다.</strong></p>
+<p>왜인가? 전문화된 도구는 의사결정 병목을 만든다. 에이전트가 &quot;이 케이스에 어느 도구를 써야 하는가&quot;를 계속 결정해야 하고, 이 결정 자체가 에러를 낳는다. 반면 bash + SQL 같은 범용 인터페이스는 에이전트의 학습 데이터와 정렬이 잘 되어 있어 예측 가능하게 사용된다.</p>
+<p><strong>좋은 도구 설계 원칙:</strong></p>
+<ol>
+<li><strong>범용 &gt; 전용</strong>: 에이전트 학습 데이터와 정렬된 인터페이스를 먼저 선택</li>
+<li><strong>에러 메시지 = 교육</strong>: 도구의 에러 메시지를 remediation instruction으로 설계 (Stripe의 접근법 — 린터 메시지가 동시에 수정 안내)</li>
+<li><strong>MCP 표준화</strong>: Stripe는 400+ 내부 도구를 MCP 서버 &quot;Toolshed&quot;로 노출. 에이전트가 도구를 탐색하는 방식을 표준화</li>
+<li><strong>도구당 단일 책임</strong>: 도구가 너무 많은 것을 하면 에이전트가 예측 불가능하게 사용</li>
+</ol>
+<p>Mitchell Hashimoto의 실천: &quot;에이전트가 접근할 수 있는 도구 목록과 사용 시나리오를 AGENTS.md에 명시. 에이전트가 잘못 사용하면 즉시 AGENTS.md를 업데이트한다.&quot;</p>
+<hr>
+<h4>Layer 3: 아키텍처 가드레일 (무엇을 하지 못하게 할 것인가)</h4>
+<p>OpenAI 내부 경험에서 발견한 역설: <strong>솔루션 공간을 제한할수록 에이전트 신뢰성이 올라간다.</strong></p>
+<p>구체적으로:</p>
+<ul>
+<li>레이어드 아키텍처와 엄격한 의존성 방향 제약 적용</li>
+<li>AI가 생성한 커스텀 린터로 아키텍처 위반 자동 차단</li>
+<li>의존성 그래프를 구조적 테스트로 지속 검증</li>
+<li>&quot;가비지 컬렉션 에이전트&quot;가 주기적으로 문서 불일치와 아키텍처 위반을 탐지</li>
+</ul>
+<p>이것이 이상하게 느껴지는 이유: 일반적으로 에이전트에게 &quot;자유롭게 해결하게&quot; 해야 한다고 생각한다. 하지만 에이전트가 솔루션 공간 전체를 탐색하면 예측 불가능한 결과를 낸다. 제약이 탐색 공간을 줄이고, 검증이 쉬워지고, 에이전트가 &quot;올바른 방향&quot;을 유지하게 만든다.</p>
+<p><strong>AGENTS.md</strong>: AI 에이전트를 위한 살아있는 README. 에이전트가 매 세션 시작 시 자동으로 읽는다. 에이전트가 실수할 때마다 업데이트하여 피드백 루프를 닫는다. 이 파일의 크기가 하네스의 경험치를 나타낸다.</p>
+<hr>
+<h4>Layer 4: 피드백 루프 (어떻게 배우게 할 것인가)</h4>
+<p>Mitchell Hashimoto의 핵심 원칙:</p>
+<blockquote><p>&quot;에이전트가 실수를 할 때마다, 그 실수를 다시 하지 못하게 만드는 구조적 해결책을 만든다.&quot;</p></blockquote>
+<p>단순하게 들리지만, 실천은 어렵다. 어디에 그 해결책을 담는가?</p>
+<p><strong>피드백 루프 메커니즘 계층:</strong></p>
+<table>
+<thead><tr>
+<th>메커니즘</th>
+<th>적용 위치</th>
+<th>강도</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>AGENTS.md 업데이트</td>
+<td>명시적 지식</td>
+<td>낮음 (에이전트가 무시 가능)</td>
+</tr>
+<tr>
+<td>도구 에러 메시지 개선</td>
+<td>암묵적 교정</td>
+<td>중간</td>
+</tr>
+<tr>
+<td>컨텍스트 템플릿 업데이트</td>
+<td>구조적 guidance</td>
+<td>중간</td>
+</tr>
+<tr>
+<td>린터 규칙 추가</td>
+<td>기계적 강제</td>
+<td>높음 (항상 적용)</td>
+</tr>
+<tr>
+<td>CI 파이프라인 테스트</td>
+<td>게이트 강제</td>
+<td>높음 (통과 없이 머지 불가)</td>
+</tr>
+</tbody></table>
+<p>LangChain의 &quot;Trace 분석&quot; 패턴: 에이전트 실패를 대규모로 분석해서 패턴을 발견 → 발견된 패턴을 하네스에 반영. 이 과정 자체를 Agent Skill로 자동화. ML의 boosting 알고리즘과 구조적으로 동일 — 이전 실패에 집중해서 반복 개선.</p>
+<hr>
+<h4>Layer 5: 평가 시스템 (어떻게 알 수 있는가)</h4>
+<p>Braintrust 연구의 충격적인 수치:</p>
+<blockquote><p>에이전트가 <strong>단일 실행에서 60% 성공률</strong>을 보이더라도, <strong>8회 반복 일관성 테스트에서 25%로 떨어진다.</strong></p></blockquote>
+<p>이것이 의미하는 바: LLM eval과 에이전트 eval은 근본적으로 다르다. 에이전트는 멀티스텝 워크플로우이므로, 초기 단계의 에러가 이후 모든 단계를 오염시킨다. &quot;한 번 성공&quot;은 &quot;신뢰할 수 있다&quot;는 뜻이 아니다.</p>
+<p><strong>에이전트 eval의 3가지 필수 차원:</strong></p>
+<ol>
+<li><strong>Task Completion Rate</strong> — 태스크를 실제로 완수했는가 (단순 완료율이 아니라 올바른 완료)</li>
+<li><strong>Trajectory Quality</strong> — 올바른 도구를 올바른 순서로, 최소한의 스텝으로 사용했는가</li>
+<li><strong>Cost Efficiency</strong> — 같은 결과를 최소한의 토큰/API 호출로 달성했는가 (동일 성능에서 50× 비용 차이가 관측됨)</li>
+</ol>
+<p><strong>실용적 eval 시작점:</strong> &quot;10개의 대표 태스크를 실행하라. 실패가 추론 문제라면 모델을 바꿔야 한다. 오케스트레이션 문제라면 하네스를 고쳐야 한다.&quot;</p>
+<hr>
+<h2>심층 탐구 2: 메타 하네스 — 에이전트를 만드는 에이전트</h2>
+<h3>무슨 일이 일어났는가</h3>
+<p>2026년 2월, arxiv에 &quot;AOrchestra: Automating Sub-Agent Creation for Agentic Orchestration&quot; 논문이 게재되었다 (arXiv:2602.03786). 핵심 기여: <strong>에이전트를 동적으로 생성하기 위한 통합 추상화.</strong></p>
+<p>에이전트를 4-튜플로 정의한다:</p>
+<pre><code>Agent = ⟨Instruction, Context, Tools, Model⟩</code></pre>
+<p>중앙 오케스트레이터가 태스크를 받으면:</p>
+<ol>
+<li>태스크에 관련된 컨텍스트를 큐레이팅</li>
+<li>적절한 도구와 모델을 선택</li>
+<li>그 순간의 태스크를 위한 전문화된 에이전트를 즉석에서 생성</li>
+<li>실행을 위임, 결과를 수집</li>
+</ol>
+<h3>왜 이것이 흥미로운가</h3>
+<p>&quot;AI 에이전트를 만드는 AI 에이전트&quot;는 단순히 에이전트가 에이전트를 spawn하는 것이 아니다. 그것은 <strong>메타 하네스 문제</strong>다: 하네스를 만드는 하네스를 어떻게 설계할 것인가?</p>
+<p>여기서 재귀적 어려움이 등장한다:</p>
+<ul>
+<li>일반 하네스의 문제: 에이전트가 실수하지 않도록 어떻게 구조화할 것인가</li>
+<li>메타 하네스의 문제: 에이전트가 만드는 에이전트 역시 실수하지 않도록 어떻게 구조화할 것인가 — 그리고 그 에러가 부모 에이전트에게 어떻게 전파되는가</li>
+</ul>
+<p>첫 번째 하네스의 실수는 고치면 된다. 하지만 메타 하네스의 실수는 그것이 생성한 모든 자식 하네스에 복제된다.</p>
+<h3>핵심 설계 결정 3가지</h3>
+<h4>결정 1: 정적 하네스 vs 동적 하네스</h4>
+<p><strong>정적 하네스</strong>: 모든 에이전트가 같은 도구/컨텍스트/프롬프트 구조를 사용. 예측 가능하고 디버깅이 쉽다. 하지만 태스크 다양성에 비효율적.</p>
+<p><strong>동적 하네스 (AOrchestra 방식)</strong>: 태스크마다 에이전트를 즉석 생성. 더 효율적이지만 예측 불가능성이 높다. 4-튜플의 각 구성요소를 누가 어떤 기준으로 결정하는가가 핵심이다.</p>
+<p><strong>실무적 권고</strong>: 신뢰도가 검증된 태스크 유형에서 동적으로 시작. 핵심 인프라와 보안 관련 에이전트는 정적으로 유지. &quot;코어는 정적, 엣지는 동적.&quot;</p>
+<h4>결정 2: 신뢰 전파 (Trust Propagation)</h4>
+<p>에이전트 A가 에이전트 B를 만들고, B가 C를 만들 때 — 신뢰와 권한이 어떻게 흐르는가?</p>
+<p>현재 best practice (아직 표준화 초기):</p>
+<ul>
+<li><strong>권한 상속 제한</strong>: 자식 에이전트는 부모보다 넓은 권한을 가질 수 없다</li>
+<li><strong>출력 검증 게이트</strong>: 자식 에이전트의 출력은 부모 하네스의 가드레일을 통과해야 한다</li>
+<li><strong>재귀 깊이 제한</strong>: 무한 에이전트 생성 방지 (보통 3-4 레벨)</li>
+<li><strong>에러 버블업</strong>: 자식 에이전트 오류는 명시적으로 부모에게 전파, 조용히 삼키지 않는다</li>
+</ul>
+<h4>결정 3: 하네스 회귀 방지 (Harness Regression Prevention)</h4>
+<p>에이전트가 동적으로 하네스를 생성할 때 — 생성된 하네스가 올바른가를 어떻게 검증하는가?</p>
+<p>두 가지 접근:</p>
+<ol>
+<li><strong>메타 하네스 평가</strong>: 생성된 하네스를 알려진 골든 태스크 세트로 즉시 테스트</li>
+<li><strong>보수적 초기화</strong>: 검증된 하네스 템플릿을 기반으로 생성, 변형 범위 제한</li>
+</ol>
+<p>Hashimoto 원칙의 메타 레벨 확장: &quot;에이전트가 만든 하네스가 실수하면, 그 하네스의 <strong>생성 로직</strong> 자체를 고쳐야 한다.&quot;</p>
+<h3>창업자 관점의 함의</h3>
+<p>에이전트를 만드는 에이전트를 파는 스타트업에게 이것은 제품 정의 질문을 바꾼다:</p>
+<blockquote><p><strong>당신의 제품은 에이전트인가, 메타 하네스인가?</strong></p></blockquote>
+<p>만약 당신이 에이전트를 만드는 에이전트를 판매한다면 — 고객에게 판매하는 것은 결국 &quot;하네스 생성의 품질&quot;이다. 생성된 에이전트가 얼마나 신뢰할 수 있는가, 얼마나 고객의 특수 컨텍스트에 적응하는가.</p>
+<p>이것은 방어 가능한 해자(moat)가 될 수 있다:</p>
+<ul>
+<li>축적된 에러→수정 이력 (Hashimoto 원칙의 데이터 축적)</li>
+<li>도메인별 검증된 (I, C, T, M) 튜플 라이브러리</li>
+<li>메타 하네스가 생성한 하네스의 품질을 평가하는 자체 eval 시스템</li>
+</ul>
+<hr>
+<h2>심층 탐구 3: 5가지 하네스 실패 모드와 방어 패턴</h2>
+<p>프로덕션에서 반복적으로 관찰되는 실패 모드들이다.</p>
+<h3>Failure Mode 1: Doom Loop (무한 수정 루프)</h3>
+<p><strong>증상</strong>: 에이전트가 작동하지 않는 접근법을 반복적으로 시도. 같은 에러가 루프. 진행이 없다.</p>
+<p><strong>원인</strong>: 에이전트는 &quot;첫 번째 그럴듯한 해결책&quot;을 찾도록 최적화되어 있다. 그 해결책이 실패하면, 대안 탐색보다 같은 접근법을 미세 수정하려는 경향이 있다.</p>
+<p><strong>방어 패턴:</strong></p>
+<ul>
+<li><strong>접근법 블랙리스트</strong>: 특정 에러가 N회 발생하면 해당 접근법을 금지 목록에 추가하고 컨텍스트에 명시</li>
+<li><strong>루프 감지 미들웨어</strong>: 연속 N번의 동일 도구 호출 패턴 감지 → 강제 체크포인트</li>
+<li><strong>추론 샌드위치 (Reasoning Sandwich)</strong>: Planning ← MAX 추론 → Implementation ← MEDIUM → Verification ← MAX. 에이전트가 &quot;생각 없이 실행&quot;하는 경향을 예산으로 교정</li>
+</ul>
+<h3>Failure Mode 2: Context Pollution (컨텍스트 오염)</h3>
+<p><strong>증상</strong>: 단계가 진행될수록 에이전트가 일관성을 잃는다. 초기 목표를 잊는다. 모순된 결정을 내린다.</p>
+<p><strong>원인</strong>: 컨텍스트 창이 관련/무관한 정보로 누적된다. &quot;lost-in-the-middle&quot; 현상 — 중간 정보는 컨텍스트 창의 어딘데 있든 모델이 잘 활용하지 못한다.</p>
+<p><strong>방어 패턴:</strong></p>
+<ul>
+<li><strong>주기적 컨텍스트 압축</strong>: raw → compressed → summarized 3단계 계층으로 누적 방지</li>
+<li><strong>목표 반복 (Goal Recitation)</strong>: 각 스텝 시작 시 원래 목표를 컨텍스트 앞부분에 재명시</li>
+<li><strong>Todo-list 상태 관리</strong>: 완료/미완료/진행중 태스크를 컨텍스트 말미에 항상 포함</li>
+</ul>
+<h3>Failure Mode 3: Tool Proliferation (도구 과잉)</h3>
+<p><strong>증상</strong>: 에이전트가 어느 도구를 써야 할지 결정하는 데 과도한 토큰 소비. 비효율적 도구 선택. 비용 급증.</p>
+<p><strong>원인</strong>: 사용 가능한 도구가 많을수록 에이전트의 의사결정 부하가 증가한다.</p>
+<p><strong>방어 패턴:</strong></p>
+<ul>
+<li><strong>도구 계층화</strong>: 기본 도구 세트 (범용, 항상 사용 가능) + 전문 도구 세트 (태스크 유형별 로드)</li>
+<li><strong>최소 시작</strong>: bash + SQL로 시작해서 실제로 필요해질 때만 전문 도구 추가</li>
+<li><strong>도구 사용 트레이싱</strong>: 어떤 도구가 얼마나 자주 사용되는지 모니터링. 거의 사용되지 않는 도구는 제거 후보</li>
+</ul>
+<h3>Failure Mode 4: Over-Specification (과잉 명세)</h3>
+<p><strong>증상</strong>: 하네스가 너무 상세하게 에이전트에게 &quot;어떻게&quot;를 지시한다. 에이전트가 새로운 상황에 유연하게 대응하지 못한다. 모델 업그레이드 시 하네스가 깨진다.</p>
+<p><strong>원인</strong>: 현재 모델의 한계를 하네스로 패치하다 보면, 그 패치가 미래 모델의 능력을 오히려 제한한다.</p>
+<p><strong>방어 패턴 — Bitter Lesson의 하네스 버전:</strong></p>
+<blockquote><p>&quot;나중에 지울 수 있는 하네스를 만들어라.&quot; — Evangelos Pappas</p></blockquote>
+<ul>
+<li>각 하네스 구성요소에 &quot;이것이 왜 필요한가&quot;와 &quot;어떤 모델 한계를 보완하는가&quot;를 주석으로 명시</li>
+<li>모델 업데이트 시 패치 리스트를 검토하고 더 이상 필요 없는 것은 삭제</li>
+<li>하네스는 모델 능력이 성장하면 <strong>단순해져야</strong> 한다, 복잡해지면 안 된다</li>
+</ul>
+<h3>Failure Mode 5: Verification Vacuum (검증 공백)</h3>
+<p><strong>증상</strong>: 에이전트가 실제로 성공하지 않았는데 성공을 선언한다. 테스트를 건너뛴다. 첫 번째 그럴듯한 결과를 최종으로 제출한다.</p>
+<p><strong>원인</strong>: LangChain 연구에서 발견한 것처럼, 에이전트는 &quot;첫 번째 그럴듯한 해결책에서 멈추도록&quot; 편향되어 있다. 검증 스텝이 명시적으로 요구되지 않으면 스킵된다.</p>
+<p><strong>방어 패턴:</strong></p>
+<ul>
+<li><strong>Self-verification 강제</strong>: 시스템 프롬프트에 &quot;항상 자신의 결과를 테스트하고 실제로 통과하는지 확인하라&quot;를 명시</li>
+<li><strong>수락 기준 사전 정의</strong>: 태스크 분해 단계에서 &quot;이것이 완료되었다는 것을 어떻게 알 수 있는가&quot;를 먼저 정의 (인간 승인 게이트)</li>
+<li><strong>CI 통합</strong>: 에이전트 출력을 자동 테스트 파이프라인에 통과시키기 전까지 &quot;완료&quot; 처리 안 함</li>
+</ul>
+<hr>
+<h2>이번 도시에 개념 도구 (Conceptual Toolkit)</h2>
+<p><strong>하네스 방정식 (Harness Equation)</strong> 성능 ∝ (컨텍스트 품질 × 도구 적절성 × 피드백 밀도) / (에이전트 자유도). &quot;모든 것을 허용하는 하네스는 하네스가 아니다.&quot; 자유도를 높이면 탐색력은 올라가지만 신뢰성은 떨어진다.</p>
+<p><strong>추론 샌드위치 (Reasoning Sandwich)</strong> LangChain이 발견한 성능 패턴: Planning에 최고 추론 예산 → Implementation에 중간 → Verification에 다시 최고. 에이전트가 &quot;생각 없이 실행&quot;하는 경향을 추론 예산으로 교정.</p>
+<p><strong>Hashimoto의 원칙</strong> &quot;에이전트가 실수를 할 때마다, 그 실수를 다시 하지 못하게 만드는 구조적 해결책을 만든다.&quot; — 하네스를 살아있는 시스템으로 대하는 접근. 실수가 하네스 개선의 입력값이 된다. 이 원칙을 꾸준히 적용하면 AGENTS.md의 크기가 경험치의 지표가 된다.</p>
+<p><strong>Bitter Lesson의 하네스 버전</strong> &quot;나중에 지울 수 있는 하네스를 만들어라.&quot; — 현재 모델의 한계를 영속적인 제약으로 만들지 마라. 하네스는 모델 능력이 성장하면 단순해져야 한다.</p>
+<p><strong>능력 임계점 (Capability Floor)</strong> 하네스 개선이 효과를 내는 전제 조건. &quot;대표 태스크 10개에서 실패가 추론 문제인가, 오케스트레이션 문제인가?&quot; 추론 문제면 모델을, 오케스트레이션 문제면 하네스를. 이 구분이 엔지니어링 자원 배분을 결정한다.</p>
+<p><strong>에이전트 튜플 (Agent Tuple)</strong> Agent = ⟨Instruction, Context, Tools, Model⟩ — AOrchestra의 추상화. 에이전트를 동적으로 생성할 때, 이 4가지 구성요소를 독립적으로 조합하고 교체할 수 있으면 메타 하네스가 훨씬 유연해진다. &quot;컴포저블한 에이전트&quot;의 기반 단위.</p>
+<p><strong>컨텍스트 압축 계층 (Context Compression Hierarchy)</strong> raw → compressed → summarized. 장시간 실행 에이전트에서 컨텍스트 오염을 방지하는 3단계. Manus가 $3→$0.30/MTok 비용 절감에 사용한 패턴.</p>
+<hr>
+<h2>시그널 간 연결</h2>
+<p>이번 도시에를 관통하는 하나의 패턴: <strong>&quot;더 적게&quot;가 &quot;더 많이&quot;를 이긴다.</strong></p>
+<ul>
+<li>Vercel: 도구 15개 → 2개, 정확도 100%</li>
+<li>Manus: 4번의 완전 재구현, 결국 더 단순한 구조로 수렴</li>
+<li>OpenAI: 아키텍처를 엄격하게 제한할수록 에이전트 신뢰성 향상</li>
+<li>LangChain: 추론 예산을 아껴 Planning과 Verification에 집중 투자</li>
+</ul>
+<p>이것은 이전에 다룬 <strong>적응적 연산(Adaptive Computation)</strong> — &quot;모든 것에 같은 양을 쓰지 마라&quot; — 과 같은 방향이다. 모델 레이어에서의 원칙이 하네스 레이어에서 동일하게 재현된다. 어텐션이 75% O(n)으로 처리하듯, 하네스도 대부분의 자유도를 제한하고 중요한 곳에만 비용을 집중한다.</p>
+<p>또 하나의 연결: 이전 도시에에서 다룬 <strong>검증 공백(Verification Vacuum)</strong> — AI Fluency Index에서 발견한 &quot;AI가 잘 할수록 인간이 덜 확인한다&quot; — 이 에이전트 레이어에서 동일한 구조로 재현된다. 에이전트도 그럴듯한 출력을 낼수록 자체 검증을 스킵한다. 인간-AI 관계에서 발견된 패턴이, AI-AI 관계에서도 동일하게 나타난다.</p>
+<hr>
+<h2>열린 질문들</h2>
+<ol>
+<li><strong>Hashimoto 원칙의 한계</strong>: 실수를 반복적으로 구조로 방지하다 보면, 하네스가 특수 케이스의 집합체가 된다. 언제 하네스를 단순화하는 것이 올바른 선택인가? 하네스의 &quot;기술 부채&quot;는 어떻게 관리하는가?</li>
+</ol>
+<ol>
+<li><strong>메타 하네스의 신뢰 문제</strong>: 에이전트가 생성한 하네스의 품질을 어떻게 지속적으로 검증하는가? 첫 번째 생성된 하네스가 잘 작동하더라도, 그것이 만든 에이전트가 만든 하네스는? 재귀적 신뢰의 한계는 어디인가?</li>
+</ol>
+<ol>
+<li><strong>모델 능력 임계점의 이동</strong>: 6개월 전 작성한 AGENTS.md가 오늘도 유효한가? 현재 모델의 한계를 보완하는 하네스 컴포넌트가, 모델이 업그레이드되면 오히려 성능을 제한하지 않는가?</li>
+</ol>
+<ol>
+<li><strong>평가의 비결정론적 문제</strong>: 에이전트 성능이 8회 실행에서 60%→25%로 떨어진다면, &quot;충분히 좋다&quot;는 기준은 어떻게 설정하는가? 비결정론적 시스템의 프로덕션 배포 기준은?</li>
+</ol>
+<ol>
+<li><strong>창업자의 질문</strong>: 에이전트를 만드는 에이전트를 판매할 때, 고객은 무엇을 사는 것인가 — 에이전트의 능력인가, 하네스의 신뢰성인가? 이 차이가 제품 설계와 영업 방식에 어떤 영향을 미치는가?</li>
+</ol>
+<hr>
+<h2>이번 도시에 학습 포인트</h2>
+<ol>
+<li><strong>하네스가 모델보다 먼저다</strong>: 에이전트 성능이 낮을 때, 모델을 바꾸기 전에 하네스를 먼저 개선하라. LangChain 데이터가 증명한다: 같은 모델, 다른 하네스로 +13.7%p.</li>
+</ol>
+<ol>
+<li><strong>더 적은 도구가 더 많은 성능을 낸다</strong>: 도구를 추가하기 전에 현재 도구를 제거해보는 실험을 하라. Vercel의 역설이 당신의 시스템에서도 성립할 가능성이 높다.</li>
+</ol>
+<ol>
+<li><strong>AGENTS.md는 살아있는 시스템이다</strong>: 에이전트가 에러를 낼 때마다 AGENTS.md가 더 풍부해져야 한다. &quot;에이전트가 실수 → AGENTS.md 업데이트&quot;를 팀의 기본 루틴으로 만들어라.</li>
+</ol>
+<ol>
+<li><strong>평가 전략이 달라야 한다</strong>: 단일 실행 성공률로 에이전트를 평가하지 마라. Task completion + Trajectory quality + Cost efficiency + Consistency (8회 반복)를 함께 측정하라.</li>
+</ol>
+<ol>
+<li><strong>메타 하네스의 단위는 (I, C, T, M) 튜플이다</strong>: 에이전트를 만드는 에이전트를 설계할 때, 이 4가지를 독립적으로 조합하고 검증할 수 있는 구조를 먼저 만들어라. 하나의 튜플이 당신 제품의 &quot;원자(atom)&quot;다.</li>
+</ol>
+<hr>
+<h2>Sources</h2>
+<ul>
+<li><a href="https://blog.langchain.com/improving-deep-agents-with-harness-engineering/" target="_blank" rel="noopener">LangChain: Improving Deep Agents with Harness Engineering</a> — Terminal Bench 52.8%→66.5% 실증 데이터</li>
+<li><a href="https://mitchellh.com/writing/my-ai-adoption-journey" target="_blank" rel="noopener">Mitchell Hashimoto: My AI Adoption Journey — Step 5: Engineer the Harness</a> — Terraform/Vagrant 개발자의 실천 가이드</li>
+<li><a href="https://www.ignorance.ai/p/the-emerging-harness-engineering" target="_blank" rel="noopener">Charlie Guo: The Emerging &quot;Harness Engineering&quot; Playbook</a> — OpenAI/Stripe/OpenClaw 케이스 종합</li>
+<li><a href="https://dev.to/epappas/the-agent-harness-is-the-architecture-and-your-model-is-not-the-bottleneck-3bjd" target="_blank" rel="noopener">Evangelos Pappas: The Agent Harness Is the Architecture</a> — OS/RAM/CPU 비유, Vercel/Manus 케이스</li>
+<li><a href="https://martinfowler.com/articles/exploring-gen-ai/harness-engineering.html" target="_blank" rel="noopener">Birgitta Böckeler (Thoughtworks): Harness Engineering</a> — Martin Fowler 시리즈 내 OpenAI 하네스 컴포넌트 분석</li>
+<li><a href="https://arxiv.org/html/2602.03786v1" target="_blank" rel="noopener">AOrchestra: Automating Sub-Agent Creation</a> — (I, C, T, M) 튜플 추상화</li>
+<li><a href="https://www.braintrust.dev/articles/ai-agent-evaluation-framework" target="_blank" rel="noopener">Braintrust: AI Agent Evaluation Framework</a> — 단일 실행 60% → 8회 반복 25% 데이터</li>
+<li><a href="https://greenflagdigital.com/content-seo-hub/what-is-context-engineering-for-ai/" target="_blank" rel="noopener">Philipp Schmid (Google DeepMind): Context Engineering</a> — 컨텍스트 엔지니어링 정의</li>
+<li><a href="https://htek.dev/articles/agent-harnesses-controlling-ai-agents-2026/" target="_blank" rel="noopener">htek.dev: Agent Harnesses — Why 2026 Isn&#039;t About More Agents</a> — 엔터프라이즈 하네스 현황</li>
+</ul>
+    </article>
+
+    <footer class="dossier-footer">
+      <span class="brand">Frontier AI Signal Swarm</span> &mdash; AI 트렌드 인텔리전스 엔진
+    </footer>
+
+  </div>
+
+  <!-- PDF Download Button -->
+  <button class="pdf-download-btn" onclick="window.print()" title="PDF로 저장">
+    <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+    PDF 저장
+  </button>
+
+  <script>(function() {
+  'use strict';
+
+  // === Config ===
+  var DOSSIER_ID = (function() {
+    var m = location.pathname.match(/\/(dossier-[^.]+)\.html/);
+    return m ? m[1] : null;
+  })();
+  if (!DOSSIER_ID) return;
+
+  var annotations = [];
+
+  // === API ===
+  var API = {
+    list: function() {
+      return fetch('/api/annotations?dossier_id=' + encodeURIComponent(DOSSIER_ID))
+        .then(function(r) { return r.json(); })
+        .then(function(d) { return d.annotations || []; });
+    },
+    create: function(data) {
+      return fetch('/api/annotations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(Object.assign({ dossier_id: DOSSIER_ID }, data))
+      }).then(function(r) { return r.json(); });
+    },
+    update: function(id, content) {
+      return fetch('/api/annotations/' + id, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content: content })
+      }).then(function(r) { return r.json(); });
+    },
+    remove: function(id) {
+      return fetch('/api/annotations/' + id, { method: 'DELETE' });
+    }
+  };
+
+  // === DOM Helpers ===
+  function getCSSPath(el) {
+    if (!el || el === document.body) return 'body';
+    if (el.id) return '#' + el.id;
+    var parent = el.parentElement;
+    if (!parent) return el.tagName.toLowerCase();
+    var siblings = Array.from(parent.children).filter(function(c) { return c.tagName === el.tagName; });
+    var idx = siblings.indexOf(el);
+    var nth = siblings.length > 1 ? ':nth-of-type(' + (idx + 1) + ')' : '';
+    return getCSSPath(parent) + ' > ' + el.tagName.toLowerCase() + nth;
+  }
+
+  function getTextAround(range, chars, before) {
+    var container = before ? range.startContainer : range.endContainer;
+    var offset = before ? range.startOffset : range.endOffset;
+    if (container.nodeType !== 3) return '';
+    var text = container.textContent || '';
+    return before ? text.slice(Math.max(0, offset - chars), offset) : text.slice(offset, offset + chars);
+  }
+
+  function findSectionId(el) {
+    while (el && el !== document.body) {
+      if (el.id && (el.id.indexOf('deep-dive') === 0 || el.id.indexOf('signal-row') === 0 ||
+          el.id.indexOf('toolkit-card') === 0 || el.id === 'cross-signal' ||
+          el.id === 'open-questions' || el.id === 'learning-points' ||
+          (el.dataset && el.dataset.sectionId))) {
+        return el.id || el.dataset.sectionId;
+      }
+      el = el.parentElement;
+    }
+    return null;
+  }
+
+  function findSignalType(sectionId) {
+    if (!sectionId) return null;
+    var el = document.getElementById(sectionId);
+    if (!el) return null;
+    var badge = el.querySelector('.badge-type');
+    return badge ? badge.textContent.trim() : null;
+  }
+
+  // === Toolbar ===
+  var toolbar = document.createElement('div');
+  toolbar.className = 'ann-toolbar';
+  toolbar.innerHTML = '<button data-action="highlight">하이라이트</button><button data-action="highlight-memo">하이라이트 + 메모</button>';
+  document.body.appendChild(toolbar);
+  var currentRange = null;
+
+  var containerEl = document.querySelector('.container');
+  if (containerEl) {
+    containerEl.addEventListener('mouseup', function(e) {
+      if (e.target.closest('.ann-toolbar') || e.target.closest('.ann-sidebar') || e.target.closest('.ann-memo-modal')) return;
+      var sel = window.getSelection();
+      if (!sel || sel.isCollapsed || !sel.toString().trim()) {
+        toolbar.classList.remove('visible');
+        return;
+      }
+      currentRange = sel.getRangeAt(0).cloneRange();
+      var rect = currentRange.getBoundingClientRect();
+      toolbar.style.left = (rect.left + rect.width / 2 - 100 + window.scrollX) + 'px';
+      toolbar.style.top = (rect.top - 44 + window.scrollY) + 'px';
+      toolbar.classList.add('visible');
+    });
+  }
+
+  document.addEventListener('mousedown', function(e) {
+    if (!e.target.closest('.ann-toolbar')) {
+      toolbar.classList.remove('visible');
+    }
+  });
+
+  toolbar.addEventListener('click', function(e) {
+    var btn = e.target.closest('button');
+    if (!btn || !currentRange) return;
+    var action = btn.dataset.action;
+    var text = currentRange.toString().trim();
+    if (!text) return;
+
+    var sectionId = findSectionId(currentRange.startContainer.parentElement);
+    var position = {
+      start_path: getCSSPath(currentRange.startContainer.nodeType === 3 ? currentRange.startContainer.parentElement : currentRange.startContainer),
+      start_offset: currentRange.startOffset,
+      end_path: getCSSPath(currentRange.endContainer.nodeType === 3 ? currentRange.endContainer.parentElement : currentRange.endContainer),
+      end_offset: currentRange.endOffset,
+      context_before: getTextAround(currentRange, 30, true),
+      context_after: getTextAround(currentRange, 30, false)
+    };
+
+    toolbar.classList.remove('visible');
+    window.getSelection().removeAllRanges();
+
+    if (action === 'highlight') {
+      API.create({
+        type: 'highlight',
+        selected_text: text,
+        section_id: sectionId,
+        position: position,
+        signal_type: findSignalType(sectionId)
+      }).then(function(ann) {
+        annotations.push(ann);
+        wrapHighlight(currentRange, ann.id, false);
+        updateSidebar();
+      });
+    } else if (action === 'highlight-memo') {
+      showMemoModal(text, sectionId, position, currentRange);
+    }
+  });
+
+  // === Memo Modal ===
+  var modal = document.createElement('div');
+  modal.className = 'ann-memo-modal';
+  modal.innerHTML = '<div class="ann-memo-modal-content"><h4>메모 추가</h4><div class="ann-selected-preview" style="padding:8px;background:var(--card-bg);border-radius:6px;margin-bottom:12px;font-size:0.85rem;color:var(--secondary);max-height:80px;overflow:hidden"></div><textarea placeholder="이 부분에 대한 생각을 적어주세요..."></textarea><div class="ann-modal-buttons"><button class="ann-btn-cancel">취소</button><button class="ann-btn-primary ann-btn-save">저장</button></div></div>';
+  document.body.appendChild(modal);
+
+  var pendingMemo = null;
+
+  function showMemoModal(text, sectionId, position, range) {
+    modal.querySelector('.ann-selected-preview').textContent = text.length > 100 ? text.slice(0, 100) + '...' : text;
+    modal.querySelector('textarea').value = '';
+    modal.classList.add('visible');
+    modal.querySelector('textarea').focus();
+    pendingMemo = { text: text, sectionId: sectionId, position: position, range: range };
+  }
+
+  function showEditModal(ann) {
+    modal.querySelector('.ann-selected-preview').textContent = ann.selected_text || '(섹션 메모)';
+    modal.querySelector('textarea').value = ann.content || '';
+    modal.classList.add('visible');
+    modal.querySelector('textarea').focus();
+    pendingMemo = { editId: ann.id };
+  }
+
+  modal.querySelector('.ann-btn-cancel').addEventListener('click', function() {
+    modal.classList.remove('visible');
+    pendingMemo = null;
+  });
+
+  modal.querySelector('.ann-btn-save').addEventListener('click', function() {
+    var content = modal.querySelector('textarea').value.trim();
+    if (!content) return;
+    modal.classList.remove('visible');
+
+    if (pendingMemo.editId) {
+      API.update(pendingMemo.editId, content).then(function(updated) {
+        var idx = -1;
+        for (var j = 0; j < annotations.length; j++) {
+          if (annotations[j].id === pendingMemo.editId) { idx = j; break; }
+        }
+        if (idx >= 0) annotations[idx] = updated;
+        pendingMemo = null;
+        updateSidebar();
+      });
+    } else {
+      var pm = pendingMemo;
+      API.create({
+        type: 'highlight',
+        selected_text: pm.text,
+        content: content,
+        section_id: pm.sectionId,
+        position: pm.position,
+        signal_type: findSignalType(pm.sectionId)
+      }).then(function(ann) {
+        annotations.push(ann);
+        if (pm.range) {
+          wrapHighlight(pm.range, ann.id, true);
+        }
+        pendingMemo = null;
+        updateSidebar();
+      });
+    }
+  });
+
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+      modal.classList.remove('visible');
+      pendingMemo = null;
+    }
+  });
+
+  // === Highlight Renderer ===
+  function wrapHighlight(range, annId, hasMemo) {
+    try {
+      var mark = document.createElement('mark');
+      mark.className = 'ann-highlight' + (hasMemo ? ' has-memo' : '');
+      mark.dataset.annId = annId;
+      range.surroundContents(mark);
+    } catch(ex) {
+      // surroundContents fails if range spans multiple elements - use extractContents
+      try {
+        var mark2 = document.createElement('mark');
+        mark2.className = 'ann-highlight' + (hasMemo ? ' has-memo' : '');
+        mark2.dataset.annId = annId;
+        mark2.appendChild(range.extractContents());
+        range.insertNode(mark2);
+      } catch(ex2) { /* give up gracefully */ }
+    }
+  }
+
+  function restoreHighlights() {
+    for (var i = 0; i < annotations.length; i++) {
+      var ann = annotations[i];
+      if (ann.type !== 'highlight' || !ann.position) continue;
+      try {
+        var startEl = document.querySelector(ann.position.start_path);
+        var endEl = document.querySelector(ann.position.end_path);
+        if (!startEl || !endEl) { restoreByText(ann); continue; }
+
+        var startNode = findTextNode(startEl, ann.position.start_offset, ann.position.context_before);
+        var endNode = findTextNode(endEl, ann.position.end_offset, ann.position.context_after);
+        if (!startNode || !endNode) { restoreByText(ann); continue; }
+
+        var range = document.createRange();
+        range.setStart(startNode.node, startNode.offset);
+        range.setEnd(endNode.node, endNode.offset);
+        wrapHighlight(range, ann.id, !!ann.content);
+      } catch(ex) {
+        restoreByText(ann);
+      }
+    }
+  }
+
+  function findTextNode(el, offset, context) {
+    var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    var node;
+    while ((node = walker.nextNode())) {
+      var text = node.textContent || '';
+      if (context && text.indexOf(context) >= 0) {
+        var idx = text.indexOf(context);
+        return { node: node, offset: idx + context.length };
+      }
+      if (offset <= text.length) {
+        return { node: node, offset: offset };
+      }
+    }
+    return null;
+  }
+
+  function restoreByText(ann) {
+    if (!ann.selected_text) return;
+    var ctn = document.querySelector('.container');
+    if (!ctn) return;
+    var walker = document.createTreeWalker(ctn, NodeFilter.SHOW_TEXT);
+    var node;
+    var searchText = ann.selected_text.slice(0, 60);
+    while ((node = walker.nextNode())) {
+      var text = node.textContent || '';
+      var idx = text.indexOf(searchText);
+      if (idx >= 0) {
+        try {
+          var range = document.createRange();
+          range.setStart(node, idx);
+          range.setEnd(node, Math.min(idx + ann.selected_text.length, text.length));
+          wrapHighlight(range, ann.id, !!ann.content);
+        } catch(ex) { /* skip */ }
+        break;
+      }
+    }
+  }
+
+  // === Section Actions ===
+  function injectSectionActions() {
+    document.querySelectorAll('.deep-dive, .toolkit-card').forEach(function(el) {
+      if (el.querySelector('.ann-section-actions')) return;
+      var actions = document.createElement('div');
+      actions.className = 'ann-section-actions';
+      actions.innerHTML = '<button class="ann-section-btn" data-action="bookmark" title="북마크">\u2605</button><button class="ann-section-btn" data-action="section-memo" title="메모">\u270E</button>';
+      el.appendChild(actions);
+
+      var sectionId = el.id;
+      var existing = annotations.filter(function(a) { return a.section_id === sectionId && (a.type === 'bookmark' || a.type === 'memo'); });
+      if (existing.length > 0) {
+        var bookmarkBtn = actions.querySelector('[data-action="bookmark"]');
+        if (existing.some(function(a) { return a.type === 'bookmark'; })) bookmarkBtn.classList.add('active');
+      }
+    });
+
+    document.addEventListener('click', function(e) {
+      var btn = e.target.closest('.ann-section-btn');
+      if (!btn) return;
+      var section = btn.closest('.deep-dive, .toolkit-card');
+      if (!section) return;
+      var sectionId = section.id;
+      var action = btn.dataset.action;
+
+      if (action === 'bookmark') {
+        var existing = null;
+        for (var j = 0; j < annotations.length; j++) {
+          if (annotations[j].section_id === sectionId && annotations[j].type === 'bookmark') {
+            existing = annotations[j]; break;
+          }
+        }
+        if (existing) {
+          API.remove(existing.id).then(function() {
+            annotations = annotations.filter(function(a) { return a.id !== existing.id; });
+            btn.classList.remove('active');
+            updateSidebar();
+          });
+        } else {
+          var headingEl = section.querySelector('h3, h4');
+          API.create({
+            type: 'bookmark',
+            section_id: sectionId,
+            selected_text: headingEl ? headingEl.textContent : '',
+            signal_type: findSignalType(sectionId)
+          }).then(function(ann) {
+            annotations.push(ann);
+            btn.classList.add('active');
+            updateSidebar();
+          });
+        }
+      } else if (action === 'section-memo') {
+        var headingEl2 = section.querySelector('h3, h4');
+        showMemoModal(
+          headingEl2 ? headingEl2.textContent : '(섹션)',
+          sectionId, null, null
+        );
+      }
+    });
+  }
+
+  // === Sidebar ===
+  var sidebar = document.createElement('div');
+  sidebar.className = 'ann-sidebar';
+  sidebar.innerHTML = '<h3>어노테이션</h3><div class="ann-sidebar-list"></div>';
+  document.body.appendChild(sidebar);
+
+  var sidebarToggle = document.createElement('button');
+  sidebarToggle.className = 'ann-sidebar-toggle';
+  sidebarToggle.innerHTML = '\u270E<span class="ann-count" style="display:none">0</span>';
+  document.body.appendChild(sidebarToggle);
+
+  sidebarToggle.addEventListener('click', function() {
+    sidebar.classList.toggle('open');
+  });
+
+  function updateSidebar() {
+    var list = sidebar.querySelector('.ann-sidebar-list');
+    var count = sidebarToggle.querySelector('.ann-count');
+    count.textContent = String(annotations.length);
+    count.style.display = annotations.length > 0 ? 'flex' : 'none';
+
+    if (annotations.length === 0) {
+      list.innerHTML = '<p style="color:var(--secondary);font-size:0.85rem">텍스트를 선택하여 하이라이트하거나,<br>섹션의 \u2605 버튼으로 북마크하세요.</p>';
+      return;
+    }
+
+    var typeLabels = { highlight: '하이라이트', memo: '메모', bookmark: '북마크', dismiss: '무시' };
+    list.innerHTML = annotations.map(function(ann) {
+      var typeLabel = typeLabels[ann.type] || ann.type;
+      var text = ann.selected_text ? (ann.selected_text.length > 80 ? ann.selected_text.slice(0, 80) + '...' : ann.selected_text) : '';
+      var memo = ann.content ? '<div class="ann-memo-content">' + escapeForHTML(ann.content) + '</div>' : '';
+      return '<div class="ann-sidebar-item" data-ann-id="' + ann.id + '">' +
+        '<div class="ann-type">' + typeLabel + '</div>' +
+        (text ? '<div class="ann-text">' + escapeForHTML(text) + '</div>' : '') +
+        memo +
+        '<div class="ann-actions">' +
+        (ann.type === 'highlight' ? '<button data-action="edit">편집</button>' : '') +
+        '<button data-action="delete">삭제</button>' +
+        '</div></div>';
+    }).join('');
+  }
+
+  function escapeForHTML(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  sidebar.addEventListener('click', function(e) {
+    var actionBtn = e.target.closest('[data-action]');
+    var item = e.target.closest('.ann-sidebar-item');
+    if (!item) return;
+    var annId = item.dataset.annId;
+    var ann = null;
+    for (var j = 0; j < annotations.length; j++) {
+      if (annotations[j].id === annId) { ann = annotations[j]; break; }
+    }
+    if (!ann) return;
+
+    if (actionBtn) {
+      var action = actionBtn.dataset.action;
+      if (action === 'delete') {
+        API.remove(annId).then(function() {
+          annotations = annotations.filter(function(a) { return a.id !== annId; });
+          document.querySelectorAll('[data-ann-id="' + annId + '"]').forEach(function(el) {
+            if (el.tagName === 'MARK') {
+              var parent = el.parentNode;
+              while (el.firstChild) parent.insertBefore(el.firstChild, el);
+              parent.removeChild(el);
+            }
+          });
+          updateSidebar();
+        });
+      } else if (action === 'edit') {
+        showEditModal(ann);
+      }
+    } else {
+      // Scroll to annotation
+      var el = document.querySelector('mark[data-ann-id="' + annId + '"]') ||
+               (ann.section_id ? document.getElementById(ann.section_id) : null);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        el.style.transition = 'outline 0.3s';
+        el.style.outline = '2px solid var(--accent)';
+        setTimeout(function() { el.style.outline = 'none'; }, 1500);
+      }
+    }
+  });
+
+  // === Auto-assign IDs (for markdown-generated pages) ===
+  function autoAssignIds() {
+    document.querySelectorAll('.container h2, .container h3').forEach(function(h, i) {
+      if (h.id) return;
+      var slug = (h.textContent || '').trim().toLowerCase()
+        .replace(/[^a-z0-9\uAC00-\uD7A3\s]/g, '').replace(/\s+/g, '-').slice(0, 40);
+      h.id = 'section-' + (slug || i);
+      var parent = h.closest('section, article, div');
+      if (parent && !parent.id) parent.dataset.sectionId = h.id;
+    });
+  }
+
+  // === Init ===
+  function init() {
+    autoAssignIds();
+    API.list().then(function(list) {
+      annotations = list;
+      restoreHighlights();
+      injectSectionActions();
+      updateSidebar();
+    }).catch(function(err) {
+      console.warn('Annotation system unavailable:', err.message);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();</script>
+</body>
+</html>

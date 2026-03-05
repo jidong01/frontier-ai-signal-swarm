@@ -1,0 +1,469 @@
+{
+  "sources": [
+    {
+      "id": "src-001",
+      "url_pattern": "site:anthropic.com/news",
+      "name": "Anthropic Blog",
+      "status": "active",
+      "trust_score": 0.9,
+      "added_by": "system",
+      "stats": {
+        "times_picked": 0,
+        "times_read": 0,
+        "times_memo": 0,
+        "times_dismissed": 0
+      },
+      "created_at": "2026-03-02T00:00:00.000Z",
+      "last_active_at": "2026-03-02T00:00:00.000Z"
+    },
+    {
+      "id": "src-002",
+      "url_pattern": "site:openai.com/index",
+      "name": "OpenAI Blog",
+      "status": "active",
+      "trust_score": 0.9,
+      "added_by": "system",
+      "stats": {
+        "times_picked": 0,
+        "times_read": 0,
+        "times_memo": 0,
+        "times_dismissed": 0
+      },
+      "created_at": "2026-03-02T00:00:00.000Z",
+      "last_active_at": "2026-03-02T00:00:00.000Z"
+    },
+    {
+      "id": "src-005",
+      "url_pattern": "site:arxiv.org cs.AI",
+      "name": "arxiv AI Papers",
+      "status": "active",
+      "trust_score": 0.9,
+      "added_by": "system",
+      "stats": {
+        "times_picked": 0,
+        "times_read": 0,
+        "times_memo": 0,
+        "times_dismissed": 0
+      },
+      "created_at": "2026-03-02T00:00:00.000Z",
+      "last_active_at": "2026-03-02T00:00:00.000Z"
+    },
+    {
+      "id": "src-010",
+      "url_pattern": "site:karpathy.github.io",
+      "name": "Andrej Karpathy",
+      "status": "active",
+      "trust_score": 1,
+      "added_by": "system",
+      "curator_note": "전 Tesla AI, 교육 콘텐츠",
+      "stats": {
+        "times_picked": 0,
+        "times_read": 1,
+        "times_memo": 2,
+        "times_dismissed": 1
+      },
+      "created_at": "2026-03-02T00:00:00.000Z",
+      "last_active_at": "2026-03-04T16:00:13.096Z"
+    },
+    {
+      "id": "src-013",
+      "url_pattern": "site:aifrontier.kr",
+      "name": "AI Frontier 팟캐스트",
+      "status": "active",
+      "trust_score": 0.9,
+      "added_by": "system",
+      "curator_note": "한국 AI 전문가 심층 분석",
+      "stats": {
+        "times_picked": 0,
+        "times_read": 0,
+        "times_memo": 0,
+        "times_dismissed": 0
+      },
+      "created_at": "2026-03-02T00:00:00.000Z",
+      "last_active_at": "2026-03-02T00:00:00.000Z"
+    },
+    {
+      "id": "src-014",
+      "url_pattern": "site:transformer-circuits.pub",
+      "name": "Transformer Circuits",
+      "status": "active",
+      "trust_score": 0.9,
+      "added_by": "system",
+      "curator_note": "트랜스포머 내부 작동 메커니즘 해석",
+      "stats": {
+        "times_picked": 0,
+        "times_read": 0,
+        "times_memo": 0,
+        "times_dismissed": 0
+      },
+      "created_at": "2026-03-02T00:00:00.000Z",
+      "last_active_at": "2026-03-02T00:00:00.000Z"
+    },
+    {
+      "id": "src-004",
+      "url_pattern": "site:ai.meta.com/blog",
+      "name": "Meta AI",
+      "status": "active",
+      "trust_score": 0.85,
+      "added_by": "system",
+      "stats": {
+        "times_picked": 0,
+        "times_read": 0,
+        "times_memo": 0,
+        "times_dismissed": 0
+      },
+      "created_at": "2026-03-02T00:00:00.000Z",
+      "last_active_at": "2026-03-02T00:00:00.000Z"
+    },
+    {
+      "id": "src-009",
+      "url_pattern": "site:simonwillison.net",
+      "name": "Simon Willison",
+      "status": "active",
+      "trust_score": 0.85,
+      "added_by": "system",
+      "curator_note": "AI 도구 실용 분석",
+      "stats": {
+        "times_picked": 0,
+        "times_read": 0,
+        "times_memo": 0,
+        "times_dismissed": 0
+      },
+      "created_at": "2026-03-02T00:00:00.000Z",
+      "last_active_at": "2026-03-02T00:00:00.000Z"
+    },
+    {
+      "id": "src-011",
+      "url_pattern": "site:semianalysis.com",
+      "name": "SemiAnalysis",
+      "status": "active",
+      "trust_score": 0.85,
+      "added_by": "system",
+      "curator_note": "GPU/칩/인프라 심층 분석",
+      "stats": {
+        "times_picked": 0,
+        "times_read": 0,
+        "times_memo": 0,
+        "times_dismissed": 0
+      },
+      "created_at": "2026-03-02T00:00:00.000Z",
+      "last_active_at": "2026-03-02T00:00:00.000Z"
+    },
+    {
+      "id": "src-012",
+      "url_pattern": "site:theinformation.com AI",
+      "name": "The Information",
+      "status": "active",
+      "trust_score": 0.85,
+      "added_by": "system",
+      "curator_note": "고품질 기술 저널리즘",
+      "stats": {
+        "times_picked": 0,
+        "times_read": 0,
+        "times_memo": 0,
+        "times_dismissed": 0
+      },
+      "created_at": "2026-03-02T00:00:00.000Z",
+      "last_active_at": "2026-03-02T00:00:00.000Z"
+    },
+    {
+      "id": "src-015",
+      "url_pattern": "site:metr.org",
+      "name": "METR",
+      "status": "active",
+      "trust_score": 0.85,
+      "added_by": "system",
+      "curator_note": "AI 능력 측정, 시간 지평 벤치마크",
+      "stats": {
+        "times_picked": 0,
+        "times_read": 0,
+        "times_memo": 0,
+        "times_dismissed": 0
+      },
+      "created_at": "2026-03-02T00:00:00.000Z",
+      "last_active_at": "2026-03-02T00:00:00.000Z"
+    },
+    {
+      "id": "src-016",
+      "url_pattern": "site:epochai.org",
+      "name": "Epoch AI",
+      "status": "active",
+      "trust_score": 0.85,
+      "added_by": "system",
+      "curator_note": "AI 트렌드 데이터, 스케일링 분석",
+      "stats": {
+        "times_picked": 0,
+        "times_read": 0,
+        "times_memo": 0,
+        "times_dismissed": 0
+      },
+      "created_at": "2026-03-02T00:00:00.000Z",
+      "last_active_at": "2026-03-02T00:00:00.000Z"
+    },
+    {
+      "id": "src-018",
+      "url_pattern": "site:dwarkesh.com",
+      "name": "Dwarkesh Patel",
+      "status": "active",
+      "trust_score": 0.85,
+      "added_by": "system",
+      "curator_note": "AI 리더 심층 인터뷰 팟캐스트",
+      "stats": {
+        "times_picked": 0,
+        "times_read": 0,
+        "times_memo": 0,
+        "times_dismissed": 0
+      },
+      "created_at": "2026-03-02T00:00:00.000Z",
+      "last_active_at": "2026-03-02T00:00:00.000Z"
+    },
+    {
+      "id": "src-023",
+      "url_pattern": "site:blog.google/technology/ai",
+      "name": "Google AI Blog",
+      "status": "active",
+      "trust_score": 0.85,
+      "added_by": "system",
+      "stats": {
+        "times_picked": 0,
+        "times_read": 0,
+        "times_memo": 0,
+        "times_dismissed": 0
+      },
+      "created_at": "2026-03-02T00:00:00.000Z",
+      "last_active_at": "2026-03-02T00:00:00.000Z"
+    },
+    {
+      "id": "src-006",
+      "url_pattern": "site:huggingface.co/papers",
+      "name": "HuggingFace Papers",
+      "status": "active",
+      "trust_score": 0.8,
+      "added_by": "system",
+      "stats": {
+        "times_picked": 0,
+        "times_read": 0,
+        "times_memo": 0,
+        "times_dismissed": 0
+      },
+      "created_at": "2026-03-02T00:00:00.000Z",
+      "last_active_at": "2026-03-02T00:00:00.000Z"
+    },
+    {
+      "id": "src-008",
+      "url_pattern": "site:x.ai/news",
+      "name": "xAI",
+      "status": "active",
+      "trust_score": 0.8,
+      "added_by": "system",
+      "stats": {
+        "times_picked": 0,
+        "times_read": 0,
+        "times_memo": 0,
+        "times_dismissed": 0
+      },
+      "created_at": "2026-03-02T00:00:00.000Z",
+      "last_active_at": "2026-03-02T00:00:00.000Z"
+    },
+    {
+      "id": "src-017",
+      "url_pattern": "site:nvidia.com/en-us/ai-data-science",
+      "name": "NVIDIA AI",
+      "status": "active",
+      "trust_score": 0.8,
+      "added_by": "system",
+      "stats": {
+        "times_picked": 0,
+        "times_read": 0,
+        "times_memo": 0,
+        "times_dismissed": 0
+      },
+      "created_at": "2026-03-02T00:00:00.000Z",
+      "last_active_at": "2026-03-02T00:00:00.000Z"
+    },
+    {
+      "id": "src-020",
+      "url_pattern": "site:paperswithcode.com trending",
+      "name": "Papers With Code",
+      "status": "active",
+      "trust_score": 0.8,
+      "added_by": "system",
+      "stats": {
+        "times_picked": 0,
+        "times_read": 0,
+        "times_memo": 0,
+        "times_dismissed": 0
+      },
+      "created_at": "2026-03-02T00:00:00.000Z",
+      "last_active_at": "2026-03-02T00:00:00.000Z"
+    },
+    {
+      "id": "src-021",
+      "url_pattern": "site:martinfowler.com AI",
+      "name": "Martin Fowler",
+      "status": "active",
+      "trust_score": 0.8,
+      "added_by": "system",
+      "curator_note": "소프트웨어 엔지니어링 + AI 접목",
+      "stats": {
+        "times_picked": 0,
+        "times_read": 0,
+        "times_memo": 0,
+        "times_dismissed": 0
+      },
+      "created_at": "2026-03-02T00:00:00.000Z",
+      "last_active_at": "2026-03-02T00:00:00.000Z"
+    },
+    {
+      "id": "src-022",
+      "url_pattern": "site:physicalintelligence.com",
+      "name": "Physical Intelligence",
+      "status": "active",
+      "trust_score": 0.8,
+      "added_by": "system",
+      "stats": {
+        "times_picked": 0,
+        "times_read": 0,
+        "times_memo": 0,
+        "times_dismissed": 0
+      },
+      "created_at": "2026-03-02T00:00:00.000Z",
+      "last_active_at": "2026-03-02T00:00:00.000Z"
+    },
+    {
+      "id": "src-007",
+      "url_pattern": "site:news.ycombinator.com AI",
+      "name": "Hacker News",
+      "status": "active",
+      "trust_score": 0.75,
+      "added_by": "system",
+      "stats": {
+        "times_picked": 0,
+        "times_read": 0,
+        "times_memo": 0,
+        "times_dismissed": 0
+      },
+      "created_at": "2026-03-02T00:00:00.000Z",
+      "last_active_at": "2026-03-02T00:00:00.000Z"
+    },
+    {
+      "id": "src-019",
+      "url_pattern": "site:every.to AI",
+      "name": "Every.to",
+      "status": "active",
+      "trust_score": 0.75,
+      "added_by": "system",
+      "curator_note": "AI 실용 분석, Vibe Check 시리즈",
+      "stats": {
+        "times_picked": 0,
+        "times_read": 0,
+        "times_memo": 0,
+        "times_dismissed": 0
+      },
+      "created_at": "2026-03-02T00:00:00.000Z",
+      "last_active_at": "2026-03-02T00:00:00.000Z"
+    },
+    {
+      "id": "src-003",
+      "url_pattern": "site:deepmind.google/blog",
+      "name": "Google DeepMind",
+      "status": "active",
+      "trust_score": 0.5666666666666667,
+      "added_by": "system",
+      "stats": {
+        "times_picked": 2,
+        "times_read": 0,
+        "times_memo": 3,
+        "times_dismissed": 0
+      },
+      "created_at": "2026-03-02T00:00:00.000Z",
+      "last_active_at": "2026-03-02T10:13:06.303Z"
+    },
+    {
+      "id": "src-024",
+      "url_pattern": "site:developer.chrome.com",
+      "name": "developer.chrome.com",
+      "status": "suggested",
+      "trust_score": 0.5,
+      "added_by": "ai",
+      "stats": {
+        "times_picked": 0,
+        "times_read": 0,
+        "times_memo": 0,
+        "times_dismissed": 0
+      },
+      "created_at": "2026-03-04T16:09:12.578Z",
+      "last_active_at": "2026-03-04T16:09:12.579Z",
+      "curator_note": "발견: dossier-2026-03-05"
+    },
+    {
+      "id": "src-025",
+      "url_pattern": "site:www.infoq.com",
+      "name": "infoq.com",
+      "status": "suggested",
+      "trust_score": 0.5,
+      "added_by": "ai",
+      "stats": {
+        "times_picked": 0,
+        "times_read": 0,
+        "times_memo": 0,
+        "times_dismissed": 0
+      },
+      "created_at": "2026-03-04T16:09:12.579Z",
+      "last_active_at": "2026-03-04T16:09:12.579Z",
+      "curator_note": "발견: dossier-2026-03-05"
+    },
+    {
+      "id": "src-026",
+      "url_pattern": "site:bug0.com",
+      "name": "bug0.com",
+      "status": "suggested",
+      "trust_score": 0.5,
+      "added_by": "ai",
+      "stats": {
+        "times_picked": 0,
+        "times_read": 0,
+        "times_memo": 0,
+        "times_dismissed": 0
+      },
+      "created_at": "2026-03-04T16:09:12.579Z",
+      "last_active_at": "2026-03-04T16:09:12.579Z",
+      "curator_note": "발견: dossier-2026-03-05"
+    },
+    {
+      "id": "src-027",
+      "url_pattern": "site:searchengineland.com",
+      "name": "searchengineland.com",
+      "status": "suggested",
+      "trust_score": 0.5,
+      "added_by": "ai",
+      "stats": {
+        "times_picked": 0,
+        "times_read": 0,
+        "times_memo": 0,
+        "times_dismissed": 0
+      },
+      "created_at": "2026-03-04T16:09:12.579Z",
+      "last_active_at": "2026-03-04T16:09:12.579Z",
+      "curator_note": "발견: dossier-2026-03-05"
+    },
+    {
+      "id": "src-028",
+      "url_pattern": "site:arxiv.org",
+      "name": "arxiv.org",
+      "status": "suggested",
+      "trust_score": 0.5,
+      "added_by": "ai",
+      "stats": {
+        "times_picked": 0,
+        "times_read": 0,
+        "times_memo": 0,
+        "times_dismissed": 0
+      },
+      "created_at": "2026-03-04T16:09:12.579Z",
+      "last_active_at": "2026-03-04T16:09:12.579Z",
+      "curator_note": "발견: dossier-2026-03-05"
+    }
+  ],
+  "last_updated": "2026-03-04T16:09:12.579Z"
+}

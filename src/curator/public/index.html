@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curator Workspace — 피드</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Navigation -->
+    <nav class="nav">
+      <div class="nav-brand">Curator <span>Workspace</span></div>
+      <div class="nav-links">
+        <a href="/" class="nav-link active">피드</a>
+        <a href="/dossiers.html" class="nav-link">도시에</a>
+        <a href="/memos.html" class="nav-link">메모</a>
+        <a href="/sources.html" class="nav-link">소스</a>
+      </div>
+      <div class="nav-stats" id="nav-stats">
+        <!-- Populated by JS -->
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <h1 class="page-title">피드</h1>
+      <p class="page-subtitle">AI가 수집하거나 직접 던진 시그널 아이템</p>
+    </div>
+
+    <!-- Learning Panel -->
+    <details class="learning-panel" id="learning-panel">
+      <summary class="learning-panel-toggle">
+        <span class="learning-panel-title">학습 현황</span>
+        <span class="learning-panel-hint" id="learning-hint"></span>
+      </summary>
+      <div class="learning-panel-body" id="learning-body">
+        <div class="loading" style="padding:1.5rem"><div class="loading-spinner"></div></div>
+      </div>
+    </details>
+
+    <!-- URL Input Bar -->
+    <div class="input-bar" id="input-bar">
+      <input
+        type="url"
+        id="url-input"
+        placeholder="링크를 붙여넣기... (https://...)"
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <div class="input-bar-fields">
+        <input
+          type="text"
+          id="title-input"
+          placeholder="제목 (선택 — 비워두면 URL에서 자동 감지)"
+        />
+        <input
+          type="text"
+          id="thought-input"
+          placeholder="생각 한 줄 (선택 — 왜 이 링크를 저장하는지)"
+        />
+      </div>
+      <div class="input-bar-footer">
+        <span style="font-family:'Inter',sans-serif;font-size:0.72rem;color:var(--secondary);">
+          Enter로 빠른 추가
+        </span>
+        <button id="add-btn" onclick="addLink()" disabled>추가</button>
+      </div>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs" role="tablist">
+      <button class="filter-tab active" data-filter="all" role="tab" aria-selected="true">
+        전체 <span class="tab-count" id="count-all">0</span>
+      </button>
+      <button class="filter-tab" data-filter="unread" role="tab" aria-selected="false">
+        안 읽음 <span class="tab-count" id="count-unread">0</span>
+      </button>
+      <button class="filter-tab" data-filter="bookmarked" role="tab" aria-selected="false">
+        북마크 <span class="tab-count" id="count-bookmarked">0</span>
+      </button>
+      <button class="filter-tab" data-filter="dismissed" role="tab" aria-selected="false">
+        무시 <span class="tab-count" id="count-dismissed">0</span>
+      </button>
+    </div>
+
+    <!-- Feed List -->
+    <div id="feed-list" class="feed-list" role="list">
+      <div class="loading">
+        <div class="loading-spinner"></div>
+        <div>피드 불러오는 중...</div>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div id="pagination" class="pagination" aria-label="페이지 이동"></div>
+
+  </div>
+
+  <!-- Toast container -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

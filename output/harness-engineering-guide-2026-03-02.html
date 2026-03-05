@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>하네스 엔지니어링(Harness Engineering): AI 에이전트 시대의 새로운 엔지니어링 패러다임</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Serif+KR:wght@400;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <style>
+    /* === Reset & Base === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #fafaf8;
+      --text: #1a1a1a;
+      --heading: #111;
+      --accent: #c45d2c;
+      --secondary: #6b7280;
+      --card-bg: #f5f3ef;
+      --border: #e5e2db;
+      --badge-noise: #9ca3af;
+      --badge-weak: #60a5fa;
+      --badge-moderate: #f59e0b;
+      --badge-strong: #f97316;
+      --badge-critical: #ef4444;
+      --blockquote-bg: #f9f7f4;
+      --blockquote-border: #c45d2c;
+      --code-bg: #f0ede8;
+      --table-header-bg: #f0ede8;
+      --table-stripe: #faf8f5;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1a1e;
+        --text: #e4e4e4;
+        --heading: #f0f0f0;
+        --accent: #e07a4f;
+        --secondary: #9ca3af;
+        --card-bg: #252528;
+        --border: #3a3a3e;
+        --blockquote-bg: #222225;
+        --blockquote-border: #e07a4f;
+        --code-bg: #2a2a2e;
+        --table-header-bg: #28282c;
+        --table-stripe: #1f1f23;
+      }
+    }
+
+    html {
+      font-size: 17px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Serif KR', 'Georgia', serif;
+      line-height: 1.8;
+      padding: 2rem 1rem 4rem;
+    }
+
+    /* === Layout === */
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* === Typography === */
+    h1, h2, h3, h4 {
+      font-family: 'Inter', sans-serif;
+      color: var(--heading);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      line-height: 1.25;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      line-height: 1.3;
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      line-height: 1.35;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      margin-bottom: 1.2rem;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s;
+    }
+    a:hover {
+      border-bottom-color: var(--accent);
+    }
+
+    strong { font-weight: 700; }
+    em { font-style: italic; }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88em;
+      background: var(--code-bg);
+      padding: 0.15em 0.4em;
+      border-radius: 3px;
+    }
+
+    pre {
+      background: var(--code-bg);
+      border-radius: 6px;
+      padding: 1.2rem 1.4rem;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+      line-height: 1.55;
+    }
+    pre code {
+      background: none;
+      padding: 0;
+      font-size: 0.85rem;
+    }
+
+    /* === Header === */
+    .dossier-header {
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .dossier-meta {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: var(--secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.8rem;
+    }
+
+    .one-liner {
+      font-size: 1.25rem;
+      line-height: 1.6;
+      color: var(--secondary);
+      margin-top: 1rem;
+      font-style: italic;
+    }
+
+    /* === Section Dividers === */
+    .section-divider {
+      width: 40px;
+      height: 1px;
+      background: var(--border);
+      margin: 3rem auto;
+    }
+
+    /* === Signal Table === */
+    .signal-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0 2rem;
+      font-size: 0.92rem;
+    }
+
+    .signal-table thead {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--secondary);
+    }
+
+    .signal-table th {
+      background: var(--table-header-bg);
+      text-align: left;
+      padding: 0.7rem 1rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .signal-table td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .signal-table tbody tr:nth-child(even) {
+      background: var(--table-stripe);
+    }
+
+    .signal-table .signal-name {
+      font-weight: 600;
+      color: var(--heading);
+    }
+
+    /* === Signal Badges === */
+    .badge {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.2em 0.6em;
+      border-radius: 3px;
+      color: #fff;
+      white-space: nowrap;
+    }
+
+    .badge-noise    { background: var(--badge-noise); }
+    .badge-weak     { background: var(--badge-weak); }
+    .badge-moderate { background: var(--badge-moderate); color: #1a1a1a; }
+    .badge-strong   { background: var(--badge-strong); color: #1a1a1a; }
+    .badge-critical { background: var(--badge-critical); }
+
+    .badge-type {
+      background: transparent;
+      border: 1px solid var(--secondary);
+      color: var(--secondary);
+    }
+
+    /* === Deep Dive === */
+    .deep-dive {
+      margin-bottom: 2.5rem;
+    }
+
+    .deep-dive h3 {
+      color: var(--accent);
+    }
+
+    /* === Blockquote === */
+    blockquote {
+      border-left: 3px solid var(--blockquote-border);
+      background: var(--blockquote-bg);
+      padding: 1rem 1.4rem;
+      margin: 1.5rem 0;
+      border-radius: 0 6px 6px 0;
+      font-style: italic;
+      color: var(--secondary);
+    }
+    blockquote p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* === Conceptual Toolkit Cards === */
+    .toolkit-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0 2rem;
+    }
+
+    @media (min-width: 560px) {
+      .toolkit-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .toolkit-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.2rem 1.4rem;
+      transition: box-shadow 0.15s;
+    }
+
+    .toolkit-card:hover {
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .toolkit-card:hover {
+        box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+      }
+    }
+
+    .toolkit-card h4 {
+      font-size: 1.05rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .toolkit-card p {
+      font-size: 0.92rem;
+      line-height: 1.65;
+      margin-bottom: 0;
+      color: var(--text);
+    }
+
+    /* === Open Questions Callout === */
+    .open-questions {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 1.5rem 1.8rem;
+      margin: 1.5rem 0 2rem;
+    }
+
+    .open-questions h2 {
+      margin-top: 0;
+      border-bottom: none;
+      padding-bottom: 0;
+      font-size: 1.3rem;
+    }
+
+    .open-questions ol {
+      margin: 1rem 0 0;
+      padding-left: 1.4rem;
+    }
+
+    .open-questions li {
+      margin-bottom: 0.6rem;
+      line-height: 1.65;
+    }
+
+    /* === Lists === */
+    ul, ol {
+      margin: 0.8rem 0 1.5rem;
+      padding-left: 1.6rem;
+    }
+
+    li {
+      margin-bottom: 0.4rem;
+    }
+
+    li::marker {
+      color: var(--accent);
+    }
+
+    /* === Learning Points === */
+    .learning-points li {
+      padding: 0.2rem 0;
+      line-height: 1.65;
+    }
+
+    /* === Sources === */
+    .sources-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+
+    .sources-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.92rem;
+    }
+
+    .sources-list li:last-child {
+      border-bottom: none;
+    }
+
+    .sources-list a {
+      font-weight: 500;
+    }
+
+    /* === Footer === */
+    .dossier-footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: var(--secondary);
+      letter-spacing: 0.03em;
+    }
+
+    .dossier-footer .brand {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    /* === Generic table (for markdown tables) === */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.92rem;
+    }
+
+    thead {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--secondary);
+    }
+
+    th {
+      background: var(--table-header-bg);
+      text-align: left;
+      padding: 0.7rem 1rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tbody tr:nth-child(even) {
+      background: var(--table-stripe);
+    }
+
+    /* === HR === */
+    hr {
+      border: none;
+      height: 1px;
+      background: var(--border);
+      margin: 2.5rem 0;
+    }
+
+    /* === Print === */
+    @media print {
+      body {
+        background: #fff;
+        color: #000;
+        padding: 0;
+        font-size: 11pt;
+      }
+      .container {
+        max-width: 100%;
+      }
+      h1, h2, h3, h4 { color: #000; }
+      a { color: #000; border-bottom: none; text-decoration: underline; }
+      .badge { border: 1px solid #999; color: #000 !important; background: #eee !important; }
+      .toolkit-card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+      .open-questions { break-inside: avoid; }
+      .dossier-footer { margin-top: 2rem; }
+    }
+
+    /* === Responsive === */
+    @media (max-width: 480px) {
+      html { font-size: 15px; }
+      h1 { font-size: 1.7rem; }
+      h2 { font-size: 1.35rem; }
+      body { padding: 1rem 0.75rem 3rem; }
+      .signal-table { font-size: 0.82rem; }
+      .signal-table th, .signal-table td { padding: 0.5rem 0.6rem; }
+      .toolkit-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header class="dossier-header">
+      <div class="dossier-meta">Frontier AI Signal Swarm &middot; 2026-03-02</div>
+      <h1>하네스 엔지니어링(Harness Engineering): AI 에이전트 시대의 새로운 엔지니어링 패러다임</h1>
+    </header>
+
+    <article>
+      <h1>하네스 엔지니어링(Harness Engineering): AI 에이전트 시대의 새로운 엔지니어링 패러다임</h1>
+<p><em>2026년 3월 2일 | Frontier AI Signal Swarm — 개념 심층 탐구</em></p>
+<blockquote><p>&quot;2025년은 에이전트의 해였다. 2026년은 에이전트 하네스의 해다.&quot; — Aakash Gupta</p></blockquote>
+<hr>
+<h2>1. 하네스 엔지니어링이란 무엇인가</h2>
+<h3>한 문장 정의</h3>
+<p><strong>하네스 엔지니어링(Harness Engineering)은 AI 모델의 본질적으로 들쭉날쭉한(spiky) 지능을 인간이 원하는 복잡한 작업에 맞게 조율하기 위해, 모델 주변에 제어 시스템과 도구를 구축하는 엔지니어링 분야다.</strong></p>
+<p>이것은 단순한 프롬프트 엔지니어링의 확장이 아니다. 시스템 프롬프트, 도구 선택, 미들웨어, 실행 흐름, 검증 루프, 아키텍처 제약 조건 등을 포괄하는 <strong>시스템 수준의 설계</strong>다.</p>
+<h3>말(馬) 비유</h3>
+<p>&quot;하네스(harness)&quot;라는 용어는 원래 말 장구(馬具)—고삐, 안장, 재갈—에서 온다. 이 비유는 의도적이다:</p>
+<table>
+<thead><tr>
+<th>요소</th>
+<th>비유</th>
+<th>역할</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><strong>말(Horse)</strong></td>
+<td>AI 모델</td>
+<td>강력하고 빠르지만, 혼자서는 어디로 갈지 모른다</td>
+</tr>
+<tr>
+<td><strong>하네스(Harness)</strong></td>
+<td>인프라</td>
+<td>제약, 가드레일, 피드백 루프로 모델의 힘을 생산적으로 channeling</td>
+</tr>
+<tr>
+<td><strong>기수(Rider)</strong></td>
+<td>인간 엔지니어</td>
+<td>방향을 제시하지, 직접 달리지 않는다</td>
+</tr>
+</tbody></table>
+<p>하네스 없는 AI 에이전트는 <strong>열린 들판의 경주마</strong>와 같다. 빠르고, 인상적이지만, 실제로 무언가를 해내는 데는 완전히 쓸모없다.</p>
+<h3>컴퓨터 비유 (Philipp Schmid, Google DeepMind)</h3>
+<p>Philipp Schmid는 더 정밀한 비유를 제안했다:</p>
+<table>
+<thead><tr>
+<th>컴퓨터 구성요소</th>
+<th>AI 시스템 대응</th>
+<th>설명</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><strong>CPU</strong></td>
+<td>AI 모델</td>
+<td>원시적 처리 능력</td>
+</tr>
+<tr>
+<td><strong>RAM</strong></td>
+<td>컨텍스트 윈도우</td>
+<td>제한적이고 휘발성인 작업 메모리</td>
+</tr>
+<tr>
+<td><strong>운영체제(OS)</strong></td>
+<td>에이전트 하네스</td>
+<td>리소스를 관리하고, 표준 인터페이스를 제공하고, 부팅 시퀀스를 처리</td>
+</tr>
+<tr>
+<td><strong>애플리케이션</strong></td>
+<td>에이전트</td>
+<td>사용자 특화 로직</td>
+</tr>
+</tbody></table>
+<p>PC의 실제 능력이 CPU 성능만으로 결정되지 않듯, AI 에이전트의 효과도 모델 성능만으로 결정되지 않는다. <strong>하네스가 곧 아키텍처</strong>다.</p>
+<hr>
+<h2>2. 왜 지금 하네스 엔지니어링이 중요한가</h2>
+<h3>&quot;모델은 상품, 하네스는 해자(moat)&quot;</h3>
+<p>AI 업계가 마주한 불편한 진실: <strong>기저 모델보다 그것을 감싸는 시스템이 더 중요하다.</strong></p>
+<p>이것을 가장 극적으로 증명한 사례가 LangChain이다:</p>
+<table>
+<thead><tr>
+<th>항목</th>
+<th>변경 전</th>
+<th>변경 후</th>
+<th>변화</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Terminal Bench 2.0 점수</td>
+<td>52.8%</td>
+<td>66.5%</td>
+<td>+13.7p</td>
+</tr>
+<tr>
+<td>순위</td>
+<td>Top 30 밖</td>
+<td>Top 5</td>
+<td>25단계 상승</td>
+</tr>
+<tr>
+<td>모델 변경</td>
+<td>없음</td>
+<td>없음</td>
+<td>GPT-5.2-Codex 고정</td>
+</tr>
+<tr>
+<td>변경한 것</td>
+<td>—</td>
+<td>하네스만</td>
+<td>시스템 프롬프트, 도구, 미들웨어</td>
+</tr>
+</tbody></table>
+<p><strong>모델을 하나도 바꾸지 않고, 하네스만 바꿔서 25단계를 뛰어올랐다.</strong> 이것은 하네스 엔지니어링의 가치를 가장 명확하게 보여주는 데이터다.</p>
+<h3>AI 모델의 구조적 한계</h3>
+<p>LLM이 아무리 강력해도, 다음 문제들은 모델 크기를 키운다고 해결되지 않는다:</p>
+<ol>
+<li><strong>제한된 컨텍스트 윈도우와 영속적 기억의 부재</strong> — 각 세션은 백지에서 시작한다</li>
+<li><strong>환경과의 상호작용 불가</strong> — LLM은 텍스트만 생산한다. 코드 실행, DB 쿼리, 웹 탐색은 중간 레이어가 필요하다</li>
+<li><strong>계획과 자기 검증의 부재</strong> — 구조가 없으면 복잡한 작업을 한 번에 해결하려다(&quot;one-shotting&quot;) 중간에 길을 잃는다</li>
+<li><strong>느리고 가변적인 출력</strong> — 전통적 소프트웨어의 밀리초 응답과 달리, 수 초 단위 응답에 품질도 들쭉날쭉하다</li>
+</ol>
+<p>하네스 엔지니어링은 이 모든 구조적 한계를 <strong>모델 외부에서</strong> 해결한다.</p>
+<hr>
+<h2>3. 하네스 엔지니어링의 기원과 계보</h2>
+<p>하네스 엔지니어링이라는 용어는 2025년 말~2026년 초에 걸쳐 여러 독립적인 흐름이 합류하면서 형성됐다.</p>
+<h3>3.1 Anthropic — &quot;Effective Harnesses for Long-Running Agents&quot; (2025년 11월)</h3>
+<p>Anthropic은 Claude Agent SDK를 &quot;강력한 범용 에이전트 하네스&quot;라고 명명하며, 장시간 실행 에이전트의 핵심 문제를 정의했다:</p>
+<blockquote><p>&quot;에이전트의 핵심 도전은 불연속적 세션에서 작업해야 한다는 것이다. 새 세션은 이전에 일어난 일에 대한 기억 없이 시작된다. 마치 교대 근무하는 엔지니어 팀인데, 새 엔지니어가 이전 교대에서 무슨 일이 있었는지 전혀 모르는 채 출근하는 것과 같다.&quot;</p></blockquote>
+<p><strong>해결책: 이중 에이전트 시스템</strong></p>
+<ul>
+<li><strong>초기화 에이전트(Initializer)</strong>: 첫 세션에서 환경을 설정하고, <code>init.sh</code>, <code>claude-progress.txt</code> 등 인수인계 문서를 생성</li>
+<li><strong>코딩 에이전트(Coder)</strong>: 이후 세션에서 진행 파일과 git 히스토리를 읽고, 기능 하나씩 점진적으로 진행하며 깨끗한 커밋을 남김</li>
+</ul>
+<p>이것이 &quot;인간 엔지니어 팀의 교대 근무 방식을 모방한 하네스&quot;라는 개념의 출발점이었다.</p>
+<h3>3.2 Mitchell Hashimoto — &quot;My AI Adoption Journey&quot; (2026년 2월 5일)</h3>
+<p>HashiCorp 공동 창업자이자 Terraform, Vagrant의 창시자인 Mitchell Hashimoto가 자신의 AI 도입 여정을 6단계로 공유하며, <strong>5단계를 &quot;Engineer the Harness&quot;</strong>라고 명명했다.</p>
+<p><strong>핵심 철학:</strong></p>
+<blockquote><p>&quot;에이전트가 처음부터 올바른 결과를 만들거나, 최소한의 수정만 필요한 결과를 만들 때 가장 효율적이다.&quot;</p></blockquote>
+<p>에이전트가 실수할 때, 두 가지 접근:</p>
+<ol>
+<li><strong>암묵적 프롬프팅 개선 (AGENTS.md)</strong>: 에이전트의 반복 실수를 문서화하여 재발 방지. Ghostty 프로젝트의 AGENTS.md에서 &quot;각 줄은 나쁜 에이전트 행동에 기반하며, 거의 모든 문제를 해결했다&quot;</li>
+<li><strong>프로그래밍된 도구</strong>: 스크린샷 촬영, 필터링된 테스트 실행 등의 커스텀 스크립트 구축</li>
+</ol>
+<h3>3.3 OpenAI — &quot;Harness Engineering: Leveraging Codex in an Agent-First World&quot; (2026년 2월 11일)</h3>
+<p>OpenAI의 Harness 팀이 이 개념을 산업적 규모로 증명했다:</p>
+<ul>
+<li><strong>5개월간 100만 줄의 코드</strong>, 인간이 직접 작성한 코드 <strong>0줄</strong></li>
+<li>3명의 엔지니어 → 7명으로 확장, 엔지니어당 하루 평균 <strong>3.5개 PR</strong></li>
+<li>기존 대비 약 <strong>1/10 시간</strong>으로 제품 구축</li>
+<li>약 <strong>1,500개 PR</strong> 생성·병합</li>
+<li>내부 일일 사용자와 외부 알파 테스터가 있는 <strong>실제 운영 제품</strong></li>
+</ul>
+<blockquote><p>&quot;소프트웨어 엔지니어링 팀의 주된 업무는 더 이상 코드를 작성하는 것이 아니라, 환경을 설계하고, 의도를 명시하며, 에이전트가 신뢰할 수 있는 작업을 수행할 수 있는 피드백 루프를 구축하는 것이다.&quot;</p></blockquote>
+<hr>
+<h2>4. 하네스의 네 가지 핵심 기능</h2>
+<p>Martin Fowler는 하네스를 &quot;AI 에이전트를 통제하는 도구와 관행&quot;이라 정의했다. 더 구체적으로, 하네스는 네 가지 기능을 수행한다:</p>
+<h3>4.1 제약(Constrain) — 에이전트가 할 수 있는 것을 제한</h3>
+<p>&quot;자유는 에이전트의 적이다.&quot; 아키텍처 경계를 기계적으로 강제하면 오히려 생산성이 올라간다. 에이전트가 해결 공간을 탐색하는 데 낭비하는 시간이 줄기 때문이다.</p>
+<p><strong>구체적 방법:</strong></p>
+<ul>
+<li>의존성 계층화: <code>Types → Config → Repo → Service → Runtime → UI</code></li>
+<li>결정론적 린터와 LLM 기반 감사기(auditor) 병행</li>
+<li>구조적 테스트와 pre-commit 훅</li>
+<li>에이전트가 특정 디렉터리/파일만 수정 가능하도록 범위 제한</li>
+</ul>
+<p><strong>OpenAI 사례:</strong> &quot;에이전트에게 폭발 반경(blast radius)을 명시적으로 정의하지 않으면, CSS 버그를 고치려다 자신있게 데이터베이스 스키마를 다시 작성한다.&quot;</p>
+<h3>4.2 정보 제공(Inform) — 에이전트가 알아야 할 것을 제공</h3>
+<p><strong>&quot;에이전트 관점에서, 컨텍스트 안에서 접근할 수 없는 것은 존재하지 않는다.&quot;</strong></p>
+<p>두 가지 유형의 컨텍스트:</p>
+<ul>
+<li><strong>정적 컨텍스트</strong>: <code>AGENTS.md</code>/<code>CLAUDE.md</code>, 검증된 설계 문서, 아키텍처 다이어그램</li>
+<li><strong>동적 컨텍스트</strong>: 관측 가능성(observability) 데이터, 디렉터리 맵핑, CI/CD 상태</li>
+</ul>
+<p><strong>핵심 설계 원칙 — 점진적 공개(Progressive Disclosure):</strong></p>
+<p>에이전트에게 천 페이지짜리 매뉴얼을 한 번에 주지 않는다. 대신 <code>AGENTS.md</code>를 <strong>목차(Table of Contents)</strong>로 만들어, 에이전트가 필요할 때 관련 문서를 스스로 찾아가게 한다.</p>
+<pre><code># AGENTS.md (목차 역할)
+## 시작하기
+- 개발 환경: docs/setup.md 참고
+- 아키텍처 개요: docs/architecture.md 참고
+
+## 규칙
+- 코딩 컨벤션: docs/conventions.md 참고
+- 테스트 전략: docs/testing.md 참고
+
+## 도구
+- 스크린샷 도구: scripts/screenshot.sh
+- 필터링 테스트: scripts/test-filter.sh</code></pre>
+<h3>4.3 검증(Verify) — 에이전트가 올바르게 했는지 확인</h3>
+<p>LangChain이 발견한 가장 흔한 실패 패턴:</p>
+<blockquote><p>&quot;에이전트가 솔루션을 작성하고, 자기 코드를 다시 읽고, 괜찮아 보인다고 판단하고, 멈춘다. 실제 테스트는 없다. 그냥 감(vibes).&quot;</p></blockquote>
+<p><strong>해결책:</strong></p>
+<ul>
+<li><strong>자기 검증 루프(Self-Verification Loop)</strong>: 계획 → 테스트를 염두에 두고 구현 → 원래 스펙(자기 코드가 아닌)에 대해 검증 → 문제 수정</li>
+<li><strong>PreCompletionChecklistMiddleware</strong>: 에이전트가 종료하기 전에 인터셉트하여 검증을 강제. &quot;일 다 했니?&quot;라고 묻는 문지기 같은 역할</li>
+<li><strong>관측 가능성 도구</strong>: 에이전트에게 로그, 메트릭, 트레이스를 직접 쿼리할 수 있는 능력 제공</li>
+<li><strong>구조적 테스트</strong>: 에이전트가 생성한 코드를 CI 파이프라인으로 자동 검증</li>
+</ul>
+<h3>4.4 교정(Correct) — 에이전트가 잘못했을 때 시스템적으로 수정</h3>
+<p>Mitchell Hashimoto의 핵심 철학: 에이전트의 실수를 <strong>그때그때 고치는 것이 아니라, 그 실수가 다시는 발생하지 않도록 시스템을 개선</strong>하는 것.</p>
+<p><strong>두 가지 교정 메커니즘:</strong></p>
+<ol>
+<li><strong>문서적 교정</strong>: <code>AGENTS.md</code>에 실패 패턴과 올바른 행동을 명문화</li>
+<li><strong>도구적 교정</strong>: 검증 스크립트, 커스텀 린터, 자동화된 정비(garbage collection) 에이전트</li>
+</ol>
+<p><strong>OpenAI의 &quot;가비지 컬렉션&quot; 접근:</strong> 주기적으로 전용 에이전트를 돌려 다음을 정리한다:</p>
+<ul>
+<li>문서 드리프트 (코드와 문서의 불일치)</li>
+<li>아키텍처 제약 위반</li>
+<li>네이밍 불일치</li>
+<li>순환 의존성</li>
+<li>사용되지 않는 코드/추상화</li>
+</ul>
+<hr>
+<h2>5. 실제 사례 연구</h2>
+<h3>사례 1: OpenAI Harness 팀 — 빈 레포에서 100만 줄까지</h3>
+<p><strong>과정:</strong></p>
+<ol>
+<li>빈 git 레포지토리에서 출발 (2025년 8월)</li>
+<li>초기 스캐폴드(디렉터리 구조, CI, 포맷팅 규칙)도 Codex가 생성</li>
+<li><code>AGENTS.md</code> 자체도 Codex가 작성</li>
+<li>5개월 후: 100만 줄, 1,500 PR, 내부 일일 사용자, 외부 알파 테스터</li>
+</ol>
+<p><strong>엔지니어의 일과:</strong></p>
+<ul>
+<li>코드를 직접 작성하지 않는다 (팀의 핵심 철학)</li>
+<li>에이전트가 막힐 때 직접 구현하지 않고, &quot;왜 막히는지&quot;, &quot;어떤 도구/추상화/규칙이 없어서 막히는지&quot;를 찾아 시스템 자체를 개선</li>
+<li>관측 가능성(로그, 메트릭, 트레이스)을 에이전트에게 직접 노출하여 자체 디버깅 가능하게 함</li>
+<li>비동기 코드 리뷰: &quot;에이전트 처리량이 인간 주의력을 훨씬 초과하는 시스템에서, 교정은 싸고 기다림은 비싸다&quot;</li>
+</ul>
+<p><strong>아키텍처 엔트로피 방지:</strong></p>
+<blockquote><p>&quot;에이전트가 코드를 생성할 때, 아키텍처 드리프트가 가장 큰 위험이다. 외부 가드레일 없이 에이전트에게 &#039;앱을 만들어라&#039;고 하면, 즉각적 문제를 해결하면서 장기적 구조적 무결성을 서서히 침식한다.&quot;</p></blockquote>
+<p>해결: 기계적으로 강제되는 아키텍처 불변량(invariants) — 커스텀 린터, 구조적 테스트, 의존성 방향 검사</p>
+<h3>사례 2: LangChain Deep Agents — 하네스만 바꿔 Top 5 진입</h3>
+<p><strong>최적화한 세 가지 노브(Knob):</strong></p>
+<ol>
+<li><strong>시스템 프롬프트</strong>: 기본 → 작업 환경 정보, 테스트 표준, 시간 예산 주입</li>
+<li><strong>도구</strong>: 환경 발견을 위한 에이전트의 시행착오 → <code>LocalContextMiddleware</code>로 사전 주입</li>
+<li><strong>미들웨어</strong>:</li>
+</ol>
+<ul>
+<li><code>LoopDetectionMiddleware</code> — 반복 루프 탐지</li>
+<li><code>ReasoningSandwichMiddleware</code> — 추론 품질 향상</li>
+<li><code>PreCompletionChecklistMiddleware</code> — 완료 전 검증 강제</li>
+</ul>
+<p><strong>미들웨어 아키텍처:</strong></p>
+<pre><code>에이전트 요청
+  → LocalContextMiddleware (환경 정보 주입)
+  → LoopDetectionMiddleware (반복 루프 탐지)
+  → ReasoningSandwichMiddleware (추론 품질 향상)
+  → PreCompletionChecklistMiddleware (완료 전 검증)
+  → 에이전트 응답</code></pre>
+<p><strong>핵심 발견:</strong></p>
+<ul>
+<li>에이전트가 환경을 파악하려고 시행착오하는 데 상당한 노력과 오류를 낭비 → 사전 주입이 더 효과적</li>
+<li>에이전트는 시간 추정을 매우 못한다 → 시간 예산 경고 주입이 효과적</li>
+<li>&quot;테스트는 자율적 에이전틱 코딩의 핵심 — 전반적 정확성을 검사하는 동시에 에이전트가 hill-climb할 신호를 제공한다&quot;</li>
+</ul>
+<h3>사례 3: Anthropic — 장시간 실행 에이전트를 위한 하네스</h3>
+<p><strong>문제:</strong></p>
+<ul>
+<li>Claude Opus 4.5도 단순히 &quot;claude.ai 클론을 만들어라&quot;라는 고수준 프롬프트만으로는 프로덕션 품질 앱을 만들지 못함</li>
+<li><strong>실패 패턴 1</strong>: 한 번에 너무 많이 하려 함 → 컨텍스트 소진 → 다음 세션이 반쯤 완성된 기능에서 시작 → 추측으로 시간 낭비</li>
+<li><strong>실패 패턴 2</strong>: 기능 구현 후 완료 표시를 너무 일찍 함 → 실제로는 제대로 작동하지 않음</li>
+</ul>
+<p><strong>해결:</strong></p>
+<ul>
+<li><strong>기능 목록(Feature List)</strong>: 초기 프롬프트를 200개 이상의 세분화된 기능으로 확장한 JSON 파일</li>
+<li><strong>브라우저 자동화 테스트</strong>: Puppeteer MCP로 실제 동작 검증 (이것 없으면 에이전트가 시기상조로 완료 표시)</li>
+<li><strong>세션 시작 프로토콜</strong>: 매 세션 시작 시 개발 서버가 돌아가고 기본 기능이 작동하는지 확인 후 새 기능 구현</li>
+</ul>
+<h3>사례 4: 토스(Toss) — 조직 차원의 하네스</h3>
+<p>토스는 하네스를 <strong>팀 생산성의 &quot;저점을 높이는&quot; 도구</strong>로 접근했다.</p>
+<p><strong>문제 인식:</strong> 같은 모델, 같은 IDE를 써도 결과물 차이가 극심하다. A 엔지니어는 10분 만에 머지 가능한 코드를 만들고, B 엔지니어는 1시간 동안 &quot;우리 팀은 이렇게 안 해&quot;를 반복하며 수정 루프에 갇힌다.</p>
+<p><strong>해결: 3계층 지식 구조</strong></p>
+<ul>
+<li><strong>Global Layer</strong>: 전사 공통 보안 정책, 코딩 표준</li>
+<li><strong>Domain Layer</strong>: 팀별 비즈니스 로직 (결제팀, 정산팀 등)</li>
+<li><strong>Local Layer</strong>: 프로젝트 특화 규칙</li>
+</ul>
+<p><strong>3가지 핵심 가치:</strong></p>
+<ol>
+<li><strong>마찰 없는 통합</strong>: 자연어와 코드가 끊김 없이 섞이는 경험</li>
+<li><strong>실행 가능한 SSOT(Single Source of Truth)</strong>: 문서는 낡지만, 플러그인 형태의 지식은 즉시 반영</li>
+<li><strong>범용에서 도메인 특화로의 진화</strong>: 각 조직만의 최적화된 AI 워크플로우 정의·배포</li>
+</ol>
+<hr>
+<h2>6. 하네스를 활용하는 소프트웨어의 형태</h2>
+<p>수집한 사례들을 종합하면, 하네스 엔지니어링을 활용하는 소프트웨어는 다음과 같은 형태로 수렴하고 있다.</p>
+<h3>6.1 에이전트 하네스 플랫폼 (Agent Harness Platform)</h3>
+<p><strong>기존 제품 예시:</strong> Claude Code, OpenAI Codex, LangChain DeepAgents</p>
+<p>이들은 범용 &quot;에이전트 운영체제&quot;를 지향한다. 핵심 구성:</p>
+<pre><code>┌───────────────────────────────────────┐
+│           사용자 인터페이스            │
+│    (CLI / IDE 통합 / 웹 대시보드)      │
+├───────────────────────────────────────┤
+│           에이전트 하네스              │
+│  ┌─────────┐  ┌──────────┐  ┌──────┐ │
+│  │ 컨텍스트  │  │ 도구 관리 │  │ 메모리 │ │
+│  │ 엔지니어링│  │ &amp; 실행   │  │ 시스템 │ │
+│  └─────────┘  └──────────┘  └──────┘ │
+│  ┌─────────┐  ┌──────────┐  ┌──────┐ │
+│  │ 미들웨어 │  │ 검증 루프 │  │ 상태  │ │
+│  │ 파이프라인│  │ (CI/테스트)│  │ 관리  │ │
+│  └─────────┘  └──────────┘  └──────┘ │
+├───────────────────────────────────────┤
+│          LLM 모델 (교체 가능)         │
+│    (Claude / GPT / Gemini / ...)      │
+└───────────────────────────────────────┘</code></pre>
+<p><strong>핵심 특징:</strong></p>
+<ul>
+<li>모델은 교체 가능한 &quot;CPU&quot;이고, 하네스가 진짜 제품</li>
+<li>컨텍스트 압축(compaction)으로 무한 세션 지원</li>
+<li>도구 호출에 대한 생명주기 훅(lifecycle hooks)</li>
+<li>서브 에이전트 위임과 관리</li>
+</ul>
+<h3>6.2 레포지토리 내장형 하네스 (Repository-Embedded Harness)</h3>
+<p><strong>가장 실용적이고 즉시 적용 가능한 형태.</strong> OpenAI와 Mitchell Hashimoto가 강조하는 접근.</p>
+<pre><code>my-project/
+├── AGENTS.md              ← 에이전트 행동 가이드 (목차 역할)
+├── CLAUDE.md              ← Claude 특화 지침
+├── docs/
+│   ├── architecture.md    ← 아키텍처 불변량
+│   ├── conventions.md     ← 코딩 컨벤션
+│   ├── testing.md         ← 테스트 전략
+│   └── setup.md           ← 환경 설정
+├── scripts/
+│   ├── screenshot.sh      ← 에이전트용 스크린샷 도구
+│   ├── test-filter.sh     ← 필터링된 테스트 실행
+│   └── verify-arch.sh     ← 아키텍처 제약 검증
+├── .lintstagedrc          ← pre-commit 자동 검사
+├── .github/
+│   └── workflows/
+│       └── agent-ci.yml   ← 에이전트 생성 코드 전용 CI
+└── src/                   ← 실제 코드 (에이전트가 작성·수정)</code></pre>
+<p><strong>구현 난이도별 가이드:</strong></p>
+<table>
+<thead><tr>
+<th>수준</th>
+<th>대상</th>
+<th>소요 시간</th>
+<th>구성</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Level 1</td>
+<td>개인 개발자</td>
+<td>1-2시간</td>
+<td><code>CLAUDE.md</code>, pre-commit 훅, 테스트 스위트, 명확한 디렉터리 구조</td>
+</tr>
+<tr>
+<td>Level 2</td>
+<td>소규모 팀</td>
+<td>1-2일</td>
+<td>+ <code>AGENTS.md</code>, CI 제약, 공유 템플릿, 문서 린팅</td>
+</tr>
+<tr>
+<td>Level 3</td>
+<td>조직</td>
+<td>1-2주</td>
+<td>+ 커스텀 미들웨어, 관측 가능성 통합, 엔트로피 에이전트, 성능 대시보드</td>
+</tr>
+</tbody></table>
+<h3>6.3 미들웨어 기반 에이전트 파이프라인</h3>
+<p>LangChain이 보여준 접근. 에이전트의 입출력에 미들웨어를 끼워 넣어 행동을 제어한다.</p>
+<pre><code class="language-python"># 개념적 구조
+class AgentPipeline:
+    middlewares = [
+        LocalContextMiddleware(),      # 환경 정보 사전 주입
+        LoopDetectionMiddleware(),      # 무한 루프 탐지
+        ReasoningSandwichMiddleware(),  # 추론 품질 향상
+        PreCompletionChecklist(),       # 완료 전 검증 강제
+        TimebudgetMiddleware(),         # 시간 예산 경고
+    ]
+
+    def run(self, task):
+        context = task
+        for mw in self.middlewares:
+            context = mw.before(context)
+        result = self.agent.execute(context)
+        for mw in reversed(self.middlewares):
+            result = mw.after(result)
+        return result</code></pre>
+<p><strong>장점:</strong> 테스트 가능하고, 모듈식이며, 핵심 에이전트 로직을 변경하지 않고 진화 가능</p>
+<h3>6.4 도메인 특화 하네스 (Domain-Specific Harness)</h3>
+<p>토스의 접근처럼, 특정 조직·팀의 맥락에 최적화된 하네스.</p>
+<p><strong>예시: 결제 시스템 팀의 하네스</strong></p>
+<pre><code>payment-harness/
+├── skills/
+│   ├── new-payment-method.md    ← &quot;새 결제수단 추가&quot; 워크플로우
+│   ├── refund-flow.md           ← &quot;환불 처리&quot; 워크플로우
+│   └── compliance-check.md      ← &quot;규정 준수 검사&quot; 워크플로우
+├── constraints/
+│   ├── pci-dss-rules.md         ← PCI-DSS 보안 규칙
+│   ├── idempotency-rules.md     ← 멱등성 규칙
+│   └── amount-validation.md     ← 금액 검증 규칙
+├── templates/
+│   ├── payment-service.ts.tmpl  ← 서비스 템플릿
+│   └── payment-test.ts.tmpl     ← 테스트 템플릿
+└── tools/
+    ├── simulate-payment.sh      ← 결제 시뮬레이션
+    └── verify-idempotency.sh    ← 멱등성 검증</code></pre>
+<p>팀원 누구나 <code>/new-payment-method</code>를 실행하면, 숙련된 엔지니어와 동일한 품질의 코드가 생산된다.</p>
+<h3>6.5 자기 진화하는 하네스 (Self-Evolving Harness)</h3>
+<p>가장 미래지향적인 형태. 하네스 자체가 에이전트의 실패로부터 학습하여 진화한다.</p>
+<pre><code>에이전트 실패 발생
+  → 실패 패턴 감지 및 분류
+  → AGENTS.md에 새 규칙 자동 추가
+  → 검증 스크립트 자동 생성
+  → 다음 실행에서 같은 실패 방지
+  → 효과 측정 및 규칙 정제</code></pre>
+<p>토스가 언급한 &quot;데이터 플라이휠&quot;: 규격화된 실패/성공 데이터가 축적되면, 이를 기반으로 도메인 특화 모델을 파인튜닝하여 조직만의 AI 엔진을 구축하는 선순환 구조.</p>
+<hr>
+<h2>7. 핵심 개념 도구 모음 (Conceptual Toolkit)</h2>
+<h3>엄격함의 재배치 (Relocating Rigor)</h3>
+<p>개발자의 엄격함이 적용되는 위치가 바뀌었다. 코드의 각 줄을 신중하게 작성하는 것에서 → <strong>에이전트가 활동할 환경과 피드백 루프를 설계</strong>하는 것으로.</p>
+<h3>컨텍스트 발견 vs 컨텍스트 주입 (Context Discovery vs Context Injection)</h3>
+<p>에이전트가 스스로 환경을 파악하게 놔두면(Discovery) 시행착오로 시간과 토큰을 낭비한다. 환경 정보를 사전에 주입(Injection)하는 것이 훨씬 효과적이다.</p>
+<h3>점진적 공개 (Progressive Disclosure)</h3>
+<p>천 페이지 매뉴얼이 아니라, 에이전트가 필요할 때 찾아가는 계층적 문서 구조. AGENTS.md는 백과사전이 아니라 목차다.</p>
+<h3>아키텍처 엔트로피 (Architectural Entropy)</h3>
+<p>에이전트가 생성한 코드는 시간이 지나면서 구조적 일관성을 잃는 경향이 있다. 이를 방지하려면 기계적으로 강제되는 아키텍처 불변량과 주기적인 &quot;가비지 컬렉션&quot;이 필요하다.</p>
+<h3>비동기 피드백 루프 (Asynchronous Feedback Loop)</h3>
+<p>에이전트 처리량은 인간 주의력을 초과한다. 머지 게이트를 낮추고 피드백을 비동기로 만들면, &quot;교정은 싸고 기다림은 비싸다&quot;는 원칙이 작동한다.</p>
+<h3>표준화된 스택으로의 수렴 (Convergence to Standardized Stacks)</h3>
+<p>AI 친화적 개발을 위해, 자유로운 언어/프레임워크 선택보다는 <strong>하네스가 잘 구축된 제한된 기술 스택</strong>으로 개발 방식이 수렴할 가능성이 높다.</p>
+<hr>
+<h2>8. 비판적 시각: 우리가 놓치고 있는 것</h2>
+<p>Andrew Maynard는 &quot;AI 하네스&quot; 은유가 내포하는 문제적 전제를 지적한다:</p>
+<h3>통제 중심 위계 (Control-Oriented Hierarchy)</h3>
+<p>하네스 은유는 인간이 지시하고 AI가 실행하는 구조를 전제한다. &quot;중요한 지능&quot;은 전적으로 인간 쪽에 있고, AI는 능력만 제공할 뿐 이해나 판단은 없다는 가정.</p>
+<h3>변형 없는 능력 (Capability Without Transformation)</h3>
+<p>이 프레임워크는 사용자가 AI 상호작용에서 변하지 않은 채로 나와야 한다고 전제한다. 그러나 실제로는 AI-인간 관계가 양쪽 모두를 변화시킨다—변형은 최소화할 부작용이 아니라 상호작용의 본질이다.</p>
+<h3>도구적 프레이밍 (Instrumental Framing)</h3>
+<p>하네스 은유는 AI를 &quot;그냥 도구&quot;로 보는 관점을 강화한다. 그러나 발전된 기술은 인간의 목적이 형성되는 인지적 지형 자체를 재구성한다. 오늘 성급하게 선택한 언어적 프레이밍이 내일 AI에 대한 사고를 제한할 수 있다.</p>
+<hr>
+<h2>9. 열린 질문들</h2>
+<ol>
+<li><strong>하네스 엔지니어링이 &quot;코드를 읽지 않는&quot; 시대를 여는가?</strong> OpenAI의 접근은 라인별 코드 리뷰 대신 스펙, 테스트, 정적 분석, 프로덕션 시그널에 의존한다. 이것이 안전한가, 아니면 보이지 않는 기술 부채를 축적하는가?</li>
+</ol>
+<ol>
+<li><strong>하네스의 표준화는 가능한가?</strong> 현재는 각 팀이 자체 하네스를 구축한다. <code>AGENTS.md</code>의 비공식 표준이 나타나고 있지만, 이것이 진짜 산업 표준으로 수렴할 수 있을까?</li>
+</ol>
+<ol>
+<li><strong>하네스 엔지니어링 능력의 편차는 어떻게 해결하는가?</strong> 토스가 지적한 문제: 같은 도구를 써도 하네스 설계 능력에 따라 생산성 차이가 극심하다. 코딩 능력 편차가 하네스 설계 능력 편차로 이동한 것뿐인가?</li>
+</ol>
+<ol>
+<li><strong>에이전트 생성 코드 100만 줄의 장기 유지보수성은?</strong> OpenAI의 실험은 5개월이다. 2년, 5년 후에도 이 코드베이스가 건강하게 유지될 수 있을까?</li>
+</ol>
+<ol>
+<li><strong>하네스 은유 자체의 한계는?</strong> 통제와 제약 중심의 프레이밍이 인간-AI 협업의 더 풍부한 가능성을 가리고 있지는 않은가?</li>
+</ol>
+<hr>
+<h2>10. 지금 시작할 수 있는 것</h2>
+<p>하네스 엔지니어링은 대규모 인프라 투자를 요구하지 않는다. 오늘 당장 할 수 있는 것:</p>
+<ol>
+<li><strong>프로젝트에 <code>AGENTS.md</code> 만들기</strong> — 에이전트가 지켜야 할 규칙, 사용 가능한 도구, 디렉터리 구조를 문서화</li>
+<li><strong>에이전트 실수를 시스템으로 전환하기</strong> — 같은 실수가 반복되면, 그때그때 고치지 말고 <code>AGENTS.md</code>에 규칙 추가 또는 검증 스크립트 작성</li>
+<li><strong>자기 검증 루프 설계하기</strong> — 에이전트가 &quot;다 했어요&quot;라고 말하기 전에 실제로 테스트를 돌리도록 강제</li>
+<li><strong>문서를 &quot;목차&quot;로 설계하기</strong> — 에이전트에게 모든 것을 한 번에 주지 말고, 필요한 정보를 찾아가는 구조 만들기</li>
+<li><strong>Mitchell Hashimoto의 방법 따라 하기</strong> — 직접 한 작업을 에이전트로 재현하면서, 에이전트가 어디서 실패하는지 관찰하고 하네스 개선</li>
+</ol>
+<hr>
+<h2>Sources</h2>
+<ul>
+<li><a href="https://openai.com/index/harness-engineering/" target="_blank" rel="noopener">OpenAI — &quot;Harness engineering: leveraging Codex in an agent-first world&quot; (2026.02.11)</a></li>
+<li><a href="https://mitchellh.com/writing/my-ai-adoption-journey" target="_blank" rel="noopener">Mitchell Hashimoto — &quot;My AI Adoption Journey&quot; (2026.02.05)</a></li>
+<li><a href="https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents" target="_blank" rel="noopener">Anthropic — &quot;Effective harnesses for long-running agents&quot; (2025.11.26)</a></li>
+<li><a href="https://www.philschmid.de/agent-harness-2026" target="_blank" rel="noopener">Philipp Schmid — &quot;The importance of Agent Harness in 2026&quot; (2026.01.05)</a></li>
+<li><a href="https://blog.langchain.com/improving-deep-agents-with-harness-engineering/" target="_blank" rel="noopener">LangChain — &quot;Improving Deep Agents with Harness Engineering&quot;</a></li>
+<li><a href="https://toss.tech/article/harness-for-team-productivity" target="_blank" rel="noopener">토스 테크 — &quot;Software 3.0 시대, Harness를 통한 조직 생산성 저점 높이기&quot; (2026.02.26)</a></li>
+<li><a href="https://medium.com/@epappas/the-agent-harness-is-the-architecture-and-your-model-is-not-the-bottleneck-5ae5fd067bb2" target="_blank" rel="noopener">Evangelos Pappas — &quot;The Agent Harness Is the Architecture&quot; (2026.02.24)</a></li>
+<li><a href="https://www.nxcode.io/resources/news/harness-engineering-complete-guide-ai-agent-codex-2026" target="_blank" rel="noopener">NxCode — &quot;Harness Engineering: The Complete Guide&quot; (2026.03.01)</a></li>
+<li><a href="https://www.futureofbeinghuman.com/p/what-we-miss-when-we-talk-about-ai-harnesses" target="_blank" rel="noopener">Andrew Maynard — &quot;What we miss when we talk about AI Harnesses&quot;</a></li>
+<li><a href="https://www.infoq.com/news/2026/02/openai-harness-engineering-codex/" target="_blank" rel="noopener">InfoQ — &quot;OpenAI Introduces Harness Engineering&quot; (2026.02)</a></li>
+<li><a href="https://hugobowne.substack.com/p/ai-agent-harness-3-principles-for" target="_blank" rel="noopener">Hugo Bowne-Anderson — &quot;AI Agent Harness, 3 Principles for Context Engineering&quot;</a></li>
+<li><a href="https://kr.linkedin.com/posts/%EC%83%81%EA%B8%B8-%EB%B0%95-b6ab145a_harness-engineering-activity-7429678800633864192-toOh" target="_blank" rel="noopener">박상길 — LinkedIn: Harness Engineering 요약</a></li>
+<li><a href="https://developers.openai.com/codex/guides/agents-md/" target="_blank" rel="noopener">Codex AGENTS.md 공식 가이드</a></li>
+<li><a href="https://simonwillison.net/2026/Feb/5/ai-adoption-journey/" target="_blank" rel="noopener">Simon Willison — Mitchell Hashimoto 글 소개</a></li>
+<li><a href="https://velog.io/@xxziiko/Harness-engineering-Codex%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%98%EB%8A%94-%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8-%EC%A4%91%EC%8B%AC-%EC%84%B8%EA%B3%84-%EB%B2%88%EC%97%AD" target="_blank" rel="noopener">velog xxziiko — Harness engineering 번역</a></li>
+</ul>
+    </article>
+
+    <footer class="dossier-footer">
+      <span class="brand">Frontier AI Signal Swarm</span> &mdash; AI 트렌드 인텔리전스 엔진
+    </footer>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,136 @@
+{
+  "dossier_id": "1634cf81-d93a-442d-8ea4-d573d5209ebc",
+  "event": {
+    "event_id": "48ce349b-16c7-4627-9818-c63b8ab1ea53",
+    "signal": {
+      "signal_id": "71f5bada-6f47-4eae-90d4-7d3a8c3f1b43",
+      "source": {
+        "source_id": "1e6cbc3b-2b9e-464a-85b4-9eaac055041b",
+        "url": "https://whitehouse.gov/presidential-actions/2025/12/eliminating-state-law-obstruction-of-national-artificial-intelligence-policy/",
+        "title": "Trump Executive Order Mandates Federal AI Preemption Framework — March 2026 Deadlines Now Active",
+        "content": "President Trump's executive order on federal AI preemption reaches critical March 11, 2026 deadlines. FTC must issue Section 5 policy statement on AI. Commerce Secretary must identify overly burdensome state AI laws. DOJ AI Litigation Task Force has been operational since January 10, 2026. Targets Colorado SB 205 and 1000+ state AI bills. BEAD broadband funding leverage. Carve-outs for child safety and procurement. Legal analysts note limited actual preemption power via policy statement vs rulemaking. Over 1000 AI-related bills introduced across US states in 2025.",
+        "source_type": "regulatory",
+        "published_at": "2026-03-01T16:19:18.855Z",
+        "collected_at": "2026-03-01T16:19:18.855Z",
+        "origin": "whitehouse.gov"
+      },
+      "is_structural": true,
+      "is_directional": true,
+      "change_domain": "market",
+      "event_nature": "strategic",
+      "signal_strength": "moderate",
+      "signal_type": "regulation",
+      "ai_relevance_reason": "Federal preemption of state AI regulation reshapes the compliance landscape and reduces incentives for model-level safety tooling and interpretability research",
+      "impact_categories": [
+        "market",
+        "ecosystem",
+        "geopolitical"
+      ],
+      "detected_at": "2026-03-01T16:19:18.855Z"
+    },
+    "analyses": [
+      {
+        "perspective": "technical",
+        "analyst_model": "claude-opus-4-6-via-claude-code",
+        "analysis": "The order's technical implications center on compliance architecture and deployment strategy. If state laws requiring bias auditing, impact assessments, and explanation capabilities are preempted, the technical burden shifts from per-model compliance to general-purpose monitoring. FTC Section 5 is outcomes-based, not process-based — evaluating AI by effects rather than architecture. This favors black-box evaluation over interpretability-based compliance, potentially reducing commercial incentives for mechanistic interpretability research. Policy statement instability favors companies with flexible compliance infrastructure. The order creates regulatory monoculture risk — a single federal framework failure point replaces distributed state experimentation.",
+        "key_points": [
+          "Federal preemption shifts compliance from model-level interventions to outcomes-based monitoring",
+          "FTC Section 5 outcomes-based standard may reduce commercial demand for interpretability research",
+          "Policy statement instability favors large organizations with flexible infrastructure",
+          "Regulatory monoculture replaces distributed state-level experimentation"
+        ],
+        "confidence": 0.72,
+        "pattern_classification": "convergence",
+        "analyzed_at": "2026-03-01T16:19:18.855Z"
+      },
+      {
+        "perspective": "strategic",
+        "analyst_model": "claude-opus-4-6-via-claude-code",
+        "analysis": "The executive order functions as regulatory capture through indirect pressure rather than direct preemption. The real mechanism is BEAD funding leverage — well-established federal tactic with strong legal precedent. Regulatory uniformity disproportionately benefits incumbent AI companies with federal lobbying capacity. Carve-outs preserve regulations large companies easily meet while targeting novel compliance burdens. The primary effect may be deterrence of future state legislation rather than invalidation of existing laws. Industry celebrates removal of regulatory friction without considering that strong federal AI authority precedent cuts both ways under different administrations.",
+        "key_points": [
+          "Executive order functions as regulatory capture via indirect pressure",
+          "Regulatory uniformity benefits incumbents with lobbying capacity over startups",
+          "Carve-outs preserve easy-compliance regulations while targeting novel burdens",
+          "Primary effect is deterring future state legislation, not rolling back existing laws"
+        ],
+        "confidence": 0.79,
+        "pattern_classification": "convergence",
+        "analyzed_at": "2026-03-01T16:19:18.855Z"
+      },
+      {
+        "perspective": "skeptical",
+        "analyst_model": "claude-opus-4-6-via-claude-code",
+        "analysis": "The political signaling far exceeds the legal substance, but that may be the point. FTC policy statements have limited preemptive power. DOJ Task Force being 'operational' is bureaucratic language revealing little about actual capacity. The BEAD funding leverage is the most potent tool and deserves more attention. Historical precedent from both Trump and Biden AI executive orders shows these instruments are fragile and reversible. Regulatory uncertainty itself disproportionately benefits large incumbents. March 2026 deadlines are almost certainly performative — federal agencies don't operationalize complex mandates in months. The gap between announcement and implementation is where executive orders typically lose momentum.",
+        "key_points": [
+          "Political signaling far exceeds legal substance — limited formal preemptive power",
+          "BEAD funding leverage is the most potent but least discussed mechanism",
+          "Historical precedent shows AI executive orders are fragile and reversible",
+          "Regulatory uncertainty benefits large incumbents over startups and civil society",
+          "March deadlines are likely performative — implementation gap is where EOs lose momentum"
+        ],
+        "confidence": 0.74,
+        "pattern_classification": "continuation",
+        "analyzed_at": "2026-03-01T16:19:18.855Z"
+      }
+    ],
+    "consensus_points": [
+      "All agree BEAD funding leverage is the most substantive mechanism in the order",
+      "All note limited formal preemptive power of FTC policy statements",
+      "All agree regulatory uncertainty disproportionately benefits large incumbents"
+    ],
+    "divergence_points": [
+      "Technical sees convergence toward outcomes-based regulation; Skeptical sees continuation of fragile executive orders",
+      "Strategic sees effective regulatory capture; Skeptical sees performative deadlines",
+      "Technical worries about reduced interpretability incentives; Strategic worries about reversibility under different administrations"
+    ],
+    "parent_trends": [],
+    "open_questions": [
+      "Will the BEAD leverage mechanism be legally challenged?",
+      "Does this executive order survive administration change?",
+      "Does removal of state compliance requirements actually reduce AI safety investment, or do market forces maintain it?"
+    ],
+    "created_at": "2026-03-01T16:19:18.855Z"
+  },
+  "event_summary": "[MODERATE/regulation] Trump Executive Order Mandates Federal AI Preemption Framework — March 2026 Deadlines Now Active — Federal preemption of state AI regulation reshapes the compliance landscape and reduces incentives for model-level safety tooling and interpretability research",
+  "signal_type": "regulation",
+  "signal_strength": "moderate",
+  "technical_interpretation": "The order's technical implications center on compliance architecture and deployment strategy. If state laws requiring bias auditing, impact assessments, and explanation capabilities are preempted, the technical burden shifts from per-model compliance to general-purpose monitoring. FTC Section 5 is outcomes-based, not process-based — evaluating AI by effects rather than architecture. This favors black-box evaluation over interpretability-based compliance, potentially reducing commercial incentives for mechanistic interpretability research. Policy statement instability favors companies with flexible compliance infrastructure. The order creates regulatory monoculture risk — a single federal framework failure point replaces distributed state experimentation.",
+  "strategic_interpretation": "The executive order functions as regulatory capture through indirect pressure rather than direct preemption. The real mechanism is BEAD funding leverage — well-established federal tactic with strong legal precedent. Regulatory uniformity disproportionately benefits incumbent AI companies with federal lobbying capacity. Carve-outs preserve regulations large companies easily meet while targeting novel compliance burdens. The primary effect may be deterrence of future state legislation rather than invalidation of existing laws. Industry celebrates removal of regulatory friction without considering that strong federal AI authority precedent cuts both ways under different administrations.",
+  "alternative_interpretation": "The political signaling far exceeds the legal substance, but that may be the point. FTC policy statements have limited preemptive power. DOJ Task Force being 'operational' is bureaucratic language revealing little about actual capacity. The BEAD funding leverage is the most potent tool and deserves more attention. Historical precedent from both Trump and Biden AI executive orders shows these instruments are fragile and reversible. Regulatory uncertainty itself disproportionately benefits large incumbents. March 2026 deadlines are almost certainly performative — federal agencies don't operationalize complex mandates in months. The gap between announcement and implementation is where executive orders typically lose momentum.",
+  "model_consensus": [
+    "All agree BEAD funding leverage is the most substantive mechanism in the order",
+    "All note limited formal preemptive power of FTC policy statements",
+    "All agree regulatory uncertainty disproportionately benefits large incumbents"
+  ],
+  "model_divergence": [
+    "Technical sees convergence toward outcomes-based regulation; Skeptical sees continuation of fragile executive orders",
+    "Strategic sees effective regulatory capture; Skeptical sees performative deadlines",
+    "Technical worries about reduced interpretability incentives; Strategic worries about reversibility under different administrations"
+  ],
+  "parent_trend": "Regulatory environment aligning with frontier AI scaling: Federal preemption removes state-level compliance friction simultaneously as frontier labs demonstrate new capability thresholds, creating a permissive environment for rapid agentic AI deployment",
+  "related_patterns": [
+    {
+      "pattern_id": "9a7be52a-8d3f-4a49-ba90-cf23b1fe95b8",
+      "pattern_type": "ecosystem_shift",
+      "description": "Regulatory environment aligning with frontier AI scaling: Federal preemption removes state-level compliance friction simultaneously as frontier labs demonstrate new capability thresholds, creating a permissive environment for rapid agentic AI deployment",
+      "connected_event_ids": [
+        "9e7569b4-b7a7-41f1-a6ee-22e4b6257b7e",
+        "48ce349b-16c7-4627-9818-c63b8ab1ea53"
+      ],
+      "evidence": [
+        "Federal preemption reduces compliance requirements for AI deployment",
+        "Agent Teams demonstrates production-scale autonomous coding",
+        "Reduced regulation + increased capability = accelerated deployment trajectory"
+      ],
+      "first_detected": "2026-03-01T16:19:18.855Z",
+      "last_updated": "2026-03-01T16:19:18.855Z",
+      "occurrence_count": 1
+    }
+  ],
+  "open_questions": [
+    "Will the BEAD leverage mechanism be legally challenged?",
+    "Does this executive order survive administration change?",
+    "Does removal of state compliance requirements actually reduce AI safety investment, or do market forces maintain it?"
+  ],
+  "generated_at": "2026-03-01T16:19:18.856Z"
+}

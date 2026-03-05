@@ -1,0 +1,35 @@
+{
+  "name": "frontier-ai-signal-swarm",
+  "version": "1.0.0",
+  "description": "Frontier AI Signal Intelligence Engine - Multi-model agent swarm for AI trend detection and analysis",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "curator": "tsx src/curator/server.ts",
+    "start": "tsx src/index.ts",
+    "collect": "tsx src/index.ts collect",
+    "analyze": "tsx src/index.ts analyze",
+    "dossier": "tsx src/index.ts dossier",
+    "pipeline": "tsx src/index.ts pipeline"
+  },
+  "keywords": [
+    "ai",
+    "frontier",
+    "signal",
+    "intelligence",
+    "trend"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.78.0",
+    "dayjs": "^1.11.19",
+    "express": "^5.2.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "uuid": "^13.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6"
+  }
+}

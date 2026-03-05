@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curator Workspace — 도시에</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Navigation -->
+    <nav class="nav">
+      <div class="nav-brand">Curator <span>Workspace</span></div>
+      <div class="nav-links">
+        <a href="/" class="nav-link">피드</a>
+        <a href="/dossiers.html" class="nav-link active">도시에</a>
+        <a href="/memos.html" class="nav-link">메모</a>
+        <a href="/sources.html" class="nav-link">소스</a>
+      </div>
+      <div class="nav-stats" id="nav-stats"></div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <h1 class="page-title">도시에</h1>
+      <p class="page-subtitle">AI가 분석한 트렌드 도시에. 터미널에서 "최신 AI 뉴스 분석해줘"로 새 도시에 생성</p>
+    </div>
+
+    <!-- Dossier List -->
+    <div id="dossier-list" class="dossier-list">
+      <div class="loading">
+        <div class="loading-spinner"></div>
+        <div>도시에 불러오는 중...</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Toast container -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

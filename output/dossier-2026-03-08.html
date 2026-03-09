@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frontier AI Signal Swarm — 도시에 2026-03-08</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Serif+KR:wght@400;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <style>
+    /* === Reset & Base === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #fafaf8;
+      --text: #1a1a1a;
+      --heading: #111;
+      --accent: #c45d2c;
+      --secondary: #6b7280;
+      --card-bg: #f5f3ef;
+      --border: #e5e2db;
+      --badge-noise: #9ca3af;
+      --badge-weak: #60a5fa;
+      --badge-moderate: #f59e0b;
+      --badge-strong: #f97316;
+      --badge-critical: #ef4444;
+      --blockquote-bg: #f9f7f4;
+      --blockquote-border: #c45d2c;
+      --code-bg: #f0ede8;
+      --table-header-bg: #f0ede8;
+      --table-stripe: #faf8f5;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1a1e;
+        --text: #e4e4e4;
+        --heading: #f0f0f0;
+        --accent: #e07a4f;
+        --secondary: #9ca3af;
+        --card-bg: #252528;
+        --border: #3a3a3e;
+        --blockquote-bg: #222225;
+        --blockquote-border: #e07a4f;
+        --code-bg: #2a2a2e;
+        --table-header-bg: #28282c;
+        --table-stripe: #1f1f23;
+      }
+    }
+
+    html {
+      font-size: 17px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Serif KR', 'Georgia', serif;
+      line-height: 1.8;
+      padding: 2rem 1rem 4rem;
+    }
+
+    /* === Layout === */
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* === Typography === */
+    h1, h2, h3, h4 {
+      font-family: 'Inter', sans-serif;
+      color: var(--heading);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      line-height: 1.25;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      line-height: 1.3;
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      line-height: 1.35;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      margin-bottom: 1.2rem;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s;
+    }
+    a:hover {
+      border-bottom-color: var(--accent);
+    }
+
+    strong { font-weight: 700; }
+    em { font-style: italic; }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88em;
+      background: var(--code-bg);
+      padding: 0.15em 0.4em;
+      border-radius: 3px;
+    }
+
+    pre {
+      background: var(--code-bg);
+      border-radius: 6px;
+      padding: 1.2rem 1.4rem;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+      line-height: 1.55;
+    }
+    pre code {
+      background: none;
+      padding: 0;
+      font-size: 0.85rem;
+    }
+
+    /* === Header === */
+    .dossier-header {
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .dossier-meta {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: var(--secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.8rem;
+    }
+
+    .one-liner {
+      font-size: 1.25rem;
+      line-height: 1.6;
+      color: var(--secondary);
+      margin-top: 1rem;
+      font-style: italic;
+    }
+
+    /* === Section Dividers === */
+    .section-divider {
+      width: 40px;
+      height: 1px;
+      background: var(--border);
+      margin: 3rem auto;
+    }
+
+    /* === Signal Table === */
+    .signal-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0 2rem;
+      font-size: 0.92rem;
+    }
+
+    .signal-table thead {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--secondary);
+    }
+
+    .signal-table th {
+      background: var(--table-header-bg);
+      text-align: left;
+      padding: 0.7rem 1rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .signal-table td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .signal-table tbody tr:nth-child(even) {
+      background: var(--table-stripe);
+    }
+
+    .signal-table .signal-name {
+      font-weight: 600;
+      color: var(--heading);
+    }
+
+    /* === Signal Badges === */
+    .badge {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.2em 0.6em;
+      border-radius: 3px;
+      color: #fff;
+      white-space: nowrap;
+    }
+
+    .badge-noise    { background: var(--badge-noise); }
+    .badge-weak     { background: var(--badge-weak); }
+    .badge-moderate { background: var(--badge-moderate); color: #1a1a1a; }
+    .badge-strong   { background: var(--badge-strong); color: #1a1a1a; }
+    .badge-critical { background: var(--badge-critical); }
+
+    .badge-type {
+      background: transparent;
+      border: 1px solid var(--secondary);
+      color: var(--secondary);
+    }
+
+    /* === Deep Dive === */
+    .deep-dive {
+      margin-bottom: 2.5rem;
+    }
+
+    .deep-dive h3 {
+      color: var(--accent);
+    }
+
+    /* === Blockquote === */
+    blockquote {
+      border-left: 3px solid var(--blockquote-border);
+      background: var(--blockquote-bg);
+      padding: 1rem 1.4rem;
+      margin: 1.5rem 0;
+      border-radius: 0 6px 6px 0;
+      font-style: italic;
+      color: var(--secondary);
+    }
+    blockquote p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* === Conceptual Toolkit Cards === */
+    .toolkit-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0 2rem;
+    }
+
+    @media (min-width: 560px) {
+      .toolkit-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .toolkit-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.2rem 1.4rem;
+      transition: box-shadow 0.15s;
+    }
+
+    .toolkit-card:hover {
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .toolkit-card:hover {
+        box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+      }
+    }
+
+    .toolkit-card h4 {
+      font-size: 1.05rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .toolkit-card p {
+      font-size: 0.92rem;
+      line-height: 1.65;
+      margin-bottom: 0;
+      color: var(--text);
+    }
+
+    /* === Open Questions Callout === */
+    .open-questions {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 1.5rem 1.8rem;
+      margin: 1.5rem 0 2rem;
+    }
+
+    .open-questions h2 {
+      margin-top: 0;
+      border-bottom: none;
+      padding-bottom: 0;
+      font-size: 1.3rem;
+    }
+
+    .open-questions ol {
+      margin: 1rem 0 0;
+      padding-left: 1.4rem;
+    }
+
+    .open-questions li {
+      margin-bottom: 0.6rem;
+      line-height: 1.65;
+    }
+
+    /* === Lists === */
+    ul, ol {
+      margin: 0.8rem 0 1.5rem;
+      padding-left: 1.6rem;
+    }
+
+    li {
+      margin-bottom: 0.4rem;
+    }
+
+    li::marker {
+      color: var(--accent);
+    }
+
+    /* === Learning Points === */
+    .learning-points li {
+      padding: 0.2rem 0;
+      line-height: 1.65;
+    }
+
+    /* === Sources === */
+    .sources-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+
+    .sources-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.92rem;
+    }
+
+    .sources-list li:last-child {
+      border-bottom: none;
+    }
+
+    .sources-list a {
+      font-weight: 500;
+    }
+
+    /* === Footer === */
+    .dossier-footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: var(--secondary);
+      letter-spacing: 0.03em;
+    }
+
+    .dossier-footer .brand {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    /* === Generic table (for markdown tables) === */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.92rem;
+    }
+
+    thead {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--secondary);
+    }
+
+    th {
+      background: var(--table-header-bg);
+      text-align: left;
+      padding: 0.7rem 1rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tbody tr:nth-child(even) {
+      background: var(--table-stripe);
+    }
+
+    /* === HR === */
+    hr {
+      border: none;
+      height: 1px;
+      background: var(--border);
+      margin: 2.5rem 0;
+    }
+
+    /* === PDF Download Button === */
+    .pdf-download-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #fff;
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      padding: 0.7rem 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
+      z-index: 1000;
+    }
+
+    .pdf-download-btn:hover {
+      background: #a84920;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+      transform: translateY(-1px);
+    }
+
+    .pdf-download-btn:active {
+      transform: translateY(0);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .pdf-download-btn:hover {
+        background: #c45d2c;
+      }
+    }
+
+    .pdf-download-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    /* === Print === */
+    @media print {
+      .pdf-download-btn { display: none !important; }
+      body {
+        background: #fff;
+        color: #000;
+        padding: 0;
+        font-size: 11pt;
+      }
+      .container {
+        max-width: 100%;
+      }
+      h1, h2, h3, h4 { color: #000; }
+      a { color: #000; border-bottom: none; text-decoration: underline; }
+      .badge { border: 1px solid #999; color: #000 !important; background: #eee !important; }
+      .toolkit-card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+      .open-questions { break-inside: avoid; }
+      .deep-dive { break-inside: avoid; }
+      .dossier-footer { margin-top: 2rem; }
+    }
+
+    /* === Responsive === */
+    @media (max-width: 480px) {
+      html { font-size: 15px; }
+      h1 { font-size: 1.7rem; }
+      h2 { font-size: 1.35rem; }
+      body { padding: 1rem 0.75rem 3rem; }
+      .signal-table { font-size: 0.82rem; }
+      .signal-table th, .signal-table td { padding: 0.5rem 0.6rem; }
+      .toolkit-grid { grid-template-columns: 1fr; }
+    }
+
+    /* === Annotation System === */
+    :root {
+      --ann-highlight: rgba(255, 213, 79, 0.35);
+      --ann-highlight-hover: rgba(255, 213, 79, 0.55);
+      --ann-toolbar-bg: #2d2d2d;
+      --ann-sidebar-width: 320px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ann-highlight: rgba(255, 213, 79, 0.2);
+        --ann-highlight-hover: rgba(255, 213, 79, 0.35);
+        --ann-toolbar-bg: #1a1a1e;
+      }
+    }
+    .ann-highlight {
+      background: var(--ann-highlight);
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .ann-highlight:hover { background: var(--ann-highlight-hover); }
+    .ann-highlight.has-memo { border-bottom: 2px solid var(--accent); }
+    .ann-toolbar {
+      position: absolute;
+      display: none;
+      background: var(--ann-toolbar-bg);
+      border-radius: 8px;
+      padding: 4px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+      z-index: 9000;
+      gap: 2px;
+    }
+    .ann-toolbar.visible { display: flex; }
+    .ann-toolbar button {
+      background: transparent;
+      border: none;
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      transition: background 0.1s;
+    }
+    .ann-toolbar button:hover { background: rgba(255,255,255,0.15); }
+    .ann-section-actions {
+      position: absolute;
+      right: -44px;
+      top: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .deep-dive, .toolkit-card { position: relative; }
+    .deep-dive:hover .ann-section-actions,
+    .toolkit-card:hover .ann-section-actions { opacity: 1; }
+    .ann-section-btn {
+      width: 28px; height: 28px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--card-bg);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      transition: border-color 0.1s;
+    }
+    .ann-section-btn:hover { border-color: var(--accent); }
+    .ann-section-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .ann-memo-indicator {
+      display: inline-block;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+    .ann-sidebar {
+      position: fixed;
+      top: 0; right: 0;
+      width: var(--ann-sidebar-width);
+      height: 100vh;
+      background: var(--bg);
+      border-left: 1px solid var(--border);
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform 0.25s ease;
+      z-index: 8000;
+      padding: 1.5rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+    }
+    .ann-sidebar.open { transform: translateX(0); }
+    .ann-sidebar h3 { font-size: 1rem; margin-bottom: 1rem; color: var(--heading); }
+    .ann-sidebar-item {
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      transition: border-color 0.15s;
+    }
+    .ann-sidebar-item:hover { border-color: var(--accent); }
+    .ann-sidebar-item .ann-type { font-size: 0.7rem; text-transform: uppercase; color: var(--secondary); }
+    .ann-sidebar-item .ann-text { margin-top: 4px; color: var(--text); line-height: 1.4; }
+    .ann-sidebar-item .ann-memo-content { margin-top: 6px; padding: 6px 8px; background: var(--card-bg); border-radius: 4px; font-size: 0.82rem; }
+    .ann-sidebar-item .ann-actions { margin-top: 6px; display: flex; gap: 8px; }
+    .ann-sidebar-item .ann-actions button {
+      background: none; border: none; cursor: pointer;
+      color: var(--secondary); font-size: 0.75rem;
+      font-family: 'Inter', sans-serif;
+    }
+    .ann-sidebar-item .ann-actions button:hover { color: var(--accent); }
+    .ann-sidebar-toggle {
+      position: fixed; bottom: 5rem; right: 2rem;
+      background: var(--accent); color: #fff;
+      border: none; border-radius: 50%;
+      width: 44px; height: 44px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      z-index: 8001;
+      transition: transform 0.1s;
+    }
+    .ann-sidebar-toggle:hover { transform: translateY(-2px); }
+    .ann-sidebar-toggle .ann-count {
+      position: absolute; top: -4px; right: -4px;
+      background: #ef4444; color: #fff;
+      border-radius: 50%; width: 18px; height: 18px;
+      font-size: 0.65rem; display: flex;
+      align-items: center; justify-content: center;
+    }
+    .ann-memo-modal {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.4);
+      display: none;
+      align-items: center; justify-content: center;
+      z-index: 9500;
+    }
+    .ann-memo-modal.visible { display: flex; }
+    .ann-memo-modal-content {
+      background: var(--bg);
+      border-radius: 12px;
+      padding: 1.5rem;
+      width: 90%; max-width: 480px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    }
+    .ann-memo-modal-content h4 { margin-bottom: 0.75rem; font-family: 'Inter', sans-serif; }
+    .ann-memo-modal-content textarea {
+      width: 100%; height: 120px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem;
+      font-family: 'Noto Serif KR', Georgia, serif;
+      font-size: 0.9rem;
+      resize: vertical;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .ann-memo-modal-content .ann-modal-buttons {
+      margin-top: 0.75rem;
+      display: flex; gap: 8px; justify-content: flex-end;
+    }
+    .ann-memo-modal-content .ann-modal-buttons button {
+      padding: 6px 16px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+    }
+    .ann-memo-modal-content .ann-modal-buttons .ann-btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    @media print {
+      .ann-toolbar, .ann-sidebar, .ann-sidebar-toggle,
+      .ann-section-actions, .ann-memo-modal,
+      .ann-memo-indicator { display: none !important; }
+      .ann-highlight { background: none !important; border-bottom: none !important; }
+    }
+    @media (max-width: 480px) {
+      .ann-section-actions { right: -36px; }
+      .ann-sidebar { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header class="dossier-header">
+      <div class="dossier-meta">Frontier AI Signal Swarm &middot; 2026-03-08</div>
+      <h1>Frontier AI Signal Swarm — 도시에 2026-03-08</h1>
+    </header>
+
+    <article>
+      <blockquote><p><strong>오늘의 한 줄:</strong> 에이전트는 더 이상 응답하지 않는다 — 행동한다. Karpathy의 자율 연구 에이전트는 에이전트가 AI를 만들기 시작한 날을 기록하고, Cursor Automations는 &quot;시작 버튼이 사라진&quot; 에이전트 인프라를 처음으로 대규모 배포하며, 동시에 그 에이전트들이 서로 통신할 프로토콜의 전쟁이 시작됐다.</p></blockquote>
+<hr>
+<h2>시그널 요약</h2>
+<table>
+<thead><tr>
+<th>시그널</th>
+<th>유형</th>
+<th>강도</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Karpathy Autoresearch — 에이전트가 AI 연구를 수행</td>
+<td>research / agent_engineering</td>
+<td><strong>strong</strong></td>
+</tr>
+<tr>
+<td>Cursor Automations — 이벤트 기반 상시 작동 에이전트</td>
+<td>product / agent_engineering</td>
+<td><strong>strong</strong></td>
+</tr>
+<tr>
+<td>에이전트 프로토콜 전쟁 (MCP/A2A/ACP/ANP)</td>
+<td>architecture / ecosystem</td>
+<td><strong>moderate</strong></td>
+</tr>
+<tr>
+<td>Kalinowski OpenAI 사임 — 거버넌스 실패의 내부 증거</td>
+<td>talent / ecosystem</td>
+<td><strong>moderate</strong></td>
+</tr>
+</tbody></table>
+<hr>
+<h2>심층 탐구 1: 에이전트가 AI를 만든다 — Karpathy Autoresearch</h2>
+<h3>무슨 일이 일어났는가</h3>
+<p>Andrej Karpathy가 2026년 3월 6일, GitHub에 <code>autoresearch</code>를 공개했다[^1]. 지금까지 그의 교육 시리즈(micrograd → makemore → nanoGPT → microgpt)가 &quot;인간이 AI를 이해하도록 돕는&quot; 것이었다면, autoresearch는 방향이 역전된다 — 에이전트가 AI 연구를 수행한다.</p>
+<p>시스템의 구조는 놀랍도록 단순하다: 단일 GPU 위에서 실행되는 소형 LLM 훈련 셋업(<code>nanochat</code>)에 AI 에이전트를 붙여주고, 에이전트는 밤새 자율적으로 실험을 반복한다. 5분간 훈련 → 이전과 비교 → 개선됐으면 유지, 아니면 롤백. 사용자가 아침에 일어나면 실험 로그와 (아마도) 더 나은 모델이 기다리고 있다.</p>
+<p>가장 흥미로운 설계 결정은 <code>program.md</code>다. 에이전트는 Python 코드를 직접 수정하지 않는다. 대신 <code>program.md</code>라는 Markdown 파일이 연구 방향, 가설, 탐색 공간을 정의하고, 에이전트는 이 &quot;프로그램&quot;을 읽고 실험을 설계한다. Karpathy가 README에서 이렇게 설명한다: &quot;당신은 Python 파일을 건드리지 않는다. 대신 에이전트에게 컨텍스트를 제공하는 <code>program.md</code> Markdown 파일을 프로그래밍한다.&quot;</p>
+<h3>왜 이것이 흥미로운가</h3>
+<p>2973개의 GitHub 스타가 18시간 만에 붙었다. 반응의 속도도 인상적이지만, 이 프로젝트가 촉발하는 질문이 더 흥미롭다: <strong>에이전트를 만드는 사람의 역할이 무엇인가?</strong></p>
+<p>Karpathy의 구조에서 인간의 역할은 세 가지로 압축된다:</p>
+<ol>
+<li>연구 방향 설정 (<code>program.md</code> 작성)</li>
+<li>실험 결과 검토</li>
+<li>방향 수정</li>
+</ol>
+<p>코드를 쓰지 않는다. 가설을 테스트하지 않는다. 파라미터를 바꾸지 않는다. 에이전트가 한다.</p>
+<p>이것은 메타 하네스(meta-harness) 개념의 처음으로 공개된 간결한 구현이다. 하네스가 에이전트를 사용해 특정 도메인 태스크를 수행한다면, 메타 하네스는 에이전트를 사용해 <strong>에이전트 자체를 개선</strong>한다. autoresearch에서 <code>program.md</code>는 하네스의 최상위 레이어다 — 모델 아키텍처를 탐색하는 에이전트에게 어떤 방향으로 탐색할지를 알려주는 지도.</p>
+<h3>실제로 어떻게 작동하는가</h3>
+<p>autoresearch의 실행 루프를 분해하면:</p>
+<pre><code>[program.md 읽기]
+      ↓
+[현재 기준점(baseline) 5분 훈련]
+      ↓
+[에이전트: &quot;다음 실험 설계&quot; — nanochat 코드 수정 제안]
+      ↓
+[수정된 코드 적용, 5분 훈련]
+      ↓
+[이전 결과와 비교 (validation loss)]
+      ↓
+[개선됐으면 새 기준점으로 채택, 아니면 롤백]
+      ↓
+[반복 — 아침까지]</code></pre>
+<p>여기서 &quot;훈련 시간 5분&quot;이라는 제약이 핵심이다. 에이전트가 더 좋은 아키텍처를 탐색하려면 빠른 피드백 루프가 필요하다. 5분은 실험이 충분히 의미 있는 신호를 주면서도, 에이전트가 하룻밤에 수십 번 반복할 수 있는 시간이다. 이것은 연구 루프의 주기를 &quot;주&quot;에서 &quot;시간&quot;으로 단축하는 압축이다.</p>
+<p>한 가지 흥미로운 미결 문제가 이슈 트래커에 이미 등장했다: <code>#22 &quot;Low creativity&quot;</code> — 에이전트가 탐색 공간의 비슷한 영역을 반복해서 시도한다는 것[^2]. 이것은 탐색-활용 트레이드오프(Exploration-Exploitation Tradeoff)의 에이전트 버전이다. 에이전트가 &quot;이미 효과를 본 것&quot;을 반복하는 경향이 있다면, <code>program.md</code>에 의도적인 다양성 주입 메커니즘이 필요하다.</p>
+<h3>이것이 바꾸는 것</h3>
+<p>빌더의 관점에서 autoresearch가 제기하는 질문은 이것이다: <strong>내가 지금 하고 있는 반복적 실험 중 어느 부분을 에이전트에게 위임할 수 있는가?</strong></p>
+<p>&quot;에이전트에게 실험을 맡긴다&quot;는 것의 선행 조건을 autoresearch가 명확히 드러낸다:</p>
+<ul>
+<li>실험의 사이클 타임이 짧아야 한다 (여기선 5분 훈련)</li>
+<li>결과의 품질을 측정하는 신호가 명확해야 한다 (여기선 validation loss)</li>
+<li>탐색 공간이 <code>program.md</code> 수준으로 명세 가능해야 한다</li>
+</ul>
+<p>이 세 조건이 갖춰지면 에이전트는 연구자보다 탐색 속도가 빠르다. 조건이 없으면 에이전트는 방향을 잃고 창의성 없이 같은 자리를 맴돈다.</p>
+<h3>아직 모르는 것</h3>
+<ul>
+<li>에이전트가 정말 &quot;새로운&quot; 아이디어를 만드는가, 아니면 훈련 데이터에서 본 패턴을 조합하는가?</li>
+<li><code>program.md</code>의 품질이 얼마나 결과에 영향을 주는가 — 이것은 새로운 종류의 프롬프트 엔지니어링인가?</li>
+<li>수렴하는 기준점의 품질 상한선은 무엇이 결정하는가? (단일 GPU 제약, 훈련 데이터, 모델 아키텍처 탐색 공간 중 어느 것이 병목인가?)</li>
+</ul>
+<h3>더 알고 싶다면</h3>
+<ul>
+<li>GitHub <code>karpathy/autoresearch</code> — README와 issues가 이미 좋은 토론의 시작점</li>
+<li>Karpathy의 이전 교육 시리즈: micrograd → makemore → nanoGPT → microgpt의 흐름을 이해하면 autoresearch의 위치가 명확해진다</li>
+</ul>
+<hr>
+<h2>심층 탐구 2: 시작 버튼이 사라진 에이전트</h2>
+<h3>무슨 일이 일어났는가</h3>
+<p>Cursor가 2026년 3월 5일 Automations를 출시했다[^3][^4]. 이름이 단순하지만, 이것이 의미하는 것은 단순하지 않다: <strong>에이전트가 더 이상 인간이 시작 버튼을 누르기를 기다리지 않는다.</strong></p>
+<p>트리거 목록이 이 변화를 잘 보여준다:</p>
+<ul>
+<li>새로운 GitHub Pull Request → 에이전트가 자동으로 코드 리뷰</li>
+<li>Slack 메시지 → 에이전트가 관련 코드를 조사</li>
+<li>PagerDuty 알람 → 에이전트가 로그 분석하고 패치 제안</li>
+<li>타이머 (크론) → 에이전트가 정기 작업 실행</li>
+</ul>
+<p>현재 Cursor는 플랫폼 전체에서 시간당 수백 건의 Automation을 실행하고 있다. Cursor CEO Michael Truell은 이 변화를 이렇게 설명했다: &quot;인간이 항상 시작하는 것이 아니라, 적절한 시점에 호출받는다.&quot;</p>
+<h3>왜 이것이 흥미로운가</h3>
+<p>에이전트 AI 도구의 진화를 세 단계로 나눌 수 있다:</p>
+<table>
+<thead><tr>
+<th>단계</th>
+<th>패러다임</th>
+<th>인간의 역할</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>1단계 (2022-2024)</td>
+<td>자동완성</td>
+<td>매 줄마다 수락/거부</td>
+</tr>
+<tr>
+<td>2단계 (2024-2025)</td>
+<td>채팅/에이전트</td>
+<td>프롬프트 입력, 결과 감독</td>
+</tr>
+<tr>
+<td><strong>3단계 (2026-)</strong></td>
+<td><strong>이벤트 기반</strong></td>
+<td><strong>정책 설정, 예외 시 호출</strong></td>
+</tr>
+</tbody></table>
+<p>3단계에서 변하는 것은 <strong>인간의 기본 자세</strong>다. 1-2단계에서 인간은 능동적으로 에이전트를 시작하고 결과를 검토한다. 3단계에서 인간은 에이전트가 자율로 작동하도록 허용하고, 에이전트가 예외를 만나거나 확인이 필요할 때 호출받는다. 에이전트가 주도권을 갖는 것이다.</p>
+<p>이것은 추상적 주장이 아니다. Cursor의 Bugbot이 구체적 사례다: Bugbot은 매 커밋마다 자동으로 코드를 분석하고, 버그를 발견하면 Slack에 보고한다. 개발자가 Cursor를 열어 &quot;이 커밋을 리뷰해줘&quot;라고 요청하는 것이 아니다 — Bugbot이 이미 해놓는다.</p>
+<h3>이벤트 기반 에이전트의 설계 문제</h3>
+<p>이 패러다임이 에이전트를 만드는 사람에게 제기하는 새로운 문제들:</p>
+<p><strong>1. 트리거 설계:</strong> 어떤 이벤트가 에이전트를 깨워야 하는가? 너무 많은 이벤트를 트리거로 쓰면 에이전트가 과부하되고, 너무 적으면 자동화의 가치가 없다. 트리거 선택은 기술 문제가 아니라 비즈니스 판단 문제다.</p>
+<p><strong>2. 종료 조건:</strong> 이벤트 기반 에이전트는 &quot;언제 멈춰야 하는가&quot;가 불명확하다. 배치 에이전트는 태스크가 완료되면 끝난다. 이벤트 기반 에이전트는 계속 새로운 이벤트를 기다린다. 이것은 에이전트의 &quot;생명 주기 관리&quot;라는 새로운 문제를 만든다.</p>
+<p><strong>3. 에스컬레이션 정책:</strong> 에이전트가 확신이 없을 때 인간을 호출하는 기준은 무엇인가? 호출을 너무 자주 하면 &quot;항상 켜진 에이전트&quot;의 가치가 없고, 너무 드물게 하면 에이전트가 잘못된 방향으로 진행한다. 이것은 에이전트의 &quot;자율성 임계값(Autonomy Threshold)&quot; 설정 문제다.</p>
+<p><strong>4. 에이전트 간 충돌:</strong> 같은 코드베이스에 여러 Automation이 설정되면 에이전트들이 서로 충돌할 수 있다. 에이전트 A가 파일을 수정하는 동안 에이전트 B가 같은 파일을 리뷰하려면? 이것은 에이전트 조율 문제다.</p>
+<p>Cursor의 Automations가 이 문제들을 어떻게 해결했는지는 아직 공개 정보가 제한적이다. 하지만 문제를 제기했다는 것 자체가 중요하다 — 이 아키텍처 결정들이 다음 세대 에이전트 인프라의 설계 기준이 될 것이다.</p>
+<h3>동시에 일어나는 일: 프로토콜의 전쟁</h3>
+<p>이벤트 기반 에이전트가 현실이 되면서, 에이전트들이 서로 통신하는 방법의 표준화가 급해졌다. 현재 경쟁하는 프로토콜들[^5][^6]:</p>
+<table>
+<thead><tr>
+<th>프로토콜</th>
+<th>개발사</th>
+<th>레이어</th>
+<th>역할</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><strong>MCP</strong> (Model Context Protocol)</td>
+<td>Anthropic</td>
+<td>에이전트 ↔ 도구</td>
+<td>AI가 외부 도구/데이터에 접근</td>
+</tr>
+<tr>
+<td><strong>A2A</strong> (Agent-to-Agent)</td>
+<td>Google DeepMind</td>
+<td>에이전트 ↔ 에이전트</td>
+<td>에이전트 간 태스크 위임</td>
+</tr>
+<tr>
+<td><strong>ACP</strong> (Agent Communication Protocol)</td>
+<td>IBM/Linux Foundation</td>
+<td>에이전트 ↔ 에이전트</td>
+<td>엔터프라이즈 에이전트 통신</td>
+</tr>
+<tr>
+<td><strong>ANP</strong> (Agent Network Protocol)</td>
+<td>분산 프로젝트</td>
+<td>에이전트 발견</td>
+<td>에이전트의 공개 디렉터리</td>
+</tr>
+<tr>
+<td><strong>AG-UI</strong></td>
+<td>커뮤니티</td>
+<td>에이전트 ↔ UI</td>
+<td>에이전트 결과의 UI 표준화</td>
+</tr>
+</tbody></table>
+<p>이 프로토콜들이 동시에 등장한 것은 우연이 아니다. Cursor Automations처럼 에이전트가 실제로 이벤트를 처리하고 다른 에이전트에게 태스크를 넘기기 시작하면, 그 통신 방식이 표준화되어야 한다.</p>
+<p>MCP와 A2A를 잘못 이해하는 흔한 오류가 있다: 둘이 경쟁한다는 것. 실제로는 레이어가 다르다. MCP는 에이전트가 데이터베이스, GitHub, Slack에 접근하는 방법이고, A2A는 에이전트가 다른 에이전트에게 서브태스크를 위임하는 방법이다. 마치 HTTP(인간 ↔ 웹서버)와 gRPC(서버 ↔ 서버)가 경쟁하지 않는 것처럼.</p>
+<p>그러나 ACP, ANP, AG-UI까지 등장하면 그림이 복잡해진다. &quot;에이전트 인터넷&quot;의 TCP/IP 모멘트가 오고 있다고 부르는 사람들이 있는데[^7], 비유는 매혹적이지만 한 가지 차이가 있다 — TCP/IP는 단 하나였다. 현재는 5개 이상의 프로토콜이 서로 다른 이해관계를 가진 대기업들(Anthropic, Google, Microsoft, IBM)이 밀고 있다. 어떤 것이 살아남을지는 아직 아무도 모른다. 채택이 느린 자발적 표준의 역사를 보면, 생태계 규모가 가장 큰 것이 이긴다 — 그리고 현재 MCP는 97M+ 다운로드로 가장 앞서 있다.</p>
+<h3>에이전트 생태계의 오늘</h3>
+<p>Kalinowski의 OpenAI 사임이 이 맥락에서 의미 있다[^8]. 그는 &quot;거버넌스 우려(governance concern)&quot;를 이유로 들었다 — &quot;발표가 가드레일 없이 급하게 진행됐다&quot;는 것. 에이전트가 이벤트에 반응하고, 코드를 수정하고, 결정을 내리는 시대에 거버넌스 — 에이전트가 무엇을 허용되고 무엇이 금지되는지, 누가 그 경계를 설정하는지 — 는 기술 문제가 아니라 조직 문제다. 그리고 최상위 기술 임원이 이 문제로 회사를 떠나는 것은, 에이전트 시대의 거버넌스 위기가 아직 해결되지 않았음을 보여준다.</p>
+<hr>
+<h2>오늘의 개념 도구</h2>
+<p><strong>자율성 임계값 (Autonomy Threshold)</strong> 에이전트가 인간 개입 없이 진행할 수 있는 불확실성의 최대 허용 수준. 이것을 낮게 설정하면 에이전트가 모든 것을 확인받으러 오고, 높게 설정하면 에이전트가 혼자 잘못된 방향으로 진행한다. 이벤트 기반 에이전트 시스템에서는 이 값을 태스크 유형별로 다르게 설정해야 한다.</p>
+<p><strong>연구 루프의 압축 (Research Loop Compression)</strong> autoresearch에서 드러나는 패턴. 인간 연구자의 실험 사이클(가설 → 구현 → 실험 → 분석 = 수 일)을 에이전트가 분 단위로 압축할 때, 병목은 아이디어의 속도가 아니라 빠른 피드백 신호의 존재 여부로 이동한다.</p>
+<p><strong>이벤트 기반 하네스 (Event-Driven Harness)</strong> 인간의 명시적 요청(prompt)을 시작 트리거로 쓰는 대신, 외부 이벤트(GitHub 이벤트, 알람, 타이머)를 시작 트리거로 쓰는 하네스 아키텍처. 인간의 역할이 &quot;에이전트를 시작하는 사람&quot;에서 &quot;정책을 설정하고 예외에 개입하는 사람&quot;으로 전환된다.</p>
+<p><strong>프로토콜 레이어 분리 (Protocol Layer Separation)</strong> MCP(에이전트↔도구), A2A(에이전트↔에이전트), WebMCP(에이전트↔브라우저)가 각각 다른 통신 문제를 해결한다는 인식. 이 셋을 혼동하면 아키텍처 설계에서 잘못된 레이어에 해결책을 적용하게 된다.</p>
+<hr>
+<h2>시그널 간 연결</h2>
+<p>오늘의 세 시그널은 같은 방향을 가리킨다: <strong>에이전트 인프라의 성숙.</strong></p>
+<p>Karpathy autoresearch는 에이전트가 할 수 있는 것의 상한선을 보여준다 — 에이전트가 스스로 더 나은 에이전트를 만들 수 있다. Cursor Automations는 에이전트가 실제로 대규모 프로덕션에서 이벤트 기반으로 작동하는 첫 번째 증거다. 에이전트 프로토콜의 등장은 이 에이전트들이 서로 통신하는 인프라 레이어가 형성되고 있음을 보여준다.</p>
+<p>이 세 변화가 동시에 일어나는 것은 우연이 아니다. 에이전트 AI의 첫 세대는 &quot;모델이 좋아지면 에이전트가 더 잘 한다&quot;는 단순한 가정 위에 있었다. 두 번째 세대는 다른 교훈을 배우고 있다: 에이전트의 한계는 주로 아키텍처에서 온다. 어떻게 시작되는가, 어떻게 통신하는가, 어떻게 중단되는가, 어떻게 인간에게 에스컬레이션하는가.</p>
+<p>이것이 하네스 엔지니어링의 다음 장이다 — 단일 에이전트 루프에서 이벤트 기반 에이전트 네트워크로.</p>
+<hr>
+<h2>열린 질문들</h2>
+<ol>
+<li><strong>에이전트가 AI 연구를 한다면, 연구자의 역할은 무엇인가?</strong> autoresearch의 <code>program.md</code>를 쓰는 것은 &quot;연구를 한다&quot;는 것인가, &quot;연구를 설계한다&quot;는 것인가? 이 구분이 중요한가?</li>
+</ol>
+<ol>
+<li><strong>이벤트 기반 에이전트의 거버넌스는 누가 설정하는가?</strong> Cursor Automations에서 어떤 이벤트가 에이전트를 트리거해야 하는지를 결정하는 사람은 개발자인가, 팀 리더인가, 법무팀인가? Kalinowski의 사임이 암시하듯, 이 질문은 기술을 만드는 회사 안에서도 아직 합의되지 않았다.</li>
+</ol>
+<ol>
+<li><strong>프로토콜 전쟁에서 빌더는 어떤 것에 지금 투자해야 하는가?</strong> MCP가 97M 다운로드로 앞서지만, A2A는 Google의 지원을 받는다. 스타트업이 MCP 위에서만 빌드하면, 나중에 A2A로 전환 비용이 얼마나 될까?</li>
+</ol>
+<ol>
+<li><strong>자율 연구 에이전트의 성능 상한선은 어디인가?</strong> autoresearch의 에이전트는 단일 GPU에서 nanochat이라는 제한된 모델을 개선한다. 이 접근법이 프론티어 모델 훈련에 적용될 때 무엇이 달라지는가?</li>
+</ol>
+<ol>
+<li><strong>이벤트 기반 에이전트가 &quot;항상 켜져&quot; 있다는 것이 감사(audit)와 책임(accountability)에 어떤 영향을 주는가?</strong> 에이전트가 자율로 코드를 수정했을 때, 버그가 발생하면 누구의 책임인가?</li>
+</ol>
+<hr>
+<h2>오늘의 학습 포인트</h2>
+<ol>
+<li><strong>에이전트 입력 모델을 재설계해야 한다.</strong> &quot;사용자가 프롬프트를 입력한다&quot;는 가정을 버리고, &quot;어떤 이벤트가 이 에이전트를 트리거해야 하는가&quot;를 설계의 첫 질문으로 바꿔야 한다.</li>
+</ol>
+<ol>
+<li><strong>빠른 피드백 신호가 자율 개선의 전제 조건이다.</strong> autoresearch가 작동하는 이유는 5분 훈련이라는 빠른 피드백 루프 때문이다. 자신의 도메인에서 이에 해당하는 &quot;5분 피드백&quot;이 무엇인지 찾는 것이 메타 에이전트 설계의 첫 단계다.</li>
+</ol>
+<ol>
+<li><strong>MCP와 A2A는 경쟁하지 않는다</strong> — 레이어가 다르다. 에이전트가 외부 도구/데이터에 접근하는 문제(MCP)와 에이전트가 다른 에이전트에게 태스크를 위임하는 문제(A2A)를 구분해야 한다. 둘을 동시에 쓰는 것이 정상이다.</li>
+</ol>
+<ol>
+<li><strong>거버넌스 없는 자동화는 부채다.</strong> Cursor Automations가 프로덕션에서 수백 건의 자동화를 실행한다면, 각 자동화의 권한 범위, 종료 조건, 에스컬레이션 정책이 명시적으로 설계되어야 한다. 이것을 나중으로 미루는 것은 기술 부채가 아닌 거버넌스 부채다.</li>
+</ol>
+<ol>
+<li><strong>프로토콜 선택보다 레이어 설계가 먼저다.</strong> 어떤 프로토콜을 쓸지 결정하기 전에, 에이전트 시스템의 어떤 레이어에서 어떤 통신 문제를 해결해야 하는지를 명확히 해야 한다.</li>
+</ol>
+<hr>
+<h2>Sources</h2>
+<ul>
+<li><a href="https://github.com/karpathy/autoresearch" target="_blank" rel="noopener">^1]: [GitHub — karpathy/autoresearch</a></li>
+<li><a href="https://github.com/karpathy/autoresearch/issues" target="_blank" rel="noopener">^2]: [autoresearch Issues — Low creativity #22</a></li>
+<li><a href="https://awesomeagents.ai/news/cursor-automations-agentic-coding-agents/" target="_blank" rel="noopener">^3]: [Cursor Launches Always-On AI Coding Agents — Awesome Agents</a></li>
+<li><a href="https://www.objectwire.org/cursor/automations-event-driven-ai-coding" target="_blank" rel="noopener">^4]: [Cursor Launches Automations: Event-Driven AI Agents — ObjectWire</a></li>
+<li><a href="https://dev.to/pockit_tools/mcp-vs-a2a-the-complete-guide-to-ai-agent-protocols-in-2026-30li" target="_blank" rel="noopener">^5]: [MCP vs A2A: The Complete Guide to AI Agent Protocols in 2026 — DEV Community</a></li>
+<li><a href="https://www.jitendrazaa.com/blog/ai/mcp-vs-a2a-vs-acp-vs-anp-complete-ai-agent-protocol-guide/" target="_blank" rel="noopener">^6]: [MCP vs A2A vs ACP vs ANP: Complete AI Agent Protocol Guide — Jitendra Zaa</a></li>
+<li><a href="https://neuralwired.com/2026/03/03/model-context-protocol-mcp-agent-economy/" target="_blank" rel="noopener">^7]: [Model Context Protocol: How MCP &amp; A2A Build the Agent Economy — NeuralWired</a></li>
+<li><a href="https://www.businessinsider.com/caitlin-kalinowski-quits-openai-robotics-head-pentagon-deal-sam-altman-2026-3" target="_blank" rel="noopener">^8]: [OpenAI Robotics Head Caitlin Kalinowski Quits After Pentagon Deal — Business Insider</a></li>
+</ul>
+    </article>
+
+    <footer class="dossier-footer">
+      <span class="brand">Frontier AI Signal Swarm</span> &mdash; AI 트렌드 인텔리전스 엔진
+    </footer>
+
+  </div>
+
+  <!-- PDF Download Button -->
+  <button class="pdf-download-btn" onclick="window.print()" title="PDF로 저장">
+    <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+    PDF 저장
+  </button>
+
+  <script>(function() {
+  'use strict';
+
+  // === Config ===
+  var DOSSIER_ID = (function() {
+    var m = location.pathname.match(/\/(dossier-[^.]+)\.html/);
+    return m ? m[1] : null;
+  })();
+  if (!DOSSIER_ID) return;
+
+  var annotations = [];
+
+  // === API ===
+  var API = {
+    list: function() {
+      return fetch('/api/annotations?dossier_id=' + encodeURIComponent(DOSSIER_ID))
+        .then(function(r) { return r.json(); })
+        .then(function(d) { return d.annotations || []; });
+    },
+    create: function(data) {
+      return fetch('/api/annotations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(Object.assign({ dossier_id: DOSSIER_ID }, data))
+      }).then(function(r) { return r.json(); });
+    },
+    update: function(id, content) {
+      return fetch('/api/annotations/' + id, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content: content })
+      }).then(function(r) { return r.json(); });
+    },
+    remove: function(id) {
+      return fetch('/api/annotations/' + id, { method: 'DELETE' });
+    }
+  };
+
+  // === DOM Helpers ===
+  function getCSSPath(el) {
+    if (!el || el === document.body) return 'body';
+    if (el.id) return '#' + el.id;
+    var parent = el.parentElement;
+    if (!parent) return el.tagName.toLowerCase();
+    var siblings = Array.from(parent.children).filter(function(c) { return c.tagName === el.tagName; });
+    var idx = siblings.indexOf(el);
+    var nth = siblings.length > 1 ? ':nth-of-type(' + (idx + 1) + ')' : '';
+    return getCSSPath(parent) + ' > ' + el.tagName.toLowerCase() + nth;
+  }
+
+  function getTextAround(range, chars, before) {
+    var container = before ? range.startContainer : range.endContainer;
+    var offset = before ? range.startOffset : range.endOffset;
+    if (container.nodeType !== 3) return '';
+    var text = container.textContent || '';
+    return before ? text.slice(Math.max(0, offset - chars), offset) : text.slice(offset, offset + chars);
+  }
+
+  function findSectionId(el) {
+    while (el && el !== document.body) {
+      if (el.id && (el.id.indexOf('deep-dive') === 0 || el.id.indexOf('signal-row') === 0 ||
+          el.id.indexOf('toolkit-card') === 0 || el.id === 'cross-signal' ||
+          el.id === 'open-questions' || el.id === 'learning-points' ||
+          (el.dataset && el.dataset.sectionId))) {
+        return el.id || el.dataset.sectionId;
+      }
+      el = el.parentElement;
+    }
+    return null;
+  }
+
+  function findSignalType(sectionId) {
+    if (!sectionId) return null;
+    var el = document.getElementById(sectionId);
+    if (!el) return null;
+    var badge = el.querySelector('.badge-type');
+    return badge ? badge.textContent.trim() : null;
+  }
+
+  // === Toolbar ===
+  var toolbar = document.createElement('div');
+  toolbar.className = 'ann-toolbar';
+  toolbar.innerHTML = '<button data-action="highlight">하이라이트</button><button data-action="highlight-memo">하이라이트 + 메모</button>';
+  document.body.appendChild(toolbar);
+  var currentRange = null;
+
+  var containerEl = document.querySelector('.container');
+  if (containerEl) {
+    containerEl.addEventListener('mouseup', function(e) {
+      if (e.target.closest('.ann-toolbar') || e.target.closest('.ann-sidebar') || e.target.closest('.ann-memo-modal')) return;
+      var sel = window.getSelection();
+      if (!sel || sel.isCollapsed || !sel.toString().trim()) {
+        toolbar.classList.remove('visible');
+        return;
+      }
+      currentRange = sel.getRangeAt(0).cloneRange();
+      var rect = currentRange.getBoundingClientRect();
+      toolbar.style.left = (rect.left + rect.width / 2 - 100 + window.scrollX) + 'px';
+      toolbar.style.top = (rect.top - 44 + window.scrollY) + 'px';
+      toolbar.classList.add('visible');
+    });
+  }
+
+  document.addEventListener('mousedown', function(e) {
+    if (!e.target.closest('.ann-toolbar')) {
+      toolbar.classList.remove('visible');
+    }
+  });
+
+  toolbar.addEventListener('click', function(e) {
+    var btn = e.target.closest('button');
+    if (!btn || !currentRange) return;
+    var action = btn.dataset.action;
+    var text = currentRange.toString().trim();
+    if (!text) return;
+
+    var sectionId = findSectionId(currentRange.startContainer.parentElement);
+    var position = {
+      start_path: getCSSPath(currentRange.startContainer.nodeType === 3 ? currentRange.startContainer.parentElement : currentRange.startContainer),
+      start_offset: currentRange.startOffset,
+      end_path: getCSSPath(currentRange.endContainer.nodeType === 3 ? currentRange.endContainer.parentElement : currentRange.endContainer),
+      end_offset: currentRange.endOffset,
+      context_before: getTextAround(currentRange, 30, true),
+      context_after: getTextAround(currentRange, 30, false)
+    };
+
+    toolbar.classList.remove('visible');
+    window.getSelection().removeAllRanges();
+
+    if (action === 'highlight') {
+      API.create({
+        type: 'highlight',
+        selected_text: text,
+        section_id: sectionId,
+        position: position,
+        signal_type: findSignalType(sectionId)
+      }).then(function(ann) {
+        annotations.push(ann);
+        wrapHighlight(currentRange, ann.id, false);
+        updateSidebar();
+      });
+    } else if (action === 'highlight-memo') {
+      showMemoModal(text, sectionId, position, currentRange);
+    }
+  });
+
+  // === Memo Modal ===
+  var modal = document.createElement('div');
+  modal.className = 'ann-memo-modal';
+  modal.innerHTML = '<div class="ann-memo-modal-content"><h4>메모 추가</h4><div class="ann-selected-preview" style="padding:8px;background:var(--card-bg);border-radius:6px;margin-bottom:12px;font-size:0.85rem;color:var(--secondary);max-height:80px;overflow:hidden"></div><textarea placeholder="이 부분에 대한 생각을 적어주세요..."></textarea><div class="ann-modal-buttons"><button class="ann-btn-cancel">취소</button><button class="ann-btn-primary ann-btn-save">저장</button></div></div>';
+  document.body.appendChild(modal);
+
+  var pendingMemo = null;
+
+  function showMemoModal(text, sectionId, position, range) {
+    modal.querySelector('.ann-selected-preview').textContent = text.length > 100 ? text.slice(0, 100) + '...' : text;
+    modal.querySelector('textarea').value = '';
+    modal.classList.add('visible');
+    modal.querySelector('textarea').focus();
+    pendingMemo = { text: text, sectionId: sectionId, position: position, range: range };
+  }
+
+  function showEditModal(ann) {
+    modal.querySelector('.ann-selected-preview').textContent = ann.selected_text || '(섹션 메모)';
+    modal.querySelector('textarea').value = ann.content || '';
+    modal.classList.add('visible');
+    modal.querySelector('textarea').focus();
+    pendingMemo = { editId: ann.id };
+  }
+
+  modal.querySelector('.ann-btn-cancel').addEventListener('click', function() {
+    modal.classList.remove('visible');
+    pendingMemo = null;
+  });
+
+  modal.querySelector('.ann-btn-save').addEventListener('click', function() {
+    var content = modal.querySelector('textarea').value.trim();
+    if (!content) return;
+    modal.classList.remove('visible');
+
+    if (pendingMemo.editId) {
+      API.update(pendingMemo.editId, content).then(function(updated) {
+        var idx = -1;
+        for (var j = 0; j < annotations.length; j++) {
+          if (annotations[j].id === pendingMemo.editId) { idx = j; break; }
+        }
+        if (idx >= 0) annotations[idx] = updated;
+        pendingMemo = null;
+        updateSidebar();
+      });
+    } else {
+      var pm = pendingMemo;
+      API.create({
+        type: 'highlight',
+        selected_text: pm.text,
+        content: content,
+        section_id: pm.sectionId,
+        position: pm.position,
+        signal_type: findSignalType(pm.sectionId)
+      }).then(function(ann) {
+        annotations.push(ann);
+        if (pm.range) {
+          wrapHighlight(pm.range, ann.id, true);
+        }
+        pendingMemo = null;
+        updateSidebar();
+      });
+    }
+  });
+
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+      modal.classList.remove('visible');
+      pendingMemo = null;
+    }
+  });
+
+  // === Highlight Renderer ===
+  function wrapHighlight(range, annId, hasMemo) {
+    function makeHighlight() {
+      var m = document.createElement('mark');
+      m.className = 'ann-highlight' + (hasMemo ? ' has-memo' : '');
+      m.dataset.annId = annId;
+      return m;
+    }
+
+    // Fast path: selection within a single element
+    try {
+      range.surroundContents(makeHighlight());
+      return;
+    } catch(ex) { /* range spans multiple elements — fall through */ }
+
+    // Fallback: wrap each text node individually to avoid inserting block
+    // elements inside <mark>, which causes unwanted line breaks.
+    try {
+      var ancestor = range.commonAncestorContainer;
+      var walker = document.createTreeWalker(ancestor, NodeFilter.SHOW_TEXT);
+      var textNodes = [];
+      var node;
+      while ((node = walker.nextNode())) {
+        var nr = document.createRange();
+        nr.selectNode(node);
+        if (nr.compareBoundaryPoints(Range.START_TO_END, range) > 0 &&
+            nr.compareBoundaryPoints(Range.END_TO_START, range) < 0) {
+          textNodes.push(node);
+        }
+      }
+      for (var i = 0; i < textNodes.length; i++) {
+        var tn = textNodes[i];
+        var tr = document.createRange();
+        tr.setStart(tn, tn === range.startContainer ? range.startOffset : 0);
+        tr.setEnd(tn, tn === range.endContainer ? range.endOffset : tn.length);
+        if (tr.toString().trim()) {
+          tr.surroundContents(makeHighlight());
+        }
+      }
+    } catch(ex2) { /* give up gracefully */ }
+  }
+
+  function restoreHighlights() {
+    for (var i = 0; i < annotations.length; i++) {
+      var ann = annotations[i];
+      if (ann.type !== 'highlight' || !ann.position) continue;
+      try {
+        var startEl = document.querySelector(ann.position.start_path);
+        var endEl = document.querySelector(ann.position.end_path);
+        if (!startEl || !endEl) { restoreByText(ann); continue; }
+
+        var startNode = findTextNode(startEl, ann.position.start_offset, ann.position.context_before);
+        var endNode = findTextNode(endEl, ann.position.end_offset, ann.position.context_after);
+        if (!startNode || !endNode) { restoreByText(ann); continue; }
+
+        var range = document.createRange();
+        range.setStart(startNode.node, startNode.offset);
+        range.setEnd(endNode.node, endNode.offset);
+        wrapHighlight(range, ann.id, !!ann.content);
+      } catch(ex) {
+        restoreByText(ann);
+      }
+    }
+  }
+
+  function findTextNode(el, offset, context) {
+    var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    var node;
+    while ((node = walker.nextNode())) {
+      var text = node.textContent || '';
+      if (context && text.indexOf(context) >= 0) {
+        var idx = text.indexOf(context);
+        return { node: node, offset: idx + context.length };
+      }
+      if (offset <= text.length) {
+        return { node: node, offset: offset };
+      }
+    }
+    return null;
+  }
+
+  function restoreByText(ann) {
+    if (!ann.selected_text) return;
+    var ctn = document.querySelector('.container');
+    if (!ctn) return;
+    var walker = document.createTreeWalker(ctn, NodeFilter.SHOW_TEXT);
+    var node;
+    var searchText = ann.selected_text.slice(0, 60);
+    while ((node = walker.nextNode())) {
+      var text = node.textContent || '';
+      var idx = text.indexOf(searchText);
+      if (idx >= 0) {
+        try {
+          var range = document.createRange();
+          range.setStart(node, idx);
+          range.setEnd(node, Math.min(idx + ann.selected_text.length, text.length));
+          wrapHighlight(range, ann.id, !!ann.content);
+        } catch(ex) { /* skip */ }
+        break;
+      }
+    }
+  }
+
+  // === Section Actions ===
+  function injectSectionActions() {
+    document.querySelectorAll('.deep-dive, .toolkit-card').forEach(function(el) {
+      if (el.querySelector('.ann-section-actions')) return;
+      var actions = document.createElement('div');
+      actions.className = 'ann-section-actions';
+      actions.innerHTML = '<button class="ann-section-btn" data-action="bookmark" title="북마크">\u2605</button><button class="ann-section-btn" data-action="section-memo" title="메모">\u270E</button>';
+      el.appendChild(actions);
+
+      var sectionId = el.id;
+      var existing = annotations.filter(function(a) { return a.section_id === sectionId && (a.type === 'bookmark' || a.type === 'memo'); });
+      if (existing.length > 0) {
+        var bookmarkBtn = actions.querySelector('[data-action="bookmark"]');
+        if (existing.some(function(a) { return a.type === 'bookmark'; })) bookmarkBtn.classList.add('active');
+      }
+    });
+
+    document.addEventListener('click', function(e) {
+      var btn = e.target.closest('.ann-section-btn');
+      if (!btn) return;
+      var section = btn.closest('.deep-dive, .toolkit-card');
+      if (!section) return;
+      var sectionId = section.id;
+      var action = btn.dataset.action;
+
+      if (action === 'bookmark') {
+        var existing = null;
+        for (var j = 0; j < annotations.length; j++) {
+          if (annotations[j].section_id === sectionId && annotations[j].type === 'bookmark') {
+            existing = annotations[j]; break;
+          }
+        }
+        if (existing) {
+          API.remove(existing.id).then(function() {
+            annotations = annotations.filter(function(a) { return a.id !== existing.id; });
+            btn.classList.remove('active');
+            updateSidebar();
+          });
+        } else {
+          var headingEl = section.querySelector('h3, h4');
+          API.create({
+            type: 'bookmark',
+            section_id: sectionId,
+            selected_text: headingEl ? headingEl.textContent : '',
+            signal_type: findSignalType(sectionId)
+          }).then(function(ann) {
+            annotations.push(ann);
+            btn.classList.add('active');
+            updateSidebar();
+          });
+        }
+      } else if (action === 'section-memo') {
+        var headingEl2 = section.querySelector('h3, h4');
+        showMemoModal(
+          headingEl2 ? headingEl2.textContent : '(섹션)',
+          sectionId, null, null
+        );
+      }
+    });
+  }
+
+  // === Sidebar ===
+  var sidebar = document.createElement('div');
+  sidebar.className = 'ann-sidebar';
+  sidebar.innerHTML = '<h3>어노테이션</h3><div class="ann-sidebar-list"></div>';
+  document.body.appendChild(sidebar);
+
+  var sidebarToggle = document.createElement('button');
+  sidebarToggle.className = 'ann-sidebar-toggle';
+  sidebarToggle.innerHTML = '\u270E<span class="ann-count" style="display:none">0</span>';
+  document.body.appendChild(sidebarToggle);
+
+  sidebarToggle.addEventListener('click', function() {
+    sidebar.classList.toggle('open');
+  });
+
+  function updateSidebar() {
+    var list = sidebar.querySelector('.ann-sidebar-list');
+    var count = sidebarToggle.querySelector('.ann-count');
+    count.textContent = String(annotations.length);
+    count.style.display = annotations.length > 0 ? 'flex' : 'none';
+
+    if (annotations.length === 0) {
+      list.innerHTML = '<p style="color:var(--secondary);font-size:0.85rem">텍스트를 선택하여 하이라이트하거나,<br>섹션의 \u2605 버튼으로 북마크하세요.</p>';
+      return;
+    }
+
+    var typeLabels = { highlight: '하이라이트', memo: '메모', bookmark: '북마크', dismiss: '무시' };
+    list.innerHTML = annotations.map(function(ann) {
+      var typeLabel = typeLabels[ann.type] || ann.type;
+      var text = ann.selected_text ? (ann.selected_text.length > 80 ? ann.selected_text.slice(0, 80) + '...' : ann.selected_text) : '';
+      var memo = ann.content ? '<div class="ann-memo-content">' + escapeForHTML(ann.content) + '</div>' : '';
+      return '<div class="ann-sidebar-item" data-ann-id="' + ann.id + '">' +
+        '<div class="ann-type">' + typeLabel + '</div>' +
+        (text ? '<div class="ann-text">' + escapeForHTML(text) + '</div>' : '') +
+        memo +
+        '<div class="ann-actions">' +
+        (ann.type === 'highlight' ? '<button data-action="edit">편집</button>' : '') +
+        '<button data-action="delete">삭제</button>' +
+        '</div></div>';
+    }).join('');
+  }
+
+  function escapeForHTML(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  sidebar.addEventListener('click', function(e) {
+    var actionBtn = e.target.closest('[data-action]');
+    var item = e.target.closest('.ann-sidebar-item');
+    if (!item) return;
+    var annId = item.dataset.annId;
+    var ann = null;
+    for (var j = 0; j < annotations.length; j++) {
+      if (annotations[j].id === annId) { ann = annotations[j]; break; }
+    }
+    if (!ann) return;
+
+    if (actionBtn) {
+      var action = actionBtn.dataset.action;
+      if (action === 'delete') {
+        API.remove(annId).then(function() {
+          annotations = annotations.filter(function(a) { return a.id !== annId; });
+          document.querySelectorAll('[data-ann-id="' + annId + '"]').forEach(function(el) {
+            if (el.tagName === 'MARK') {
+              var parent = el.parentNode;
+              while (el.firstChild) parent.insertBefore(el.firstChild, el);
+              parent.removeChild(el);
+            }
+          });
+          updateSidebar();
+        });
+      } else if (action === 'edit') {
+        showEditModal(ann);
+      }
+    } else {
+      // Scroll to annotation
+      var el = document.querySelector('mark[data-ann-id="' + annId + '"]') ||
+               (ann.section_id ? document.getElementById(ann.section_id) : null);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        el.style.transition = 'outline 0.3s';
+        el.style.outline = '2px solid var(--accent)';
+        setTimeout(function() { el.style.outline = 'none'; }, 1500);
+      }
+    }
+  });
+
+  // === Auto-assign IDs (for markdown-generated pages) ===
+  function autoAssignIds() {
+    document.querySelectorAll('.container h2, .container h3').forEach(function(h, i) {
+      if (h.id) return;
+      var slug = (h.textContent || '').trim().toLowerCase()
+        .replace(/[^a-z0-9\uAC00-\uD7A3\s]/g, '').replace(/\s+/g, '-').slice(0, 40);
+      h.id = 'section-' + (slug || i);
+      var parent = h.closest('section, article, div');
+      if (parent && !parent.id) parent.dataset.sectionId = h.id;
+    });
+  }
+
+  // === Init ===
+  function init() {
+    autoAssignIds();
+    API.list().then(function(list) {
+      annotations = list;
+      restoreHighlights();
+      injectSectionActions();
+      updateSidebar();
+    }).catch(function(err) {
+      console.warn('Annotation system unavailable:', err.message);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();</script>
+</body>
+</html>

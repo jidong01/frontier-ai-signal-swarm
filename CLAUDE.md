@@ -97,6 +97,36 @@ When the user asks you to analyze AI news/trends, you execute this pipeline:
 
 **시간 기준:** 오늘 날짜를 기준으로 최근 1-2일 이내 (오늘 + 어제 버퍼) 항목만 수확. 검색 쿼리에 반드시 현재 날짜(연도/월/일)를 포함한다 (예: "2026-03-05", "March 5 2026"). `mcp__exa__web_search_exa`를 병렬로 사용하면 빠름. 오래된 정보는 가치가 없다 — 항상 가장 최신 소스를 우선한다. **도시에는 일별(daily) 발행이므로 2일 이상 된 소스는 제외한다.**
 
+#### Layer 1.5 — X 탑보이스 수확 (X Top Voices Harvest)
+AI 분야 핵심 인물들의 최신 X 게시글을 수확한다. `mcp__exa__web_search_exa`로 `{handle} site:x.com {YYYY-MM}` 쿼리를 사용한다.
+
+**고정 계정 (Fixed Accounts):**
+
+| 계정 | Exa 쿼리 | 특징 |
+|------|---------|------|
+| **@karpathy** | `karpathy site:x.com {YYYY-MM}` | Andrej Karpathy — 전 Tesla AI, MicroGPT |
+| **@YiTayML** | `YiTayML site:x.com {YYYY-MM}` | Yi Tay — 모델 아키텍처 인사이트 |
+| **@OriolVinyalsML** | `OriolVinyalsML site:x.com {YYYY-MM}` | Oriol Vinyals — Google DeepMind |
+| **@GavinSBaker** | `GavinSBaker site:x.com {YYYY-MM}` | Gavin Baker — AI 인프라/스케일링 |
+| **@sama** | `sama openai site:x.com {YYYY-MM}` | Sam Altman — OpenAI CEO |
+| **@ylecun** | `ylecun site:x.com {YYYY-MM}` | Yann LeCun — Meta Chief AI Scientist |
+| **@DrJimFan** | `DrJimFan site:x.com {YYYY-MM}` | Jim Fan — NVIDIA Embodied AI |
+| **@emollick** | `emollick site:x.com {YYYY-MM}` | Ethan Mollick — AI 연구자/교수 |
+| **@fchollet** | `fchollet site:x.com {YYYY-MM}` | François Chollet — Keras, ARC-AGI |
+
+**트렌딩 AI 트윗:**
+
+| 쿼리 | 목적 |
+|------|------|
+| `"AI agent" OR "reasoning model" site:x.com {YYYY-MM-DD}` | 실시간 AI 트렌드 게시글 |
+| `"new model" OR "benchmark" AI site:x.com {YYYY-MM-DD}` | 모델 발표/벤치마크 반응 |
+
+**수확 원칙:**
+- 각 계정당 최대 3개 게시글 (최신순)
+- 링크/스레드 포함 게시글 우선, RT/홍보성 제외
+- X.com이 Exa로 검색 불가 시 해당 계정 건너뜀 (Doom Loop 방지)
+- 발견한 게시글 URL을 체인 탐색(Layer 2)의 씨앗으로 활용
+
 #### Layer 2 — 체인 탐색 (Chain Exploration) ★핵심★
 
 **병렬 검색이 아니라 "타고타고" 따라간다.** Layer 1에서 발견한 각 씨앗 시그널을 출발점으로, 연결된 소스를 순차적으로 추적한다. 이것이 "내가 모르는 것"을 발견하는 핵심 메커니즘이다.
@@ -454,6 +484,30 @@ curl -s -X POST http://localhost:3847/api/sources/auto-register \
 
 **8. Sources**
 - 사용한 1차 소스 목록 (링크 포함)
+
+### 인라인 출처 표기 규칙 (Inline Citation)
+
+**원칙: 출처가 있는 사실·수치·주장은 문장 끝에 마크다운 각주로 출처를 표기한다.**
+
+**표기 방법:**
+- 문장 끝, 마침표 앞에 `[^N]` 형식으로 각주 번호를 삽입한다
+- 도시에 맨 아래(Sources 섹션 직후)에 각주 정의를 모아 작성한다
+- 각주 정의 형식: `[^N]: [소스 제목 또는 설명](URL)`
+
+**예시:**
+```
+OSWorld 벤치마크에서 GPT-5.4는 75.0%를 기록해 인간 기준점(72.4%)을 처음으로 넘어섰다[^1].
+Tool Search는 36개 MCP 서버 250개 태스크에서 토큰을 47% 절감하면서 정확도는 동일하게 유지했다[^2].
+
+[^1]: [OpenAI GPT-5.4 Technical Report](https://openai.com/index/gpt-5-4/)
+[^2]: [Awesome Agents — GPT-5.4 Analysis](https://awesomeagents.ai/models/gpt-5-4/)
+```
+
+**적용 기준:**
+- 구체적 수치(벤치마크 점수, 파라미터 수, 비율 등)는 **반드시** 출처 표기
+- 공식 발표·보도·논문에서 인용한 주장은 **반드시** 출처 표기
+- 분석자의 해석·의견·추론은 출처 표기 불필요 (단, "이것은 추측이다" 등 명시)
+- 여러 문장이 같은 소스를 참조하면 같은 각주 번호를 재사용한다
 
 ## Operating Principles (작동 원칙)
 

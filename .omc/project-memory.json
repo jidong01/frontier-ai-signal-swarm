@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1772723236292,
+  "lastScanned": 1772946135219,
   "projectRoot": "/Users/jidonghwan/harness-factory/harnesses/frontier-ai-signal-swarm",
   "techStack": {
     "languages": [
@@ -66,7 +66,7 @@
       "path": "agents",
       "purpose": null,
       "fileCount": 3,
-      "lastAccessed": 1772723236279,
+      "lastAccessed": 1772946135189,
       "keyFiles": [
         "implications-analyst.md",
         "skeptical-verifier.md",
@@ -77,14 +77,14 @@
       "path": "data",
       "purpose": "Data files",
       "fileCount": 0,
-      "lastAccessed": 1772723236279,
+      "lastAccessed": 1772946135189,
       "keyFiles": []
     },
     "dist": {
       "path": "dist",
       "purpose": "Distribution/build output",
       "fileCount": 12,
-      "lastAccessed": 1772723236279,
+      "lastAccessed": 1772946135190,
       "keyFiles": [
         "index.d.ts",
         "index.d.ts.map",
@@ -96,8 +96,8 @@
     "output": {
       "path": "output",
       "purpose": null,
-      "fileCount": 24,
-      "lastAccessed": 1772723236280,
+      "fileCount": 29,
+      "lastAccessed": 1772946135199,
       "keyFiles": [
         "dossier-1634cf81.json",
         "dossier-1634cf81.md",
@@ -110,7 +110,7 @@
       "path": "src",
       "purpose": "Source code",
       "fileCount": 3,
-      "lastAccessed": 1772723236280,
+      "lastAccessed": 1772946135199,
       "keyFiles": [
         "index.ts",
         "local.ts",
@@ -121,7 +121,7 @@
       "path": "dist/config",
       "purpose": "Configuration files",
       "fileCount": 4,
-      "lastAccessed": 1772723236281,
+      "lastAccessed": 1772946135200,
       "keyFiles": [
         "sources.d.ts",
         "sources.d.ts.map",
@@ -132,7 +132,7 @@
       "path": "src/config",
       "purpose": "Configuration files",
       "fileCount": 1,
-      "lastAccessed": 1772723236281,
+      "lastAccessed": 1772946135201,
       "keyFiles": [
         "sources.ts"
       ]
@@ -140,87 +140,117 @@
   },
   "hotPaths": [
     {
-      "path": "src/curator/server.ts",
-      "accessCount": 19,
-      "lastAccessed": 1772726524231,
-      "type": "directory"
-    },
-    {
-      "path": "src/curator/public/style.css",
-      "accessCount": 19,
-      "lastAccessed": 1772726663292,
+      "path": "data/memory/analyzed-topics.json",
+      "accessCount": 10,
+      "lastAccessed": 1773030636927,
       "type": "file"
     },
     {
-      "path": "src/curator/public/app.js",
-      "accessCount": 17,
-      "lastAccessed": 1772726654734,
+      "path": "src/curator/public/profile.html",
+      "accessCount": 5,
+      "lastAccessed": 1772946994016,
+      "type": "file"
+    },
+    {
+      "path": "src/curator/server.ts",
+      "accessCount": 5,
+      "lastAccessed": 1772947024113,
+      "type": "directory"
+    },
+    {
+      "path": "src/curator/public/index.html",
+      "accessCount": 4,
+      "lastAccessed": 1772946889251,
+      "type": "directory"
+    },
+    {
+      "path": "CLAUDE.md",
+      "accessCount": 3,
+      "lastAccessed": 1772947794488,
+      "type": "directory"
+    },
+    {
+      "path": "",
+      "accessCount": 3,
+      "lastAccessed": 1773030214308,
+      "type": "directory"
+    },
+    {
+      "path": ".claude/settings.local.json",
+      "accessCount": 2,
+      "lastAccessed": 1772948674737,
+      "type": "file"
+    },
+    {
+      "path": "data/curator/profile.json",
+      "accessCount": 2,
+      "lastAccessed": 1773029874752,
+      "type": "file"
+    },
+    {
+      "path": "data/curator/sources.json",
+      "accessCount": 2,
+      "lastAccessed": 1773029875391,
       "type": "file"
     },
     {
       "path": "data/curator/feed.json",
-      "accessCount": 14,
-      "lastAccessed": 1772726447980,
-      "type": "file"
-    },
-    {
-      "path": "CLAUDE.md",
-      "accessCount": 5,
-      "lastAccessed": 1772724071897,
-      "type": "directory"
-    },
-    {
-      "path": "src/curator/feed-manager.ts",
-      "accessCount": 5,
-      "lastAccessed": 1772726029772,
-      "type": "file"
-    },
-    {
-      "path": "data/memory/analyzed-topics.json",
-      "accessCount": 5,
-      "lastAccessed": 1772727986603,
-      "type": "file"
-    },
-    {
-      "path": "",
-      "accessCount": 4,
-      "lastAccessed": 1772727996780,
-      "type": "directory"
-    },
-    {
-      "path": "data/curator/profile.json",
-      "accessCount": 3,
-      "lastAccessed": 1772727521445,
-      "type": "file"
-    },
-    {
-      "path": "src",
       "accessCount": 2,
-      "lastAccessed": 1772723442219,
+      "lastAccessed": 1773029897561,
+      "type": "file"
+    },
+    {
+      "path": "output/dossier-2026-03-08.md",
+      "accessCount": 1,
+      "lastAccessed": 1772946447113,
+      "type": "file"
+    },
+    {
+      "path": "src/curator/public",
+      "accessCount": 1,
+      "lastAccessed": 1772946858071,
       "type": "directory"
     },
     {
-      "path": "src/curator/types.ts",
-      "accessCount": 2,
-      "lastAccessed": 1772723872349,
-      "type": "file"
+      "path": "src/curator/public/dossiers.html",
+      "accessCount": 1,
+      "lastAccessed": 1772946871312,
+      "type": "directory"
     },
     {
-      "path": "output/dossier-2026-03-06.md",
+      "path": "src/curator/public/sources.html",
       "accessCount": 1,
-      "lastAccessed": 1772727904307,
-      "type": "file"
+      "lastAccessed": 1772946894908,
+      "type": "directory"
     },
     {
-      "path": "output/dossier-2026-03-06.json",
+      "path": "src/curator/public/memos.html",
       "accessCount": 1,
-      "lastAccessed": 1772727942806,
+      "lastAccessed": 1772946895282,
+      "type": "directory"
+    },
+    {
+      "path": "src/curator",
+      "accessCount": 1,
+      "lastAccessed": 1772947276280,
+      "type": "directory"
+    },
+    {
+      "path": "data/curator/memos.json",
+      "accessCount": 1,
+      "lastAccessed": 1773029901905,
       "type": "file"
     },
     {
       "path": "src/dossier/html-template.ts",
       "accessCount": 1,
-      "lastAccessed": 1772727953003,
+      "lastAccessed": 1773030292823,
+      "type": "file"
+    },
+    {
+      "path": "output/dossier-2026-03-09.md",
+      "accessCount": 1,
+      "lastAccessed": 1773030571981,
       "type": "file"
     }
   ],

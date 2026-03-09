@@ -267,6 +267,37 @@ async function startServer() {
     res.json(memory.getProfile());
   });
 
+  // PATCH /api/profile — Update curator profile
+  app.patch('/api/profile', async (req, res) => {
+    const patch = req.body;
+    if (!patch || typeof patch !== 'object') {
+      res.status(400).json({ error: 'Invalid profile data' });
+      return;
+    }
+
+    const profile = memory.getProfile();
+
+    // Deep-merge top-level sections
+    if (patch.name !== undefined) profile.name = patch.name;
+    if (patch.context && typeof patch.context === 'object') {
+      Object.assign(profile.context, patch.context);
+    }
+    if (patch.interests && typeof patch.interests === 'object') {
+      if (patch.interests.domains) Object.assign(profile.interests.domains, patch.interests.domains);
+      if (patch.interests.depth_preference) profile.interests.depth_preference = patch.interests.depth_preference;
+      if (patch.interests.hype_sensitivity) profile.interests.hype_sensitivity = patch.interests.hype_sensitivity;
+      if (Array.isArray(patch.interests.focus_areas)) profile.interests.focus_areas = patch.interests.focus_areas;
+    }
+    if (patch.learned_patterns && typeof patch.learned_patterns === 'object') {
+      if (Array.isArray(patch.learned_patterns.likes)) profile.learned_patterns.likes = patch.learned_patterns.likes;
+      if (Array.isArray(patch.learned_patterns.dislikes)) profile.learned_patterns.dislikes = patch.learned_patterns.dislikes;
+    }
+
+    profile.last_updated = new Date().toISOString();
+    await memory.saveProfile();
+    res.json(profile);
+  });
+
   // GET /api/brief — Learned preferences for pipeline integration
   app.get('/api/brief', (req, res) => {
     res.json({

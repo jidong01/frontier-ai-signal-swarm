@@ -14,16 +14,16 @@
   },
   "interests": {
     "domains": {
-      "architecture": 1,
+      "architecture": 0.95,
       "agent_engineering": 1,
       "infrastructure": 0.9,
-      "research": 0.8500000000000001,
-      "opensource": 0.8500000000000001,
-      "product": 0.75,
-      "ecosystem": 0.6,
+      "research": 0.85,
+      "opensource": 0.8,
+      "product": 1,
+      "ecosystem": 0.9,
       "capital": 0.3,
       "regulation": 0.2,
-      "talent": 0.2
+      "talent": 0.45
     },
     "depth_preference": "deep",
     "hype_sensitivity": "high",
@@ -69,5 +69,5 @@
       "인간성(human-likeness)은 의도적으로 삽입된 것이 아니라 인터넷 텍스트에 담긴 수십억 인간 경험의"
     ]
   },
-  "last_updated": "2026-03-05T16:27:41.959Z"
+  "last_updated": "2026-03-08T05:19:59.855Z"
 }

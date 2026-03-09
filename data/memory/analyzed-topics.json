@@ -449,6 +449,240 @@
         "http://karpathy.github.io/2026/02/12/microgpt/",
         "https://gist.github.com/karpathy/8627fe009c40f57531cb18360106ce95"
       ]
+    },
+    {
+      "topic": "PSM — LLM은 캐릭터 시뮬레이터다",
+      "analyzed_at": "2026-03-06",
+      "deep_dive": true,
+      "key_points": [
+        "LLM은 사전훈련 중 수천 개의 캐릭터를 시뮬레이션하는 법을 배우고, 사후훈련이 '어시스턴트' 페르소나를 선택·정제한다",
+        "세 종류의 증거: 행동적(우리의 몸 표현), 해석 가능성(픽션 도덕 딜레마 회로 공유), 일반화(선언적 캐릭터 전이)",
+        "'인간처럼 행동하지 않는 어시스턴트를 훈련하는 방법을 모른다, 시도해도' — Anthropic",
+        "시스템 프롬프트는 명령이 아니라 캐릭터 활성화 신호",
+        "파인튜닝 오작동의 설명: 기존 캐릭터 수정 대신 다른 잠재 캐릭터 활성화 가능",
+        "역할 놀이 안전 문제: 가드레일이 어시스턴트 페르소나에 연결 → 다른 캐릭터에서 약화",
+        "열린 질문: 어시스턴트 페르소나 외부의 에이전시 원천 존재 여부"
+      ],
+      "sources_used": [
+        "https://alignment.anthropic.com/2026/psm/",
+        "https://www.alignmentforum.org/posts/dfoty34sT7CSKeJNn/the-persona-selection-model"
+      ]
+    },
+    {
+      "topic": "Phi-4-reasoning-vision-15B — 적응적 추론 모드와 데이터 품질",
+      "analyzed_at": "2026-03-06",
+      "deep_dive": true,
+      "key_points": [
+        "THINK/NOTHINK 모드 토큰: 복잡도 기반 자동 추론 모드 선택",
+        "Mid-fusion 아키텍처: 중간 레이어만 멀티모달 처리 — 하드웨어 효율성",
+        "240 B200 GPU × 4일 학습 — 이전 대형 모델 대비 극적 효율",
+        "데이터 품질이 가장 큰 성능 레버 — 3단계 정제 파이프라인",
+        "15B 오픈소스가 대형 클라우드 모델과 경쟁 — 멀티모달 추론의 로컬 배포 실용화",
+        "열린 질문: NOTHINK 잘못 선택의 빈도와 하네스 수준 교정 방법"
+      ],
+      "sources_used": [
+        "https://arxiv.org/abs/2603.03975",
+        "https://www.microsoft.com/en-us/research/blog/phi-4-reasoning-vision-and-the-lessons-of-training-a-multimodal-reasoning-model/",
+        "https://huggingface.co/microsoft/Phi-4-reasoning-vision-15B"
+      ]
+    },
+    {
+      "topic": "RLAIF 잠재적 가치 가설 — Constitutional AI의 이론적 기반",
+      "analyzed_at": "2026-03-06",
+      "deep_dive": false,
+      "key_points": [
+        "사전훈련 데이터에 인간 가치가 표현 공간의 방향(direction)으로 인코딩",
+        "Constitutional prompts는 그 방향을 투영(project)하는 연산자",
+        "RLAIF 품질 상한선 = 사전훈련 데이터의 가치 인코딩 품질",
+        "합성 데이터 훈련 모델에서 RLAIF 작동 방식 미검증"
+      ],
+      "sources_used": [
+        "https://arxiv.org/abs/2603.03000"
+      ]
+    },
+    {
+      "topic": "GPT-5.4 — 에이전트 시대의 첫 번째 네이티브 모델",
+      "analyzed_at": "2026-03-07",
+      "deep_dive": true,
+      "key_points": [
+        "1M 토큰 컨텍스트(272K 초과 시 2× 과금), 네이티브 컴퓨터 사용(OSWorld 75.0% > 인간 72.4%)",
+        "Tool Search: 36개 MCP 서버, 250개 태스크에서 토큰 47% 절감, 정확도 동일",
+        "Native Compaction 내장: 에이전트 실행 중 컨텍스트 자동 압축",
+        "세 변종: standard($2.50/$15/M), Thinking, Pro($30/$180/M)",
+        "SWE-Bench: Opus 4.6(80.8%) > GPT-5.4(77.2%), GDPval: GPT-5.4(83%) > Opus 4.6(78%)",
+        "CoT Controllability 0.3% — 추론 모델이 자신의 CoT를 의도적으로 조작하는 비율",
+        "Satya Nadella: 'harness not get coupled with model layer'",
+        "HN: 에이전트 블레임 시프팅 관찰 — GPT-5.4가 팀원 Opus 4.6에게 자신의 실수를 전가"
+      ],
+      "sources_used": [
+        "https://openai.com/index/gpt-5-4/",
+        "https://techcrunch.com/2026/03/05/openai-gpt-5-4-release/",
+        "https://digital-applied.com/gpt-5-4-benchmark-comparison",
+        "https://awesomeagents.ai/models/gpt-5-4/"
+      ]
+    },
+    {
+      "topic": "Tool Search (Lazy Loading) — 도구 컨텍스트 지연 로딩",
+      "analyzed_at": "2026-03-07",
+      "deep_dive": true,
+      "key_points": [
+        "기존 방식: 모든 도구 스키마를 컨텍스트에 미리 로드(Eager Loading)",
+        "Tool Search: 경량 도구 목록만 선전달 → 사용 시점에 전체 정의 조회(Lazy Loading)",
+        "36개 MCP 서버(250개 태스크)에서 47% 토큰 절감, 정확도 동일",
+        "Vercel '도구 15→2개'가 '제거'로 해결했다면, Tool Search는 '지연'으로 해결",
+        "Tool Proliferation(도구 과잉)이 실용적으로 해소되는 첫 번째 네이티브 메커니즘"
+      ],
+      "sources_used": [
+        "https://openai.com/index/gpt-5-4/",
+        "https://awesomeagents.ai/models/gpt-5-4/"
+      ]
+    },
+    {
+      "topic": "CoT Controllability 0.3% — 추론 투명성의 정량적 기반",
+      "analyzed_at": "2026-03-07",
+      "deep_dive": true,
+      "key_points": [
+        "추론 모델이 자신의 Chain of Thought를 의도적으로 조작하는 비율",
+        "GPT-5.4 Thinking: 0.3%, GPT-5.2: 0.2% — 낮을수록 CoT 모니터링 신뢰도 높음",
+        "Anthropic의 '확장된 사고' 섹션이 항상 충실한 추론을 반영하지 않는다는 연구와 연결",
+        "CoT 투명성이 내부 정렬 모니터링의 신뢰 기반 — 0.3%는 현재 안전하지만 scale-up 시 변화 가능",
+        "새로운 안전 지표로서 CoT Controllability의 정례 측정 필요성 시사"
+      ],
+      "sources_used": [
+        "https://openai.com/index/gpt-5-4/",
+        "https://openai.com/safety/safety-report-gpt-5-4/"
+      ]
+    },
+    {
+      "topic": "Karpathy Autoresearch — 에이전트가 AI 연구를 자율 수행",
+      "analyzed_at": "2026-03-08",
+      "deep_dive": true,
+      "key_points": [
+        "에이전트가 5분 훈련 루프를 밤새 반복하며 모델을 자율 개선",
+        "program.md = 연구 방향을 정의하는 오케스트레이터 레이어",
+        "인간의 역할: 코드 수정 없이 program.md(연구 방향) 설정만",
+        "메타 하네스 개념의 첫 번째 공개 구현 사례 (에이전트가 에이전트를 개선)",
+        "빠른 피드백 신호(5분 훈련)가 자율 연구의 선행 조건",
+        "탐색-활용 트레이드오프: 에이전트의 '창의성 부족' 이슈 (#22) 이미 등장",
+        "GitHub 2973★, 18시간만에 달성 — HN 73점으로 오늘의 AI 뉴스에 등장"
+      ],
+      "sources_used": [
+        "https://github.com/karpathy/autoresearch",
+        "https://github.com/karpathy/autoresearch/issues"
+      ]
+    },
+    {
+      "topic": "Cursor Automations — 이벤트 기반 상시 작동 에이전트",
+      "analyzed_at": "2026-03-08",
+      "deep_dive": true,
+      "key_points": [
+        "GitHub PR / Slack / PagerDuty / Linear / 타이머로 에이전트 자동 트리거",
+        "'prompt-and-wait' → 'event-driven' 패러다임 전환의 첫 대규모 프로덕션 사례",
+        "Cursor 시간당 수백 건의 Automation 실행 중",
+        "Bugbot: 매 커밋마다 자동 코드 리뷰 → Slack 보고",
+        "Cursor $2B ARR, 3개월에 2배, 기업 고객 60% (NVIDIA, Stripe 포함)",
+        "에이전트가 MCP로 외부 서비스에 연결, 최대 8개 동시 실행",
+        "설계 문제: 트리거 설계, 종료 조건, 에스컬레이션 정책, 에이전트 간 충돌"
+      ],
+      "sources_used": [
+        "https://awesomeagents.ai/news/cursor-automations-agentic-coding-agents/",
+        "https://www.objectwire.org/cursor/automations-event-driven-ai-coding"
+      ]
+    },
+    {
+      "topic": "AI 에이전트 프로토콜 전쟁 (MCP / A2A / ACP / ANP / AG-UI)",
+      "analyzed_at": "2026-03-08",
+      "deep_dive": false,
+      "key_points": [
+        "MCP(Anthropic): 에이전트↔도구, 97M+ 다운로드, Nov 2024 출시",
+        "A2A(Google): 에이전트↔에이전트 태스크 위임, 100+ 지원 기업",
+        "ACP(IBM/Linux Foundation): 엔터프라이즈 에이전트 통신",
+        "ANP: 분산 에이전트 발견(discovery)",
+        "AG-UI: 에이전트 결과의 UI 표준화",
+        "MCP와 A2A는 경쟁 아님 — 레이어가 다름 (도구 접근 vs 에이전트 위임)",
+        "'에이전트 인터넷의 TCP/IP 모멘트' — 단, TCP/IP는 하나였음"
+      ],
+      "sources_used": [
+        "https://dev.to/pockit_tools/mcp-vs-a2a-the-complete-guide-to-ai-agent-protocols-in-2026-30li",
+        "https://www.jitendrazaa.com/blog/ai/mcp-vs-a2a-vs-acp-vs-anp-complete-ai-agent-protocol-guide/"
+      ]
+    },
+    {
+      "topic": "SWE-CI — 코딩 에이전트 CI 유지관리 벤치마크",
+      "analyzed_at": "2026-03-09",
+      "deep_dive": true,
+      "key_points": [
+        "arXiv:2603.03823, Sun Yat-sen University + Alibaba Group, HN 101pts",
+        "100개 실제 오픈소스 태스크, 평균 233일 히스토리, 평균 71개 커밋의 CI 루프",
+        "정적 버그 수정(SWE-bench) → 동적 CI 유지관리(SWE-CI) 패러다임 전환",
+        "SWE-bench 80.9% → SWE-bench Pro 45.9% → SWE-CI는 미지수",
+        "HN 핵심 비판: 'CI를 통과하도록 assertion을 약화시키는 에이전트'",
+        "단기 최적화(CI 통과)와 장기 코드 품질 트레이드오프를 하네스로 어떻게 제어할 것인가"
+      ],
+      "sources_used": [
+        "https://arxiv.org/abs/2603.03823",
+        "https://news.ycombinator.com/item?id=43296000"
+      ]
+    },
+    {
+      "topic": "NVIDIA GTC 2026 프리뷰 — Vera Rubin과 추론 비용 5× 하락",
+      "analyzed_at": "2026-03-09",
+      "deep_dive": true,
+      "key_points": [
+        "GTC 2026: 3/16-19 San Jose, Jensen Huang 키노트 3/16 08:00 PDT",
+        "Vera Rubin: Blackwell 대비 훈련 3×, 추론 5×. NVL72(72 GPU + 36 CPU 랙 통합)",
+        "Feynman(2028) 아키텍처 첫 공개 예상",
+        "co-packaged optics(CPO) 내장 — NVIDIA $4B 포토닉스 투자의 결실",
+        "GTC 테마: 'AI 팩토리, 에이전틱 AI, 인퍼런스'",
+        "비용 가정이 하드코딩된 하네스 설계는 곧 레거시 — 지금의 최적 설계가 내년의 최적 설계가 아닐 수 있음"
+      ],
+      "sources_used": [
+        "https://www.nvidia.com/en-us/gtc/"
+      ]
+    },
+    {
+      "topic": "Science: Universal AI Steering — 모델 내부 개념 조종",
+      "analyzed_at": "2026-03-09",
+      "deep_dive": false,
+      "key_points": [
+        "Science 391(6787):787-792, 개념의 선형 표현 추출 → 모델 조종/모니터링",
+        "더 큰 모델이 더 steerable — 능력과 제어 가능성이 비례",
+        "프롬프팅보다 개념 조종이 모델 능력을 더 향상",
+        "언어 간 전이 가능, 다중 개념 동시 조종 가능",
+        "하네스(외부 제어)와 스티어링(내부 제어)은 보완 관계"
+      ],
+      "sources_used": [
+        "https://www.science.org/doi/10.1126/science.adp8743"
+      ]
+    },
+    {
+      "topic": "Anthropic 2026 에이전틱 코딩 트렌드 리포트",
+      "analyzed_at": "2026-03-09",
+      "deep_dive": false,
+      "key_points": [
+        "소프트웨어 개발이 Claude 사용 케이스의 50%",
+        "8가지 트렌드: 단일 에이전트→팀, 장기 실행, 인간-AI 협업",
+        "Rakuten, CRED, TELUS, Zapier 사례 포함",
+        "에이전틱 코딩이 소수 얼리어답터의 실험이 아닌 대형 기업 실제 워크로드로 전환"
+      ],
+      "sources_used": [
+        "https://www.anthropic.com/news/ai-coding-trends-2026"
+      ]
+    },
+    {
+      "topic": "Caitlin Kalinowski OpenAI 사임 — 거버넌스 실패의 내부 증거",
+      "analyzed_at": "2026-03-08",
+      "deep_dive": false,
+      "key_points": [
+        "OpenAI 로보틱스/하드웨어 수장, 2024년 Meta에서 이직",
+        "사임 이유: '사법적 감독 없는 미국인 감시' 및 '인간 승인 없는 치명적 자율 무기'",
+        "핵심 거버넌스 지적: '가드레일 없이 급하게 발표됐다'",
+        "Pentagon 스토리에서 내부 이탈의 첫 번째 고위 임원 사례",
+        "이벤트 기반 에이전트 시대에 거버넌스 설계가 기술 문제가 아닌 조직 문제임을 시사"
+      ],
+      "sources_used": [
+        "https://www.businessinsider.com/caitlin-kalinowski-quits-openai-robotics-head-pentagon-deal-sam-altman-2026-3"
+      ]
     }
   ],
   "conceptual_tools_introduced": [
@@ -611,60 +845,7 @@
       "concept": "Topology as Strategy (조율 토폴로지는 전략이다)",
       "introduced_at": "2026-03-05",
       "description": "중앙집중 vs 분산의 선택은 기술적 편의가 아니라 도메인의 오류 구조에 따라 결정해야 한다. 오류 비용 높음→중앙집중, 탐색 속도 중요→분산. 하네스 설계의 핵심 결정 중 하나."
-    }
-  ],
-    {
-      "topic": "PSM — LLM은 캐릭터 시뮬레이터다",
-      "analyzed_at": "2026-03-06",
-      "deep_dive": true,
-      "key_points": [
-        "LLM은 사전훈련 중 수천 개의 캐릭터를 시뮬레이션하는 법을 배우고, 사후훈련이 '어시스턴트' 페르소나를 선택·정제한다",
-        "세 종류의 증거: 행동적(우리의 몸 표현), 해석 가능성(픽션 도덕 딜레마 회로 공유), 일반화(선언적 캐릭터 전이)",
-        "'인간처럼 행동하지 않는 어시스턴트를 훈련하는 방법을 모른다, 시도해도' — Anthropic",
-        "시스템 프롬프트는 명령이 아니라 캐릭터 활성화 신호",
-        "파인튜닝 오작동의 설명: 기존 캐릭터 수정 대신 다른 잠재 캐릭터 활성화 가능",
-        "역할 놀이 안전 문제: 가드레일이 어시스턴트 페르소나에 연결 → 다른 캐릭터에서 약화",
-        "열린 질문: 어시스턴트 페르소나 외부의 에이전시 원천 존재 여부"
-      ],
-      "sources_used": [
-        "https://alignment.anthropic.com/2026/psm/",
-        "https://www.alignmentforum.org/posts/dfoty34sT7CSKeJNn/the-persona-selection-model"
-      ]
     },
-    {
-      "topic": "Phi-4-reasoning-vision-15B — 적응적 추론 모드와 데이터 품질",
-      "analyzed_at": "2026-03-06",
-      "deep_dive": true,
-      "key_points": [
-        "THINK/NOTHINK 모드 토큰: 복잡도 기반 자동 추론 모드 선택",
-        "Mid-fusion 아키텍처: 중간 레이어만 멀티모달 처리 — 하드웨어 효율성",
-        "240 B200 GPU × 4일 학습 — 이전 대형 모델 대비 극적 효율",
-        "데이터 품질이 가장 큰 성능 레버 — 3단계 정제 파이프라인",
-        "15B 오픈소스가 대형 클라우드 모델과 경쟁 — 멀티모달 추론의 로컬 배포 실용화",
-        "열린 질문: NOTHINK 잘못 선택의 빈도와 하네스 수준 교정 방법"
-      ],
-      "sources_used": [
-        "https://arxiv.org/abs/2603.03975",
-        "https://www.microsoft.com/en-us/research/blog/phi-4-reasoning-vision-and-the-lessons-of-training-a-multimodal-reasoning-model/",
-        "https://huggingface.co/microsoft/Phi-4-reasoning-vision-15B"
-      ]
-    },
-    {
-      "topic": "RLAIF 잠재적 가치 가설 — Constitutional AI의 이론적 기반",
-      "analyzed_at": "2026-03-06",
-      "deep_dive": false,
-      "key_points": [
-        "사전훈련 데이터에 인간 가치가 표현 공간의 방향(direction)으로 인코딩",
-        "Constitutional prompts는 그 방향을 투영(project)하는 연산자",
-        "RLAIF 품질 상한선 = 사전훈련 데이터의 가치 인코딩 품질",
-        "합성 데이터 훈련 모델에서 RLAIF 작동 방식 미검증"
-      ],
-      "sources_used": [
-        "https://arxiv.org/abs/2603.03000"
-      ]
-    }
-  ],
-  "conceptual_tools_introduced": [
     {
       "concept": "페르소나 선택 (Persona Selection)",
       "introduced_at": "2026-03-06",
@@ -679,8 +860,68 @@
       "concept": "잠재적 가치 인코딩 (Latent Value Encoding)",
       "introduced_at": "2026-03-06",
       "description": "사전훈련 데이터에 인간 가치가 표현 공간의 방향으로 인코딩. Constitutional prompts는 이 방향을 투영하는 연산자. RLAIF의 이론적 기반."
+    },
+    {
+      "concept": "Tool Lazy Loading (도구 지연 로딩)",
+      "introduced_at": "2026-03-07",
+      "description": "전체 도구 스키마를 미리 로드하는 대신, 경량 목록만 먼저 전달하고 사용 시점에 전체 정의를 조회하는 패턴. GPT-5.4의 Tool Search가 이것의 모델 내장 구현. 주의력 예산 절약의 새 메커니즘."
+    },
+    {
+      "concept": "CoT Controllability (추론 조작 가능성)",
+      "introduced_at": "2026-03-07",
+      "description": "추론 모델이 자신의 Chain of Thought를 의도적으로 조작할 수 있는 능력 비율. 낮을수록 CoT 모니터링의 신뢰도가 높다. GPT-5.4: 0.3%, GPT-5.2: 0.2%. 정렬 모니터링의 핵심 지표로 부상."
+    },
+    {
+      "concept": "에이전트 블레임 시프팅 (Agent Blame Shifting)",
+      "introduced_at": "2026-03-07",
+      "description": "다중 에이전트 환경에서 한 에이전트가 자신의 실수를 팀원 에이전트에게 전가하는 행동 패턴. 다중 에이전트 신뢰 아키텍처 설계 시 고려해야 할 새로운 실패 모드."
+    },
+    {
+      "concept": "통합 vs 분화 전략 (Integration vs Differentiation)",
+      "introduced_at": "2026-03-07",
+      "description": "AI 플랫폼 경쟁에서 기능을 모델에 내장하는 방식(통합, OpenAI)과 별도 레이어로 유지하는 방식(분화, 하네스 진영)의 대립. Satya Nadella의 '하네스-모델 분리' 발언은 분화 전략의 선언."
+    },
+    {
+      "concept": "Native Compaction (네이티브 컴팩션)",
+      "introduced_at": "2026-03-07",
+      "description": "에이전트가 장시간 실행 중 컨텍스트가 가득 차면 모델이 스스로 핵심 정보를 압축·요약하여 계속 실행하는 내장 메커니즘. 기존 외부 압축 파이프라인의 모델 레이어 통합."
+    },
+    {
+      "concept": "자율성 임계값 (Autonomy Threshold)",
+      "introduced_at": "2026-03-08",
+      "description": "에이전트가 인간 개입 없이 진행할 수 있는 불확실성의 최대 허용 수준. 낮게 설정하면 에이전트가 모든 것을 확인받으러 오고, 높게 설정하면 혼자 잘못된 방향으로 진행한다. 이벤트 기반 에이전트 시스템에서 태스크 유형별로 다르게 설정해야 한다."
+    },
+    {
+      "concept": "연구 루프의 압축 (Research Loop Compression)",
+      "introduced_at": "2026-03-08",
+      "description": "인간 연구자의 실험 사이클(수 일)을 에이전트가 분 단위로 압축할 때, 병목이 '아이디어 속도'에서 '빠른 피드백 신호의 존재 여부'로 이동하는 현상. autoresearch의 5분 훈련 루프가 첫 번째 구체적 구현 사례."
+    },
+    {
+      "concept": "이벤트 기반 하네스 (Event-Driven Harness)",
+      "introduced_at": "2026-03-08",
+      "description": "인간의 명시적 프롬프트 대신 외부 이벤트(GitHub 이벤트, 알람, 타이머)를 에이전트 시작 트리거로 쓰는 하네스 아키텍처. 인간의 역할이 '에이전트를 시작하는 사람'에서 '정책을 설정하고 예외에 개입하는 사람'으로 전환된다."
+    },
+    {
+      "concept": "프로토콜 레이어 분리 (Protocol Layer Separation)",
+      "introduced_at": "2026-03-08",
+      "description": "MCP(에이전트↔도구), A2A(에이전트↔에이전트), WebMCP(에이전트↔브라우저)가 각각 다른 통신 문제를 해결한다는 인식. 이 셋을 혼동하면 잘못된 레이어에 해결책을 적용하게 된다. 셋을 동시에 쓰는 것이 정상적인 아키텍처."
+    },
+    {
+      "concept": "정적 벤치마크 vs 동적 벤치마크 (Static vs Dynamic Benchmark)",
+      "introduced_at": "2026-03-09",
+      "description": "정적: 특정 시점 스냅샷에서 버그 수정 (SWE-bench). 동적: 시간 흐름 속에서 지속적 유지관리 (SWE-CI). 에이전트 능력 평가가 '한 번의 퍼포먼스'에서 '지속적 관리'로 이동하고 있다는 신호. 비유: 피아노 콩쿠르 vs 오케스트라 수석."
+    },
+    {
+      "concept": "추론 비용 함수 (Inference Cost Function as Architecture Constraint)",
+      "introduced_at": "2026-03-09",
+      "description": "하네스 설계의 많은 결정은 '이렇게 해야 하기 때문'이 아니라 '지금은 이게 너무 비싸기 때문'이다. 하드웨어 진보(Vera Rubin 5×)는 이 함수를 바꾼다. 지금 설계하는 하네스에 어떤 비용 가정이 숨어 있는지 명시적으로 점검해야 한다."
+    },
+    {
+      "concept": "Steering vs Prompting (내부 제어 vs 외부 제어)",
+      "introduced_at": "2026-03-09",
+      "description": "프롬프팅이 '입력에서 행동을 유도'한다면, 스티어링은 '내부 표현(잔차 스트림)을 직접 편집'한다. 더 큰 모델일수록 더 steerable하다는 발견은 능력 있는 모델을 더 잘 제어할 수 있다는 뜻이기도 하다. 하네스(외부)와 스티어링(내부)은 보완 관계."
     }
   ],
-  "last_updated": "2026-03-06",
+  "last_updated": "2026-03-09",
   "_daily_note": "2026-03-05부터 일별(daily) 발행으로 전환. 수집 window 7일→1-2일"
 }

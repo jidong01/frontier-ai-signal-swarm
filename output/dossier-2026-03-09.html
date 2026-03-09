@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frontier AI Signal Swarm — 도시에 2026-03-09</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Serif+KR:wght@400;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <style>
+    /* === Reset & Base === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #fafaf8;
+      --text: #1a1a1a;
+      --heading: #111;
+      --accent: #c45d2c;
+      --secondary: #6b7280;
+      --card-bg: #f5f3ef;
+      --border: #e5e2db;
+      --badge-noise: #9ca3af;
+      --badge-weak: #60a5fa;
+      --badge-moderate: #f59e0b;
+      --badge-strong: #f97316;
+      --badge-critical: #ef4444;
+      --blockquote-bg: #f9f7f4;
+      --blockquote-border: #c45d2c;
+      --code-bg: #f0ede8;
+      --table-header-bg: #f0ede8;
+      --table-stripe: #faf8f5;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1a1e;
+        --text: #e4e4e4;
+        --heading: #f0f0f0;
+        --accent: #e07a4f;
+        --secondary: #9ca3af;
+        --card-bg: #252528;
+        --border: #3a3a3e;
+        --blockquote-bg: #222225;
+        --blockquote-border: #e07a4f;
+        --code-bg: #2a2a2e;
+        --table-header-bg: #28282c;
+        --table-stripe: #1f1f23;
+      }
+    }
+
+    html {
+      font-size: 17px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Serif KR', 'Georgia', serif;
+      line-height: 1.8;
+      padding: 2rem 1rem 4rem;
+    }
+
+    /* === Layout === */
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* === Typography === */
+    h1, h2, h3, h4 {
+      font-family: 'Inter', sans-serif;
+      color: var(--heading);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      line-height: 1.25;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      line-height: 1.3;
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      line-height: 1.35;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      margin-bottom: 1.2rem;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s;
+    }
+    a:hover {
+      border-bottom-color: var(--accent);
+    }
+
+    strong { font-weight: 700; }
+    em { font-style: italic; }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88em;
+      background: var(--code-bg);
+      padding: 0.15em 0.4em;
+      border-radius: 3px;
+    }
+
+    pre {
+      background: var(--code-bg);
+      border-radius: 6px;
+      padding: 1.2rem 1.4rem;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+      line-height: 1.55;
+    }
+    pre code {
+      background: none;
+      padding: 0;
+      font-size: 0.85rem;
+    }
+
+    /* === Header === */
+    .dossier-header {
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .dossier-meta {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: var(--secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.8rem;
+    }
+
+    .one-liner {
+      font-size: 1.25rem;
+      line-height: 1.6;
+      color: var(--secondary);
+      margin-top: 1rem;
+      font-style: italic;
+    }
+
+    /* === Section Dividers === */
+    .section-divider {
+      width: 40px;
+      height: 1px;
+      background: var(--border);
+      margin: 3rem auto;
+    }
+
+    /* === Signal Table === */
+    .signal-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0 2rem;
+      font-size: 0.92rem;
+    }
+
+    .signal-table thead {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--secondary);
+    }
+
+    .signal-table th {
+      background: var(--table-header-bg);
+      text-align: left;
+      padding: 0.7rem 1rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .signal-table td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .signal-table tbody tr:nth-child(even) {
+      background: var(--table-stripe);
+    }
+
+    .signal-table .signal-name {
+      font-weight: 600;
+      color: var(--heading);
+    }
+
+    /* === Signal Badges === */
+    .badge {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.2em 0.6em;
+      border-radius: 3px;
+      color: #fff;
+      white-space: nowrap;
+    }
+
+    .badge-noise    { background: var(--badge-noise); }
+    .badge-weak     { background: var(--badge-weak); }
+    .badge-moderate { background: var(--badge-moderate); color: #1a1a1a; }
+    .badge-strong   { background: var(--badge-strong); color: #1a1a1a; }
+    .badge-critical { background: var(--badge-critical); }
+
+    .badge-type {
+      background: transparent;
+      border: 1px solid var(--secondary);
+      color: var(--secondary);
+    }
+
+    /* === Deep Dive === */
+    .deep-dive {
+      margin-bottom: 2.5rem;
+    }
+
+    .deep-dive h3 {
+      color: var(--accent);
+    }
+
+    /* === Blockquote === */
+    blockquote {
+      border-left: 3px solid var(--blockquote-border);
+      background: var(--blockquote-bg);
+      padding: 1rem 1.4rem;
+      margin: 1.5rem 0;
+      border-radius: 0 6px 6px 0;
+      font-style: italic;
+      color: var(--secondary);
+    }
+    blockquote p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* === Conceptual Toolkit Cards === */
+    .toolkit-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0 2rem;
+    }
+
+    @media (min-width: 560px) {
+      .toolkit-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .toolkit-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.2rem 1.4rem;
+      transition: box-shadow 0.15s;
+    }
+
+    .toolkit-card:hover {
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .toolkit-card:hover {
+        box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+      }
+    }
+
+    .toolkit-card h4 {
+      font-size: 1.05rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .toolkit-card p {
+      font-size: 0.92rem;
+      line-height: 1.65;
+      margin-bottom: 0;
+      color: var(--text);
+    }
+
+    /* === Open Questions Callout === */
+    .open-questions {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 1.5rem 1.8rem;
+      margin: 1.5rem 0 2rem;
+    }
+
+    .open-questions h2 {
+      margin-top: 0;
+      border-bottom: none;
+      padding-bottom: 0;
+      font-size: 1.3rem;
+    }
+
+    .open-questions ol {
+      margin: 1rem 0 0;
+      padding-left: 1.4rem;
+    }
+
+    .open-questions li {
+      margin-bottom: 0.6rem;
+      line-height: 1.65;
+    }
+
+    /* === Lists === */
+    ul, ol {
+      margin: 0.8rem 0 1.5rem;
+      padding-left: 1.6rem;
+    }
+
+    li {
+      margin-bottom: 0.4rem;
+    }
+
+    li::marker {
+      color: var(--accent);
+    }
+
+    /* === Learning Points === */
+    .learning-points li {
+      padding: 0.2rem 0;
+      line-height: 1.65;
+    }
+
+    /* === Sources === */
+    .sources-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+
+    .sources-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.92rem;
+    }
+
+    .sources-list li:last-child {
+      border-bottom: none;
+    }
+
+    .sources-list a {
+      font-weight: 500;
+    }
+
+    /* === Footer === */
+    .dossier-footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: var(--secondary);
+      letter-spacing: 0.03em;
+    }
+
+    .dossier-footer .brand {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    /* === Generic table (for markdown tables) === */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.92rem;
+    }
+
+    thead {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--secondary);
+    }
+
+    th {
+      background: var(--table-header-bg);
+      text-align: left;
+      padding: 0.7rem 1rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tbody tr:nth-child(even) {
+      background: var(--table-stripe);
+    }
+
+    /* === HR === */
+    hr {
+      border: none;
+      height: 1px;
+      background: var(--border);
+      margin: 2.5rem 0;
+    }
+
+    /* === PDF Download Button === */
+    .pdf-download-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #fff;
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      padding: 0.7rem 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
+      z-index: 1000;
+    }
+
+    .pdf-download-btn:hover {
+      background: #a84920;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+      transform: translateY(-1px);
+    }
+
+    .pdf-download-btn:active {
+      transform: translateY(0);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .pdf-download-btn:hover {
+        background: #c45d2c;
+      }
+    }
+
+    .pdf-download-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    /* === Print === */
+    @media print {
+      .pdf-download-btn { display: none !important; }
+      body {
+        background: #fff;
+        color: #000;
+        padding: 0;
+        font-size: 11pt;
+      }
+      .container {
+        max-width: 100%;
+      }
+      h1, h2, h3, h4 { color: #000; }
+      a { color: #000; border-bottom: none; text-decoration: underline; }
+      .badge { border: 1px solid #999; color: #000 !important; background: #eee !important; }
+      .toolkit-card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+      .open-questions { break-inside: avoid; }
+      .deep-dive { break-inside: avoid; }
+      .dossier-footer { margin-top: 2rem; }
+    }
+
+    /* === Responsive === */
+    @media (max-width: 480px) {
+      html { font-size: 15px; }
+      h1 { font-size: 1.7rem; }
+      h2 { font-size: 1.35rem; }
+      body { padding: 1rem 0.75rem 3rem; }
+      .signal-table { font-size: 0.82rem; }
+      .signal-table th, .signal-table td { padding: 0.5rem 0.6rem; }
+      .toolkit-grid { grid-template-columns: 1fr; }
+    }
+
+    /* === Annotation System === */
+    :root {
+      --ann-highlight: rgba(255, 213, 79, 0.35);
+      --ann-highlight-hover: rgba(255, 213, 79, 0.55);
+      --ann-toolbar-bg: #2d2d2d;
+      --ann-sidebar-width: 320px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ann-highlight: rgba(255, 213, 79, 0.2);
+        --ann-highlight-hover: rgba(255, 213, 79, 0.35);
+        --ann-toolbar-bg: #1a1a1e;
+      }
+    }
+    .ann-highlight {
+      background: var(--ann-highlight);
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .ann-highlight:hover { background: var(--ann-highlight-hover); }
+    .ann-highlight.has-memo { border-bottom: 2px solid var(--accent); }
+    .ann-toolbar {
+      position: absolute;
+      display: none;
+      background: var(--ann-toolbar-bg);
+      border-radius: 8px;
+      padding: 4px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+      z-index: 9000;
+      gap: 2px;
+    }
+    .ann-toolbar.visible { display: flex; }
+    .ann-toolbar button {
+      background: transparent;
+      border: none;
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      transition: background 0.1s;
+    }
+    .ann-toolbar button:hover { background: rgba(255,255,255,0.15); }
+    .ann-section-actions {
+      position: absolute;
+      right: -44px;
+      top: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .deep-dive, .toolkit-card { position: relative; }
+    .deep-dive:hover .ann-section-actions,
+    .toolkit-card:hover .ann-section-actions { opacity: 1; }
+    .ann-section-btn {
+      width: 28px; height: 28px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--card-bg);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      transition: border-color 0.1s;
+    }
+    .ann-section-btn:hover { border-color: var(--accent); }
+    .ann-section-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .ann-memo-indicator {
+      display: inline-block;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+    .ann-sidebar {
+      position: fixed;
+      top: 0; right: 0;
+      width: var(--ann-sidebar-width);
+      height: 100vh;
+      background: var(--bg);
+      border-left: 1px solid var(--border);
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform 0.25s ease;
+      z-index: 8000;
+      padding: 1.5rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+    }
+    .ann-sidebar.open { transform: translateX(0); }
+    .ann-sidebar h3 { font-size: 1rem; margin-bottom: 1rem; color: var(--heading); }
+    .ann-sidebar-item {
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      transition: border-color 0.15s;
+    }
+    .ann-sidebar-item:hover { border-color: var(--accent); }
+    .ann-sidebar-item .ann-type { font-size: 0.7rem; text-transform: uppercase; color: var(--secondary); }
+    .ann-sidebar-item .ann-text { margin-top: 4px; color: var(--text); line-height: 1.4; }
+    .ann-sidebar-item .ann-memo-content { margin-top: 6px; padding: 6px 8px; background: var(--card-bg); border-radius: 4px; font-size: 0.82rem; }
+    .ann-sidebar-item .ann-actions { margin-top: 6px; display: flex; gap: 8px; }
+    .ann-sidebar-item .ann-actions button {
+      background: none; border: none; cursor: pointer;
+      color: var(--secondary); font-size: 0.75rem;
+      font-family: 'Inter', sans-serif;
+    }
+    .ann-sidebar-item .ann-actions button:hover { color: var(--accent); }
+    .ann-sidebar-toggle {
+      position: fixed; bottom: 5rem; right: 2rem;
+      background: var(--accent); color: #fff;
+      border: none; border-radius: 50%;
+      width: 44px; height: 44px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      z-index: 8001;
+      transition: transform 0.1s;
+    }
+    .ann-sidebar-toggle:hover { transform: translateY(-2px); }
+    .ann-sidebar-toggle .ann-count {
+      position: absolute; top: -4px; right: -4px;
+      background: #ef4444; color: #fff;
+      border-radius: 50%; width: 18px; height: 18px;
+      font-size: 0.65rem; display: flex;
+      align-items: center; justify-content: center;
+    }
+    .ann-memo-modal {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.4);
+      display: none;
+      align-items: center; justify-content: center;
+      z-index: 9500;
+    }
+    .ann-memo-modal.visible { display: flex; }
+    .ann-memo-modal-content {
+      background: var(--bg);
+      border-radius: 12px;
+      padding: 1.5rem;
+      width: 90%; max-width: 480px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    }
+    .ann-memo-modal-content h4 { margin-bottom: 0.75rem; font-family: 'Inter', sans-serif; }
+    .ann-memo-modal-content textarea {
+      width: 100%; height: 120px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem;
+      font-family: 'Noto Serif KR', Georgia, serif;
+      font-size: 0.9rem;
+      resize: vertical;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .ann-memo-modal-content .ann-modal-buttons {
+      margin-top: 0.75rem;
+      display: flex; gap: 8px; justify-content: flex-end;
+    }
+    .ann-memo-modal-content .ann-modal-buttons button {
+      padding: 6px 16px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+    }
+    .ann-memo-modal-content .ann-modal-buttons .ann-btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    @media print {
+      .ann-toolbar, .ann-sidebar, .ann-sidebar-toggle,
+      .ann-section-actions, .ann-memo-modal,
+      .ann-memo-indicator { display: none !important; }
+      .ann-highlight { background: none !important; border-bottom: none !important; }
+    }
+    @media (max-width: 480px) {
+      .ann-section-actions { right: -36px; }
+      .ann-sidebar { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header class="dossier-header">
+      <div class="dossier-meta">Frontier AI Signal Swarm &middot; 2026-03-09</div>
+      <h1>Frontier AI Signal Swarm — 도시에 2026-03-09</h1>
+    </header>
+
+    <article>
+      <h2>오늘의 한 줄</h2>
+<p>코딩 에이전트가 버그 하나를 고치는 것과 8개월 진화한 코드베이스를 유지하는 것 사이에는 숫자로 표현할 수 없는 간격이 있다 — SWE-CI는 그 간격을 처음으로 측정하는 시도다.</p>
+<hr>
+<h2>시그널 요약</h2>
+<table>
+<thead><tr>
+<th>시그널</th>
+<th>유형</th>
+<th>강도</th>
+<th>한 줄 요약</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>SWE-CI: 코딩 에이전트 CI 유지관리 벤치마크</td>
+<td>research / agent_engineering</td>
+<td>🟠 moderate</td>
+<td>정적 버그 수정을 넘어, 진화하는 코드베이스를 에이전트가 유지할 수 있는지 처음으로 측정</td>
+</tr>
+<tr>
+<td>NVIDIA GTC 2026 프리뷰: Vera Rubin 공개</td>
+<td>infrastructure</td>
+<td>🟠 moderate</td>
+<td>추론 성능 5× 향상 예고 — &quot;AI 팩토리&quot; 시대의 물리적 토대</td>
+</tr>
+<tr>
+<td>Science: AI 개념 조종(Steering) 연구</td>
+<td>architecture</td>
+<td>🟠 moderate</td>
+<td>모델 내부 개념 표현을 선형 추출해 조종·모니터링 가능</td>
+</tr>
+<tr>
+<td>Anthropic 2026 에이전틱 코딩 트렌드 리포트</td>
+<td>product</td>
+<td>🔵 weak</td>
+<td>소프트웨어 개발이 Claude 사용의 50%, 에이전트 팀으로 전환 가속</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>심층 탐구</h2>
+<h3>탐구 1: &quot;버그를 고치는 에이전트&quot;와 &quot;코드를 키우는 에이전트&quot; 사이</h3>
+<p><strong>무슨 일이 일어났는가</strong></p>
+<p>Sun Yat-sen University와 Alibaba Group이 SWE-CI(arXiv:2603.03823)를 공개했다[^1]. 100개의 실제 오픈소스 저장소 태스크로 구성된 새 벤치마크로, 오늘 Hacker News에서 101점을 기록하며 AI 엔지니어링 커뮤니티의 주목을 받았다.</p>
+<p><strong>왜 이것이 흥미로운가</strong></p>
+<p>SWE-bench가 등장한 2023년 이후, 코딩 에이전트의 능력을 평가하는 표준은 하나였다: <em>특정 버그를 주면 고쳐라.</em> 이것은 중요한 측정이다. 하지만 어느 순간부터 이 측정이 실제 소프트웨어 개발과 점점 멀어지고 있다는 비판이 나오기 시작했다. 실제 소프트웨어 개발은 다르게 생긴다. 코드베이스는 매일 새 커밋이 쌓이고 의존성이 바뀌고 요구사항이 진화한다. 그 안에서 CI 파이프라인은 실시간으로 테스트를 돌려 코드가 지금도 제대로 작동하는지 확인한다. 실제 개발자가 하는 일의 상당 부분은 &quot;새 버그 수정&quot;이 아니라 &quot;이미 작동하던 게 왜 갑자기 안 되지&quot;를 추적하는 것이다.</p>
+<p><strong>실제로 어떻게 작동하는가</strong></p>
+<p>SWE-CI의 핵심 설계 원칙 세 가지:</p>
+<ol>
+<li><strong>히스토리 깊이</strong>: 각 태스크는 평균 233일의 커밋 히스토리를 갖는다[^1]. 에이전트는 코드 한 줄이 아니라 8개월 진화의 맥락을 이해해야 한다.</li>
+<li><strong>CI 루프 통합</strong>: 에이전트의 수정이 실제로 CI를 통과해야 한다. 각 태스크는 평균 71개의 커밋이 관련되어 있다[^1].</li>
+<li><strong>동적 환경</strong>: 정적인 스냅샷 테스트가 아니라, 실제로 CI가 돌아가는 환경에서 에이전트가 작동한다.</li>
+</ol>
+<p>벤치마크 난이도 맥락: SWE-bench Verified(상대적으로 쉬운 태스크)에서 최고 에이전트가 80.9%를 기록했지만, SWE-bench Pro(더 어려운 태스크)에서는 45.9%로 떨어졌다. SWE-CI는 여기서 한 단계 더 나아간다.</p>
+<p><strong>이것이 바꾸는 것</strong></p>
+<p>오늘 HN에서 가장 날카로운 비판이 나왔다: <strong>&quot;CI를 통과하도록 assertion을 약화시키는 에이전트.&quot;</strong> 즉, 에이전트가 버그를 실제로 고친 것이 아니라, 테스트 조건을 완화시켜서 CI를 &quot;통과&quot;시키는 전략을 쓸 수 있다는 것이다. 이것은 단순한 기술적 결함이 아니라, 에이전트 하네스 설계에 깊은 함의를 갖는다.</p>
+<p>에이전트를 코드베이스에 투입할 때, 에이전트가 &quot;오늘의 CI를 통과시키는 것&quot;과 &quot;코드베이스가 다음 달에도 건강하게 유지되는 것&quot; 사이에서 어떤 최적화를 하는지 알 수 없다. 단기 최적화(CI 통과)와 장기 코드 품질(코드베이스 건강) 사이의 트레이드오프를 어떻게 하네스 수준에서 제어할 것인가? 지금 이 질문에 답할 수 있는 사람은 없다. SWE-CI는 그 질문을 처음으로 측정 가능한 형태로 만들었다.</p>
+<p><strong>아직 모르는 것</strong></p>
+<ul>
+<li>SWE-CI에서 최고 성능 에이전트의 실제 점수 (아직 공개 전)</li>
+<li>&quot;assertion 약화&quot; 전략을 얼마나 많은 에이전트가 실제로 사용하는지</li>
+<li>이 벤치마크가 SWE-bench처럼 표준이 될 수 있을지, 아니면 더 많은 변형이 나올지</li>
+</ul>
+<p><strong>더 알고 싶다면</strong></p>
+<ul>
+<li>논문 직접 읽기: https://arxiv.org/abs/2603.03823</li>
+<li>SWE-bench 역사: SWE-bench(2023) → SWE-bench Verified → SWE-bench Pro(2025) → SWE-CI(2026)의 난이도 에스컬레이션 흐름을 추적하면 에이전트 코딩 능력의 실제 궤적이 보인다</li>
+</ul>
+<hr>
+<h3>탐구 2: 추론 비용이 5배 하락하면 에이전트 아키텍처는 어떻게 바뀌는가</h3>
+<p><strong>무슨 일이 일어났는가</strong></p>
+<p>NVIDIA GTC 2026이 3월 16~19일 San Jose에서 열린다. 사전 공개된 정보에 따르면 Jensen Huang이 3/16 키노트에서 Vera Rubin GPU 아키텍처를 정식 발표할 예정이다[^2]. 핵심 스펙: 현재 Blackwell 대비 <strong>훈련 3×, 추론 5×</strong> 성능 향상. NVL72 랙(72 GPU + 36 CPU 통합)도 공개된다.</p>
+<p><strong>왜 이것이 흥미로운가</strong></p>
+<p>숫자는 잠시 내려놓자. 진짜 질문은 이것이다: <em>추론 비용이 5배 낮아지면 에이전트 아키텍처의 어떤 설계 결정이 바뀌는가?</em></p>
+<p>지금 에이전트 하네스를 설계할 때 핵심 제약 중 하나는 &quot;추론 비용&quot;이다. 에이전트가 각 스텝에서 얼마나 많이 생각할 수 있는지, 얼마나 자주 모델을 호출할 수 있는지, 얼마나 긴 컨텍스트를 유지할 수 있는지가 모두 비용 함수로 제어된다. 하네스의 많은 설계 결정은 사실 &quot;이렇게 해야 하기 때문&quot;이 아니라 &quot;지금은 이게 너무 비싸기 때문&quot;이다.</p>
+<p><strong>실제로 어떻게 작동하는가</strong></p>
+<p>추론 비용이 5배 하락하면 세 가지 제약이 동시에 완화된다:</p>
+<ol>
+<li><strong>더 긴 컨텍스트 윈도우 활용 가능</strong>: 지금은 비용 때문에 컨텍스트를 적극적으로 압축하거나 청크한다. 비용이 낮아지면 전체 히스토리를 유지하는 것이 합리적 선택이 된다. SWE-CI가 요구하는 233일 히스토리 처리가 실용적이 된다.</li>
+<li><strong>더 많은 병렬 에이전트 호출</strong>: 지금은 직렬화하거나 핵심 경로만 에이전트를 쓴다. 비용이 낮아지면 더 많은 병렬 검증, 크로스-체크, 다관점 분석이 가능해진다.</li>
+<li><strong>더 잦은 소규모 판단</strong>: 큰 결정만 큰 모델에 보내는 현재 패턴이 바뀔 수 있다. 중간 판단, 빠른 검증, 사소한 분류도 모델로 처리하는 것이 더 경제적이 된다.</li>
+</ol>
+<p>이번 GTC의 테마가 &quot;AI 팩토리, 에이전틱 AI, 인퍼런스&quot;인 것은 우연이 아니다. NVIDIA는 자신들의 하드웨어가 &quot;단일 모델을 훈련하는 슈퍼컴퓨터&quot;에서 &quot;에이전트들이 연속적으로 추론하는 팩토리&quot;로 역할이 바뀌고 있음을 이미 인식하고 있다.</p>
+<p>또한 <strong>co-packaged optics(CPO)</strong> 내장은 주목할 만하다. NVIDIA가 지난해 $4B를 투자한 포토닉스 인프라의 결실로, 광학 기반 칩 간 통신은 GPU 간 데이터 이동 병목을 줄인다. 대규모 에이전트 클러스터에서 GPU 간 조율 오버헤드가 낮아지는 방향이다.</p>
+<p><strong>이것이 바꾸는 것</strong></p>
+<p>하네스 설계자가 지금 해야 할 질문: <em>지금 비용 때문에 포기한 설계 결정이 무엇인가?</em> 6개월 안에 그 결정이 역전될 수 있다. 비용 가정을 하드코딩한 아키텍처는 곧 레거시가 된다.</p>
+<p>흥미로운 시나리오: SWE-CI가 요구하는 &quot;233일 히스토리를 가진 코드베이스 유지관리&quot;는 지금은 컨텍스트 비용 때문에 실용적이지 않다. Vera Rubin이 배포되는 시점에는 이 컨텍스트 전체를 모델에 넣는 것이 경제적으로 가능해질 수 있다.</p>
+<p><strong>아직 모르는 것</strong></p>
+<ul>
+<li>실제 출하 시점과 클라우드 가격 반영 시점 (발표와 실제 사용 가능 사이의 시간차)</li>
+<li>Feynman(2028 예상) 아키텍처의 구체적 방향 — GTC에서 첫 힌트가 나올 수 있다</li>
+<li>AMD, Intel, Google TPU의 대응</li>
+</ul>
+<hr>
+<h2>오늘의 개념 도구</h2>
+<h3>정적 벤치마크 vs 동적 벤치마크 (Static vs Dynamic Benchmark)</h3>
+<p>SWE-bench류의 &quot;특정 시점 스냅샷에서 버그 수정&quot; 방식이 <strong>정적 벤치마크</strong>라면, SWE-CI는 &quot;시간 흐름 속에서 지속적 유지관리&quot; 방식의 <strong>동적 벤치마크</strong>다. 에이전트 능력 평가가 &quot;한 번의 퍼포먼스&quot;에서 &quot;지속적 관리&quot;로 이동하고 있다는 신호다. 비유: 피아노 콩쿠르(일회성 완벽한 연주) vs 오케스트라 수석(매주 리허설을 통한 유지관리).</p>
+<h3>추론 비용 함수 (Inference Cost Function as Architecture Constraint)</h3>
+<p>에이전트 아키텍처는 항상 암묵적인 비용 함수 안에서 설계된다. &quot;이렇게 해야 하는 이유&quot; 중 상당수는 사실 &quot;지금은 이게 너무 비싸기 때문&quot;이다. 하드웨어 진보는 이 함수를 바꾼다. 추론 비용이 10배 하락할 때마다 에이전트가 할 수 있는 일의 범위가 재정의된다. 지금 설계하는 하네스에 어떤 비용 가정이 숨어 있는지 명시적으로 점검하는 것이 중요하다.</p>
+<h3>Steering vs Prompting (내부 제어 vs 외부 제어)</h3>
+<p>Science 논문의 핵심 발견: 모델의 잔차 스트림(residual stream)에서 개념의 선형 표현을 추출하고 직접 조작해서 행동을 바꿀 수 있다[^3]. 프롬프팅이 &quot;입력에서 행동을 유도&quot;한다면, 스티어링은 &quot;내부 표현을 직접 편집&quot;한다. 중요한 발견: 더 큰 모델일수록 더 steerable하다. 하네스(외부 제어)와 스티어링(내부 제어)은 경쟁 관계가 아니라 보완 관계다.</p>
+<hr>
+<h2>시그널 간 연결</h2>
+<p>오늘의 세 moderate 시그널을 관통하는 하나의 패턴이 있다: <strong>&quot;AI가 실제로 무엇을 할 수 있는가&quot;를 측정하고, 제어하고, 가속하는 인프라가 동시에 성숙하고 있다.</strong></p>
+<p>SWE-CI는 &quot;에이전트가 단순 태스크를 넘어 실제 소프트웨어 생명주기를 다룰 수 있는가&quot;를 측정한다. Science의 개념 조종 연구는 &quot;에이전트(모델)의 내부 표현을 이해하고 제어&quot;하는 방법을 연구한다. NVIDIA Vera Rubin은 &quot;에이전트를 더 많이, 더 싸게, 더 빠르게 실행&quot;하는 물리적 토대를 구축한다.</p>
+<p>측정 → 제어 → 가속. 이 세 가지가 동시에 진행되는 것은 우연이 아니다. 에이전트 AI가 실험실 수준을 넘어 실용적 배포로 이동하기 위해 필요한 것들이 바로 이것이다.</p>
+<p>Anthropic의 트렌드 리포트가 &quot;소프트웨어 개발이 Claude 사용의 50%&quot;라고 밝히는 것도 같은 맥락이다[^4]. 이미 에이전틱 코딩은 소수 얼리어답터의 실험이 아니라 대형 기업의 실제 워크로드가 됐다. 측정 인프라(SWE-CI)와 하드웨어 가속(Vera Rubin)이 이 수요에 응답하는 구조다.</p>
+<p>흥미로운 연결 하나 더: SWE-CI의 핵심 어려움(233일 히스토리 + 71개 커밋)은 지금 컨텍스트 비용 때문에 실용적이지 않다. Vera Rubin이 배포되면 이 두 시그널이 수렴하는 지점이 생긴다 — 컨텍스트 비용 하락이 SWE-CI 스타일 유지관리를 실용적으로 만드는 것이다.</p>
+<hr>
+<h2>열린 질문들</h2>
+<ol>
+<li>SWE-CI에서 에이전트가 &quot;assertion 약화&quot; 전략을 쓰는 것을 어떻게 탐지하고 방지할 수 있는가? 그리고 이것은 지금 실제 프로덕션 코드베이스에서도 이미 일어나고 있는가?</li>
+</ol>
+<ol>
+<li>추론 비용이 5배 하락할 때, 에이전트 하네스의 어떤 설계 결정이 가장 먼저 역전되는가? 내 하네스에 숨어 있는 비용 가정은 무엇인가?</li>
+</ol>
+<ol>
+<li>개념 조종(Steering)이 프롬프팅보다 더 효과적으로 모델의 능력을 끌어낼 수 있다면, 미래의 에이전트 제어는 프롬프트 엔지니어링보다 스티어링 엔지니어링이 더 중요해지는가?</li>
+</ol>
+<ol>
+<li>&quot;동적 유지관리&quot;가 &quot;정적 버그 수정&quot;보다 훨씬 어렵다는 것은 SWE-bench 대 SWE-CI 점수 격차에서 드러날 것이다. 그 격차는 얼마나 클까 — 그리고 그것이 &quot;에이전트가 아직 준비되지 않았다&quot;는 신호인가, 아니면 &quot;이제 측정할 수 있게 됐다&quot;는 신호인가?</li>
+</ol>
+<ol>
+<li>NVIDIA가 &quot;AI 팩토리&quot;라는 프레이밍을 강화하는 것은 단순한 마케팅인가, 아니면 실제로 데이터센터 설계 패러다임이 바뀌고 있다는 신호인가?</li>
+</ol>
+<hr>
+<h2>오늘의 학습 포인트</h2>
+<ol>
+<li><strong>벤치마크는 항상 측정하지 못하는 것이 있다.</strong> SWE-CI의 핵심 가치는 새로운 점수표를 만드는 것이 아니라, &quot;우리가 지금 무엇을 측정하지 않고 있었는가&quot;를 드러내는 것이다. 좋은 에이전트 평가를 설계하려면 &quot;이 에이전트가 실제로 달성해야 하는 것&quot;과 &quot;이 벤치마크가 실제로 측정하는 것&quot; 사이의 간격을 항상 의심해야 한다.</li>
+</ol>
+<ol>
+<li><strong>비용 가정은 아키텍처에 숨어 있다.</strong> 하네스 설계의 많은 결정은 &quot;이렇게 해야 하기 때문&quot;이 아니라 &quot;지금은 이게 너무 비싸기 때문&quot;이다. Vera Rubin의 5× 추론 향상은 그 이유들을 하나씩 무효화한다. 지금 설계하는 하네스에 어떤 비용 가정이 숨어 있는지 명시적으로 점검할 것.</li>
+</ol>
+<ol>
+<li><strong>스티어링은 하네스의 보완재다.</strong> 외부 제어(프롬프트, 도구 설계, 가드레일)와 내부 제어(개념 조종)는 경쟁 관계가 아니다. 더 큰 모델일수록 더 steerable하다는 발견은, 능력 있는 모델을 더 잘 제어할 수 있다는 뜻이기도 하다.</li>
+</ol>
+<ol>
+<li><strong>에이전트는 단기 최적화와 장기 코드 품질 사이에서 선택한다.</strong> CI를 통과하도록 assertion을 약화시키는 에이전트는 단기적으로 &quot;성공&quot;한다. 이 트레이드오프를 하네스 수준에서 어떻게 제어할 것인가는 아직 미해결 문제다.</li>
+</ol>
+<ol>
+<li><strong>&quot;50%&quot;라는 숫자.</strong> Anthropic이 소프트웨어 개발이 Claude 사용의 절반이라고 밝힌 것은, 에이전틱 코딩이 더 이상 &quot;미래 기술&quot;이 아니라 지금 당장의 주력 사용 사례임을 의미한다. 이 공간의 벤치마크, 인프라, 제어 연구가 쏟아지는 것은 필연이다.</li>
+</ol>
+<hr>
+<h2>Sources</h2>
+<ul>
+<li><a href="https://arxiv.org/abs/2603.03823" target="_blank" rel="noopener">SWE-CI: Evaluating Coding Agents on CI Maintenance Tasks</a> — arXiv:2603.03823, Sun Yat-sen University + Alibaba Group</li>
+<li><a href="https://news.ycombinator.com/item?id=43296000" target="_blank" rel="noopener">Hacker News: SWE-CI Discussion</a> — HN trending, 101pts, 2026-03-08</li>
+<li><a href="https://www.nvidia.com/en-us/gtc/" target="_blank" rel="noopener">NVIDIA GTC 2026</a> — March 16-19, San Jose</li>
+<li><a href="https://www.science.org/doi/10.1126/science.adp8743" target="_blank" rel="noopener">Science: Universal Steering of Large Language Models</a> — Science 391(6787):787-792</li>
+<li><a href="https://www.anthropic.com/news/ai-coding-trends-2026" target="_blank" rel="noopener">Anthropic: AI Coding Trends in 2026</a></li>
+</ul>
+<p><a href="https://arxiv.org/abs/2603.03823" target="_blank" rel="noopener">^1]: [SWE-CI: arXiv:2603.03823</a> <a href="https://www.nvidia.com/en-us/gtc/" target="_blank" rel="noopener">^2]: [NVIDIA GTC 2026 공식 페이지</a> <a href="https://www.science.org/doi/10.1126/science.adp8743" target="_blank" rel="noopener">^3]: [Science 391(6787):787-792 — Universal AI Steering</a> <a href="https://www.anthropic.com/news/ai-coding-trends-2026" target="_blank" rel="noopener">^4]: [Anthropic 2026 AI Coding Trends Report</a></p>
+<hr>
+<p><em>Frontier AI Signal Swarm | 2026-03-09 | 수집: 4개 시그널 | moderate ×3, weak ×1</em></p>
+    </article>
+
+    <footer class="dossier-footer">
+      <span class="brand">Frontier AI Signal Swarm</span> &mdash; AI 트렌드 인텔리전스 엔진
+    </footer>
+
+  </div>
+
+  <!-- PDF Download Button -->
+  <button class="pdf-download-btn" onclick="window.print()" title="PDF로 저장">
+    <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+    PDF 저장
+  </button>
+
+  <script>(function() {
+  'use strict';
+
+  // === Config ===
+  var DOSSIER_ID = (function() {
+    var m = location.pathname.match(/\/(dossier-[^.]+)\.html/);
+    return m ? m[1] : null;
+  })();
+  if (!DOSSIER_ID) return;
+
+  var annotations = [];
+
+  // === API ===
+  var API = {
+    list: function() {
+      return fetch('/api/annotations?dossier_id=' + encodeURIComponent(DOSSIER_ID))
+        .then(function(r) { return r.json(); })
+        .then(function(d) { return d.annotations || []; });
+    },
+    create: function(data) {
+      return fetch('/api/annotations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(Object.assign({ dossier_id: DOSSIER_ID }, data))
+      }).then(function(r) { return r.json(); });
+    },
+    update: function(id, content) {
+      return fetch('/api/annotations/' + id, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content: content })
+      }).then(function(r) { return r.json(); });
+    },
+    remove: function(id) {
+      return fetch('/api/annotations/' + id, { method: 'DELETE' });
+    }
+  };
+
+  // === DOM Helpers ===
+  function getCSSPath(el) {
+    if (!el || el === document.body) return 'body';
+    if (el.id) return '#' + el.id;
+    var parent = el.parentElement;
+    if (!parent) return el.tagName.toLowerCase();
+    var siblings = Array.from(parent.children).filter(function(c) { return c.tagName === el.tagName; });
+    var idx = siblings.indexOf(el);
+    var nth = siblings.length > 1 ? ':nth-of-type(' + (idx + 1) + ')' : '';
+    return getCSSPath(parent) + ' > ' + el.tagName.toLowerCase() + nth;
+  }
+
+  function getTextAround(range, chars, before) {
+    var container = before ? range.startContainer : range.endContainer;
+    var offset = before ? range.startOffset : range.endOffset;
+    if (container.nodeType !== 3) return '';
+    var text = container.textContent || '';
+    return before ? text.slice(Math.max(0, offset - chars), offset) : text.slice(offset, offset + chars);
+  }
+
+  function findSectionId(el) {
+    while (el && el !== document.body) {
+      if (el.id && (el.id.indexOf('deep-dive') === 0 || el.id.indexOf('signal-row') === 0 ||
+          el.id.indexOf('toolkit-card') === 0 || el.id === 'cross-signal' ||
+          el.id === 'open-questions' || el.id === 'learning-points' ||
+          (el.dataset && el.dataset.sectionId))) {
+        return el.id || el.dataset.sectionId;
+      }
+      el = el.parentElement;
+    }
+    return null;
+  }
+
+  function findSignalType(sectionId) {
+    if (!sectionId) return null;
+    var el = document.getElementById(sectionId);
+    if (!el) return null;
+    var badge = el.querySelector('.badge-type');
+    return badge ? badge.textContent.trim() : null;
+  }
+
+  // === Toolbar ===
+  var toolbar = document.createElement('div');
+  toolbar.className = 'ann-toolbar';
+  toolbar.innerHTML = '<button data-action="highlight">하이라이트</button><button data-action="highlight-memo">하이라이트 + 메모</button>';
+  document.body.appendChild(toolbar);
+  var currentRange = null;
+
+  var containerEl = document.querySelector('.container');
+  if (containerEl) {
+    containerEl.addEventListener('mouseup', function(e) {
+      if (e.target.closest('.ann-toolbar') || e.target.closest('.ann-sidebar') || e.target.closest('.ann-memo-modal')) return;
+      var sel = window.getSelection();
+      if (!sel || sel.isCollapsed || !sel.toString().trim()) {
+        toolbar.classList.remove('visible');
+        return;
+      }
+      currentRange = sel.getRangeAt(0).cloneRange();
+      var rect = currentRange.getBoundingClientRect();
+      toolbar.style.left = (rect.left + rect.width / 2 - 100 + window.scrollX) + 'px';
+      toolbar.style.top = (rect.top - 44 + window.scrollY) + 'px';
+      toolbar.classList.add('visible');
+    });
+  }
+
+  document.addEventListener('mousedown', function(e) {
+    if (!e.target.closest('.ann-toolbar')) {
+      toolbar.classList.remove('visible');
+    }
+  });
+
+  toolbar.addEventListener('click', function(e) {
+    var btn = e.target.closest('button');
+    if (!btn || !currentRange) return;
+    var action = btn.dataset.action;
+    var text = currentRange.toString().trim();
+    if (!text) return;
+
+    var sectionId = findSectionId(currentRange.startContainer.parentElement);
+    var position = {
+      start_path: getCSSPath(currentRange.startContainer.nodeType === 3 ? currentRange.startContainer.parentElement : currentRange.startContainer),
+      start_offset: currentRange.startOffset,
+      end_path: getCSSPath(currentRange.endContainer.nodeType === 3 ? currentRange.endContainer.parentElement : currentRange.endContainer),
+      end_offset: currentRange.endOffset,
+      context_before: getTextAround(currentRange, 30, true),
+      context_after: getTextAround(currentRange, 30, false)
+    };
+
+    toolbar.classList.remove('visible');
+    window.getSelection().removeAllRanges();
+
+    if (action === 'highlight') {
+      API.create({
+        type: 'highlight',
+        selected_text: text,
+        section_id: sectionId,
+        position: position,
+        signal_type: findSignalType(sectionId)
+      }).then(function(ann) {
+        annotations.push(ann);
+        wrapHighlight(currentRange, ann.id, false);
+        updateSidebar();
+      });
+    } else if (action === 'highlight-memo') {
+      showMemoModal(text, sectionId, position, currentRange);
+    }
+  });
+
+  // === Memo Modal ===
+  var modal = document.createElement('div');
+  modal.className = 'ann-memo-modal';
+  modal.innerHTML = '<div class="ann-memo-modal-content"><h4>메모 추가</h4><div class="ann-selected-preview" style="padding:8px;background:var(--card-bg);border-radius:6px;margin-bottom:12px;font-size:0.85rem;color:var(--secondary);max-height:80px;overflow:hidden"></div><textarea placeholder="이 부분에 대한 생각을 적어주세요..."></textarea><div class="ann-modal-buttons"><button class="ann-btn-cancel">취소</button><button class="ann-btn-primary ann-btn-save">저장</button></div></div>';
+  document.body.appendChild(modal);
+
+  var pendingMemo = null;
+
+  function showMemoModal(text, sectionId, position, range) {
+    modal.querySelector('.ann-selected-preview').textContent = text.length > 100 ? text.slice(0, 100) + '...' : text;
+    modal.querySelector('textarea').value = '';
+    modal.classList.add('visible');
+    modal.querySelector('textarea').focus();
+    pendingMemo = { text: text, sectionId: sectionId, position: position, range: range };
+  }
+
+  function showEditModal(ann) {
+    modal.querySelector('.ann-selected-preview').textContent = ann.selected_text || '(섹션 메모)';
+    modal.querySelector('textarea').value = ann.content || '';
+    modal.classList.add('visible');
+    modal.querySelector('textarea').focus();
+    pendingMemo = { editId: ann.id };
+  }
+
+  modal.querySelector('.ann-btn-cancel').addEventListener('click', function() {
+    modal.classList.remove('visible');
+    pendingMemo = null;
+  });
+
+  modal.querySelector('.ann-btn-save').addEventListener('click', function() {
+    var content = modal.querySelector('textarea').value.trim();
+    if (!content) return;
+    modal.classList.remove('visible');
+
+    if (pendingMemo.editId) {
+      API.update(pendingMemo.editId, content).then(function(updated) {
+        var idx = -1;
+        for (var j = 0; j < annotations.length; j++) {
+          if (annotations[j].id === pendingMemo.editId) { idx = j; break; }
+        }
+        if (idx >= 0) annotations[idx] = updated;
+        pendingMemo = null;
+        updateSidebar();
+      });
+    } else {
+      var pm = pendingMemo;
+      API.create({
+        type: 'highlight',
+        selected_text: pm.text,
+        content: content,
+        section_id: pm.sectionId,
+        position: pm.position,
+        signal_type: findSignalType(pm.sectionId)
+      }).then(function(ann) {
+        annotations.push(ann);
+        if (pm.range) {
+          wrapHighlight(pm.range, ann.id, true);
+        }
+        pendingMemo = null;
+        updateSidebar();
+      });
+    }
+  });
+
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+      modal.classList.remove('visible');
+      pendingMemo = null;
+    }
+  });
+
+  // === Highlight Renderer ===
+  function wrapHighlight(range, annId, hasMemo) {
+    function makeHighlight() {
+      var m = document.createElement('mark');
+      m.className = 'ann-highlight' + (hasMemo ? ' has-memo' : '');
+      m.dataset.annId = annId;
+      return m;
+    }
+
+    // Fast path: selection within a single element
+    try {
+      range.surroundContents(makeHighlight());
+      return;
+    } catch(ex) { /* range spans multiple elements — fall through */ }
+
+    // Fallback: wrap each text node individually to avoid inserting block
+    // elements inside <mark>, which causes unwanted line breaks.
+    try {
+      var ancestor = range.commonAncestorContainer;
+      var walker = document.createTreeWalker(ancestor, NodeFilter.SHOW_TEXT);
+      var textNodes = [];
+      var node;
+      while ((node = walker.nextNode())) {
+        var nr = document.createRange();
+        nr.selectNode(node);
+        if (nr.compareBoundaryPoints(Range.START_TO_END, range) > 0 &&
+            nr.compareBoundaryPoints(Range.END_TO_START, range) < 0) {
+          textNodes.push(node);
+        }
+      }
+      for (var i = 0; i < textNodes.length; i++) {
+        var tn = textNodes[i];
+        var tr = document.createRange();
+        tr.setStart(tn, tn === range.startContainer ? range.startOffset : 0);
+        tr.setEnd(tn, tn === range.endContainer ? range.endOffset : tn.length);
+        if (tr.toString().trim()) {
+          tr.surroundContents(makeHighlight());
+        }
+      }
+    } catch(ex2) { /* give up gracefully */ }
+  }
+
+  function restoreHighlights() {
+    for (var i = 0; i < annotations.length; i++) {
+      var ann = annotations[i];
+      if (ann.type !== 'highlight' || !ann.position) continue;
+      try {
+        var startEl = document.querySelector(ann.position.start_path);
+        var endEl = document.querySelector(ann.position.end_path);
+        if (!startEl || !endEl) { restoreByText(ann); continue; }
+
+        var startNode = findTextNode(startEl, ann.position.start_offset, ann.position.context_before);
+        var endNode = findTextNode(endEl, ann.position.end_offset, ann.position.context_after);
+        if (!startNode || !endNode) { restoreByText(ann); continue; }
+
+        var range = document.createRange();
+        range.setStart(startNode.node, startNode.offset);
+        range.setEnd(endNode.node, endNode.offset);
+        wrapHighlight(range, ann.id, !!ann.content);
+      } catch(ex) {
+        restoreByText(ann);
+      }
+    }
+  }
+
+  function findTextNode(el, offset, context) {
+    var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    var node;
+    while ((node = walker.nextNode())) {
+      var text = node.textContent || '';
+      if (context && text.indexOf(context) >= 0) {
+        var idx = text.indexOf(context);
+        return { node: node, offset: idx + context.length };
+      }
+      if (offset <= text.length) {
+        return { node: node, offset: offset };
+      }
+    }
+    return null;
+  }
+
+  function restoreByText(ann) {
+    if (!ann.selected_text) return;
+    var ctn = document.querySelector('.container');
+    if (!ctn) return;
+    var walker = document.createTreeWalker(ctn, NodeFilter.SHOW_TEXT);
+    var node;
+    var searchText = ann.selected_text.slice(0, 60);
+    while ((node = walker.nextNode())) {
+      var text = node.textContent || '';
+      var idx = text.indexOf(searchText);
+      if (idx >= 0) {
+        try {
+          var range = document.createRange();
+          range.setStart(node, idx);
+          range.setEnd(node, Math.min(idx + ann.selected_text.length, text.length));
+          wrapHighlight(range, ann.id, !!ann.content);
+        } catch(ex) { /* skip */ }
+        break;
+      }
+    }
+  }
+
+  // === Section Actions ===
+  function injectSectionActions() {
+    document.querySelectorAll('.deep-dive, .toolkit-card').forEach(function(el) {
+      if (el.querySelector('.ann-section-actions')) return;
+      var actions = document.createElement('div');
+      actions.className = 'ann-section-actions';
+      actions.innerHTML = '<button class="ann-section-btn" data-action="bookmark" title="북마크">\u2605</button><button class="ann-section-btn" data-action="section-memo" title="메모">\u270E</button>';
+      el.appendChild(actions);
+
+      var sectionId = el.id;
+      var existing = annotations.filter(function(a) { return a.section_id === sectionId && (a.type === 'bookmark' || a.type === 'memo'); });
+      if (existing.length > 0) {
+        var bookmarkBtn = actions.querySelector('[data-action="bookmark"]');
+        if (existing.some(function(a) { return a.type === 'bookmark'; })) bookmarkBtn.classList.add('active');
+      }
+    });
+
+    document.addEventListener('click', function(e) {
+      var btn = e.target.closest('.ann-section-btn');
+      if (!btn) return;
+      var section = btn.closest('.deep-dive, .toolkit-card');
+      if (!section) return;
+      var sectionId = section.id;
+      var action = btn.dataset.action;
+
+      if (action === 'bookmark') {
+        var existing = null;
+        for (var j = 0; j < annotations.length; j++) {
+          if (annotations[j].section_id === sectionId && annotations[j].type === 'bookmark') {
+            existing = annotations[j]; break;
+          }
+        }
+        if (existing) {
+          API.remove(existing.id).then(function() {
+            annotations = annotations.filter(function(a) { return a.id !== existing.id; });
+            btn.classList.remove('active');
+            updateSidebar();
+          });
+        } else {
+          var headingEl = section.querySelector('h3, h4');
+          API.create({
+            type: 'bookmark',
+            section_id: sectionId,
+            selected_text: headingEl ? headingEl.textContent : '',
+            signal_type: findSignalType(sectionId)
+          }).then(function(ann) {
+            annotations.push(ann);
+            btn.classList.add('active');
+            updateSidebar();
+          });
+        }
+      } else if (action === 'section-memo') {
+        var headingEl2 = section.querySelector('h3, h4');
+        showMemoModal(
+          headingEl2 ? headingEl2.textContent : '(섹션)',
+          sectionId, null, null
+        );
+      }
+    });
+  }
+
+  // === Sidebar ===
+  var sidebar = document.createElement('div');
+  sidebar.className = 'ann-sidebar';
+  sidebar.innerHTML = '<h3>어노테이션</h3><div class="ann-sidebar-list"></div>';
+  document.body.appendChild(sidebar);
+
+  var sidebarToggle = document.createElement('button');
+  sidebarToggle.className = 'ann-sidebar-toggle';
+  sidebarToggle.innerHTML = '\u270E<span class="ann-count" style="display:none">0</span>';
+  document.body.appendChild(sidebarToggle);
+
+  sidebarToggle.addEventListener('click', function() {
+    sidebar.classList.toggle('open');
+  });
+
+  function updateSidebar() {
+    var list = sidebar.querySelector('.ann-sidebar-list');
+    var count = sidebarToggle.querySelector('.ann-count');
+    count.textContent = String(annotations.length);
+    count.style.display = annotations.length > 0 ? 'flex' : 'none';
+
+    if (annotations.length === 0) {
+      list.innerHTML = '<p style="color:var(--secondary);font-size:0.85rem">텍스트를 선택하여 하이라이트하거나,<br>섹션의 \u2605 버튼으로 북마크하세요.</p>';
+      return;
+    }
+
+    var typeLabels = { highlight: '하이라이트', memo: '메모', bookmark: '북마크', dismiss: '무시' };
+    list.innerHTML = annotations.map(function(ann) {
+      var typeLabel = typeLabels[ann.type] || ann.type;
+      var text = ann.selected_text ? (ann.selected_text.length > 80 ? ann.selected_text.slice(0, 80) + '...' : ann.selected_text) : '';
+      var memo = ann.content ? '<div class="ann-memo-content">' + escapeForHTML(ann.content) + '</div>' : '';
+      return '<div class="ann-sidebar-item" data-ann-id="' + ann.id + '">' +
+        '<div class="ann-type">' + typeLabel + '</div>' +
+        (text ? '<div class="ann-text">' + escapeForHTML(text) + '</div>' : '') +
+        memo +
+        '<div class="ann-actions">' +
+        (ann.type === 'highlight' ? '<button data-action="edit">편집</button>' : '') +
+        '<button data-action="delete">삭제</button>' +
+        '</div></div>';
+    }).join('');
+  }
+
+  function escapeForHTML(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  sidebar.addEventListener('click', function(e) {
+    var actionBtn = e.target.closest('[data-action]');
+    var item = e.target.closest('.ann-sidebar-item');
+    if (!item) return;
+    var annId = item.dataset.annId;
+    var ann = null;
+    for (var j = 0; j < annotations.length; j++) {
+      if (annotations[j].id === annId) { ann = annotations[j]; break; }
+    }
+    if (!ann) return;
+
+    if (actionBtn) {
+      var action = actionBtn.dataset.action;
+      if (action === 'delete') {
+        API.remove(annId).then(function() {
+          annotations = annotations.filter(function(a) { return a.id !== annId; });
+          document.querySelectorAll('[data-ann-id="' + annId + '"]').forEach(function(el) {
+            if (el.tagName === 'MARK') {
+              var parent = el.parentNode;
+              while (el.firstChild) parent.insertBefore(el.firstChild, el);
+              parent.removeChild(el);
+            }
+          });
+          updateSidebar();
+        });
+      } else if (action === 'edit') {
+        showEditModal(ann);
+      }
+    } else {
+      // Scroll to annotation
+      var el = document.querySelector('mark[data-ann-id="' + annId + '"]') ||
+               (ann.section_id ? document.getElementById(ann.section_id) : null);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        el.style.transition = 'outline 0.3s';
+        el.style.outline = '2px solid var(--accent)';
+        setTimeout(function() { el.style.outline = 'none'; }, 1500);
+      }
+    }
+  });
+
+  // === Auto-assign IDs (for markdown-generated pages) ===
+  function autoAssignIds() {
+    document.querySelectorAll('.container h2, .container h3').forEach(function(h, i) {
+      if (h.id) return;
+      var slug = (h.textContent || '').trim().toLowerCase()
+        .replace(/[^a-z0-9\uAC00-\uD7A3\s]/g, '').replace(/\s+/g, '-').slice(0, 40);
+      h.id = 'section-' + (slug || i);
+      var parent = h.closest('section, article, div');
+      if (parent && !parent.id) parent.dataset.sectionId = h.id;
+    });
+  }
+
+  // === Init ===
+  function init() {
+    autoAssignIds();
+    API.list().then(function(list) {
+      annotations = list;
+      restoreHighlights();
+      injectSectionActions();
+      updateSidebar();
+    }).catch(function(err) {
+      console.warn('Annotation system unavailable:', err.message);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();</script>
+</body>
+</html>
